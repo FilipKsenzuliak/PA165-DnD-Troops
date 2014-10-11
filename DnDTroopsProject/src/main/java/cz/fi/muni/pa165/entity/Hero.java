@@ -37,8 +37,8 @@ public class Hero {
     
     private String name;
     
-    private String/*Troop - getter setter*/ troop;
-    
+    private Troop troop;
+ 
     private List<Role> role;
 
     public Race getRace() {
@@ -84,6 +84,14 @@ public class Hero {
     public void setName(String name) {
         this.name = name;
     }
+    
+    public void setTroop(Troop troop) {
+        this.troop = troop;
+    }
+
+    public Troop getTroop() {
+        return troop;
+    }
 
     public List<Role> getRole() {
         return role;
@@ -102,6 +110,7 @@ public class Hero {
         hash = 97 * hash + this.gold;
         hash = 97 * hash + Objects.hashCode(this.name);
         hash = 97 * hash + Objects.hashCode(this.role);
+        hash = 97 * hash + Objects.hashCode(this.troop);
         return hash;
     }
 
@@ -132,6 +141,10 @@ public class Hero {
         if (!Objects.equals(this.role, other.role)) {
             return false;
         }
+        if (!Objects.equals(this.troop, other.troop)) {
+            return false;
+        }
+        
         return true;
     }
 

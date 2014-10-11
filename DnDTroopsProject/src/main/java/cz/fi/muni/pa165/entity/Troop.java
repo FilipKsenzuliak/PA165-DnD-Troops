@@ -29,7 +29,7 @@ public class Troop {
     private String name;
     
     @Column(nullable = false)
-    private String mission;
+    private Mission mission;
     
     @Column(nullable = false)
     private int amountOfMoney;
@@ -46,11 +46,11 @@ public class Troop {
         this.name = name;
     }
 
-    public String getMission() {
+    public Mission getMission() {
         return mission;
     }
 
-    public void setMission(String mission) {
+    public void setMission(Mission mission) {
         this.mission = mission;
     }
 
