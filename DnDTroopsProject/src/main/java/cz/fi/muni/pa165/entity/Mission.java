@@ -27,7 +27,7 @@ public class Mission {
     private String name;
     
     @Column(nullable = false)
-    private String description;
+    private String objective;
     
     @Column(nullable = false)
     private int reward;
@@ -36,8 +36,8 @@ public class Mission {
         this.name = name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setObjective(String objective) {
+        this.objective = objective;
     }
 
     public void setReward(int reward) {
@@ -52,8 +52,8 @@ public class Mission {
         return name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getObjective() {
+        return objective;
     }
 
     public int getReward() {
@@ -64,7 +64,7 @@ public class Mission {
     public int hashCode() {
         int hash = 3;
         hash = 37 * hash + Objects.hashCode(this.name);
-        hash = 37 * hash + Objects.hashCode(this.description);
+        hash = 37 * hash + Objects.hashCode(this.objective);
         hash = 37 * hash + Objects.hashCode(this.reward);
         return hash;
     }
@@ -78,7 +78,7 @@ public class Mission {
             return false;
         }
         final Mission other = (Mission) obj;
-        return this.name.equals(other.name) && (this.description.equals(other.description)) && this.reward == other.reward;
+        return this.name.equals(other.name) && (this.objective.equals(other.objective)) && this.reward == other.reward;
     }
     
     
