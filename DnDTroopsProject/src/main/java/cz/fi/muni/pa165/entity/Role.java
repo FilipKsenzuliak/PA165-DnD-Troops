@@ -10,10 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-enum Class {
-    WIZARD, BARD, WARRIOR, ROGUE, RANGER, CLERIC, PALADIN
-}
-
 /**
  * 
  * @author Dávid Hubac
@@ -27,15 +23,19 @@ public class Role {
     private long id;
         
     @Column(nullable = false)
-    private Class name;
+    private String name;
     
+    @Column(nullable = false)
     private String description;
-
+    
+    @Column(nullable = false)
+    private int roleLevel = 1;
+    
     public long getId() {
         return id;
     }
 
-    public Class getName() {
+    public String getName() {
         return name;
     }
 
@@ -47,15 +47,24 @@ public class Role {
         this.description = description;
     }
 
-    public void setName(Class name) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public int getRoleLevel() {
+        return roleLevel;
+    }
+
+    public void setRoleLevel(int roleLevel) {
+        this.roleLevel = roleLevel;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.name != null ? this.name.hashCode() : 0);
-        hash = 29 * hash + Objects.hashCode(this.description);
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.name);
+        hash = 23 * hash + Objects.hashCode(this.description);
+        hash = 23 * hash + this.roleLevel;
         return hash;
     }
 
@@ -68,10 +77,13 @@ public class Role {
             return false;
         }
         final Role other = (Role) obj;
-        if (this.name != other.name) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
         if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (this.roleLevel != other.roleLevel) {
             return false;
         }
         return true;
@@ -79,8 +91,7 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+        return "Role{" + "id=" + id + ", name=" + name + ", description=" + description + ", roleLevel=" + roleLevel + '}';
     }
-
 
 }
