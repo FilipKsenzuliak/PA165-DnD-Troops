@@ -97,6 +97,7 @@ public class Hero {
         hash = 97 * hash + (this.race != null ? this.race.hashCode() : 0);
         hash = 97 * hash + Objects.hashCode(this.name);
         hash = 97 * hash + Objects.hashCode(this.role);
+        hash = 97 * hash + Objects.hashCode(this.troop);
         return hash;
     }
 
