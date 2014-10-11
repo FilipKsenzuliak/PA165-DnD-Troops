@@ -29,6 +29,9 @@ public class Role {
     @Id
     @GeneratedValue
     private long id;
+    
+    @Column(nullable = false)
+    private String name;
         
     @Column(nullable = false)
     private Race race;
@@ -36,6 +39,7 @@ public class Role {
     @Column(nullable = false)
     private Class cls;
     
+    private String description;
     
     public Race getRace() {
         return race;
@@ -43,6 +47,10 @@ public class Role {
 
     public void setRace(Race race) {
         this.race = race;
+        if(this.cls != null)
+        {
+            this.name = this.race.toString() + " " + this.cls.toString();
+        }
     }
 
     public Class getCls() {
@@ -51,6 +59,10 @@ public class Role {
 
     public void setCls(Class cls) {
         this.cls = cls;
+        if(this.race != null)
+        {
+            this.name = this.race.toString() + " " + this.cls.toString();
+        }
     }
 
     @Override
@@ -81,6 +93,7 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" + "race=" + race + ", cls=" + cls + '}';
+        return "Role{" + "name=" + name + ", description=" + description + '}';
     }
+
 }
