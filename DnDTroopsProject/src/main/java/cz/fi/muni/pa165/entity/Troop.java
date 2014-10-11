@@ -30,51 +30,30 @@ public class Troop {
     
     private int amountOfMoney;
    
-    /**
-     * @return the id
-     */
     public long getId() {
         return id;
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the mission
-     */
     public String getMission() {
         return mission;
     }
 
-    /**
-     * @param mission the mission to set
-     */
     public void setMission(String mission) {
         this.mission = mission;
     }
 
-    /**
-     * @return the amountOfMoney
-     */
     public int getAmountOfMoney() {
         return amountOfMoney;
     }
 
-    /**
-     * @param amountOfMoney the amountOfMoney to set
-     */
     public void setAmountOfMoney(int amountOfMoney) {
         this.amountOfMoney = amountOfMoney;
     }
@@ -111,6 +90,6 @@ public class Troop {
 
     @Override
     public String toString() {
-        return "Troop{" + "name=" + name + ", mission=" + mission + ", amountOfMoney=" + amountOfMoney + '}';
+        return "Troop{" + "id=" + id + ", name=" + name + ", mission=" + mission + ", amountOfMoney=" + amountOfMoney + '}';
     }
 }
