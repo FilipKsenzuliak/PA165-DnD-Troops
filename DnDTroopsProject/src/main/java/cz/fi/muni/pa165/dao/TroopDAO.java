@@ -31,7 +31,7 @@ public interface TroopDAO {
      * @return troop with given id or null if such troop is not in database.
      * @throws IllegalArgumentException when given id is null.
      */
-    public Troop getTroop(Long id) throws IllegalArgumentException;
+    public Troop getTroopById(Long id) throws IllegalArgumentException;
     
     /**
      * Updates troop in database.
@@ -47,7 +47,7 @@ public interface TroopDAO {
      * @param troop troop to be removed from database.
      * @throws IllegalArgumentException when troop is null, or has null id.
      */
-    void removeTroop(Troop troop) throws IllegalArgumentException;
+    void deleteTroop(Troop troop) throws IllegalArgumentException;
     
     /**
      * Return list of all troops in the database.
@@ -56,13 +56,4 @@ public interface TroopDAO {
      */
     List<Troop> getAllTroops();
     
-    /**
-     * Method to find troop by name.
-     * 
-     * @param name name to find troop
-     * @return list of all troops with given name.
-     * @throws IllegalArgumentException when given name is null.
-     */
-
-    List<Troop> findTroopByName(String Name) throws IllegalArgumentException;
 }
