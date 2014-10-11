@@ -21,7 +21,7 @@ public class Mission {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    private Long id;
     
     @Column(nullable = false)
     private String name;
@@ -44,7 +44,7 @@ public class Mission {
         this.reward = reward;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

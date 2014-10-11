@@ -33,7 +33,7 @@ public class RoleDAOImpl implements RoleDAO{
     
     @Override
     public void createRole(Role role) throws IllegalArgumentException {
-        if(Role == null)
+        if(role == null)
         {
             throw new IllegalArgumentException("Role cannot be null.");
         }
