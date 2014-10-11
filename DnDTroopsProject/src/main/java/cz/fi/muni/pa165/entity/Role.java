@@ -7,6 +7,7 @@ import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -19,8 +20,8 @@ import javax.persistence.OneToMany;
 public class Role {
     
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
         
     @Column(nullable = false)
     private String name;
@@ -31,7 +32,7 @@ public class Role {
     @Column(nullable = false)
     private int roleLevel = 1;
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

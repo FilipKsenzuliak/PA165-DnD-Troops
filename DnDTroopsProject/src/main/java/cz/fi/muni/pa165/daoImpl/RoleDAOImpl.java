@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -23,82 +24,60 @@ import org.springframework.test.context.ContextConfiguration;
  */
 public class RoleDAOImpl implements RoleDAO{
 
-    @PersistenceUnit
-    public EntityManagerFactory emf;
+    private EntityManager em;
     
-    public RoleDAOImpl() {
-        emf = Persistence.createEntityManagerFactory("Unit");
+    @PersistenceContext
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
     }
     
     @Override
     public void createRole(Role role) throws IllegalArgumentException {
-        EntityManager em = emf.createEntityManager();
-        try{
-            em.getTransaction().begin();
-            em.persist(role);
-            em.getTransaction().commit();
-        }catch(Exception e){
-            throw new IllegalArgumentException("Error when accessing DB.", e);
-        }finally {
-            em.close();
+        if(Role == null)
+        {
+            throw new IllegalArgumentException("Role cannot be null.");
         }
+        if(role.getId() != null)
+        {
+            throw new IllegalArgumentException("Role identifier is already set.");
+        }
+        
+        this.em.persist(role);
     }
 
     @Override
     public Role getRoleById(Long id) throws IllegalArgumentException {
-        EntityManager em = emf.createEntityManager();
-        Role role = null;
-        try{
-           role = em.find(Role.class, id);
-        }catch(Exception e){
-            throw new IllegalArgumentException("Error when accessing DB.", e);
-        }finally {
-            em.close();
-            return role;
+        if(id == null)
+        {
+            throw new IllegalArgumentException("Identifier should now be null.");
         }
+        return this.em.find(Role.class, id);
     }
 
     @Override
     public void updateRole(Role role) throws IllegalArgumentException {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.merge(role);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Error when accessing DB.", e);
-        } finally {
-            em.close();
+        if(role == null) {
+            throw new IllegalArgumentException("Role can't be null.");
         }
+        if(role.getId() == null) {
+            throw new IllegalArgumentException("Role is not present in DB.");
+        }        
+        this.em.merge(role);
     }
 
     @Override
     public void deleteRole(Role role) throws IllegalArgumentException {
-        EntityManager em = emf.createEntityManager();
-        try {
-            Role roleToDelete = em.find(Role.class, role.getId());
-            em.getTransaction().begin();
-            em.remove(role);
-            em.getTransaction().commit();
-            
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Error when accessing DB.", e);
-        } finally {
-            em.close();
+        if(role == null) {
+            throw new IllegalArgumentException("Role can't be null.");
         }
+        if(role.getId() == null) {
+            throw new IllegalArgumentException("Role is not present in DB.");
+        } 
+        this.em.remove(role);
     }
 
     @Override
     public List<Role> getAllRoles() {
-        EntityManager em = emf.createEntityManager();
-        List<Role> roles = new ArrayList<Role>();
-        try {
-            roles = em.createQuery("SELECT r FROM Role r", Role.class).getResultList();            
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Error when accessing DB.", e);
-        } finally {
-            em.close();
-            return roles;
-        }
+        return this.em.createQuery("SELECT r FROM Role r", Role.class).getResultList();   
     }
 }
