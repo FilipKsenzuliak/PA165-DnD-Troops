@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 enum Race {
     ELF, HUMAN, HALFORC, GNOME, DWARF
@@ -28,19 +29,24 @@ public class Hero {
     
     @Column(nullable = false)
     private Race race;
-    
     private int age;
-    
     private int level;
-   
-    private int gold;
+    private List<Role> role;
     
+    @Column(nullable=false, unique=true)
     private String name;
     
-    private String/*Troop - getter setter*/ troop;
+    @ManyToOne
+    private Troop troop;
     
-    private List<Role> role;
+    public Troop getTroop() {
+        return troop;
+    }
 
+    public void setTroop(Troop troop) {
+        this.troop = troop;
+    }
+    
     public Race getRace() {
         return race;
     }
@@ -69,14 +75,6 @@ public class Hero {
         this.level = level;
     }
 
-    public int getGold() {
-        return gold;
-    }
-
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
-
     public String getName() {
         return name;
     }
@@ -97,9 +95,6 @@ public class Hero {
     public int hashCode() {
         int hash = 5;
         hash = 97 * hash + (this.race != null ? this.race.hashCode() : 0);
-        hash = 97 * hash + this.age;
-        hash = 97 * hash + this.level;
-        hash = 97 * hash + this.gold;
         hash = 97 * hash + Objects.hashCode(this.name);
         hash = 97 * hash + Objects.hashCode(this.role);
         return hash;
@@ -120,16 +115,7 @@ public class Hero {
         if (this.age != other.age) {
             return false;
         }
-        if (this.level != other.level) {
-            return false;
-        }
-        if (this.gold != other.gold) {
-            return false;
-        }
         if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.role, other.role)) {
             return false;
         }
         return true;
@@ -137,9 +123,11 @@ public class Hero {
 
     @Override
     public String toString() {
-        return "Hero{" + "id=" + id + ", race=" + race + ", age=" + age + ", level=" + level + ", gold=" + gold + ", name=" + name + ", role=" + role + '}';
-    }
-    
-    
-    
+        return "Hero{" + "id=" + id 
+                + ", race=" + race + ","
+                + " age=" + age + ","
+                + " level=" + level + ","
+                + " name=" + name + ","
+                + " role=" + role + '}';
+    }     
 }
