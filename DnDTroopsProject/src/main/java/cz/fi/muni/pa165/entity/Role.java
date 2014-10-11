@@ -40,6 +40,22 @@ public class Role {
     private Class cls;
     
     private String description;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
     
     public Race getRace() {
         return race;
