@@ -10,10 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-enum Race {
-    ELF, HUMAN, HALFORC, GNOME, DWARF
-}
-
 enum Class {
     WIZARD, BARD, WARRIOR, ROGUE, RANGER, CLERIC, PALADIN
 }
@@ -29,15 +25,9 @@ public class Role {
     @Id
     @GeneratedValue
     private long id;
-    
-    @Column(nullable = false)
-    private String name;
         
     @Column(nullable = false)
-    private Race race;
-        
-    @Column(nullable = false)
-    private Class cls;
+    private Class name;
     
     private String description;
 
@@ -45,7 +35,7 @@ public class Role {
         return id;
     }
 
-    public String getName() {
+    public Class getName() {
         return name;
     }
 
@@ -56,36 +46,16 @@ public class Role {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    public Race getRace() {
-        return race;
-    }
 
-    public void setRace(Race race) {
-        this.race = race;
-        if(this.cls != null)
-        {
-            this.name = this.race.toString() + " " + this.cls.toString();
-        }
-    }
-
-    public Class getCls() {
-        return cls;
-    }
-
-    public void setCls(Class cls) {
-        this.cls = cls;
-        if(this.race != null)
-        {
-            this.name = this.race.toString() + " " + this.cls.toString();
-        }
+    public void setName(Class name) {
+        this.name = name;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.race);
-        hash = 37 * hash + Objects.hashCode(this.cls);
+        int hash = 7;
+        hash = 29 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 29 * hash + Objects.hashCode(this.description);
         return hash;
     }
 
@@ -98,10 +68,10 @@ public class Role {
             return false;
         }
         final Role other = (Role) obj;
-        if (this.race != other.race) {
+        if (this.name != other.name) {
             return false;
         }
-        if (this.cls != other.cls) {
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         return true;
@@ -109,7 +79,8 @@ public class Role {
 
     @Override
     public String toString() {
-        return "Role{" + "name=" + name + ", description=" + description + '}';
+        return "Role{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
+
 
 }
