@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import hello.Application;
-import hello.Customer;
-import hello.CustomerRepository;
+import source.Application;
+import source.Customer;
+import source.CustomerRepository;
 import junit.framework.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
