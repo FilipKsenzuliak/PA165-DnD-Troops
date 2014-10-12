@@ -21,7 +21,7 @@ import org.junit.Test;
  * @author Filip Ksenzuliak
  * @uco 396072
  */
-
+/*
 public class MissionDAOTest{
         
     public MissionDAOTest() {
@@ -85,3 +85,4 @@ public class MissionDAOTest{
     
     
 }
+*/
