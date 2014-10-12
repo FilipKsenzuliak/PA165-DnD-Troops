@@ -25,6 +25,12 @@ public class Role {
     private List<Hero> heroes;
     private int roleLevel = 1;
     
+    public Role(String name, String description, int roleLevel){
+        this.name=name;
+        this.description=description;
+        this.roleLevel=roleLevel;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

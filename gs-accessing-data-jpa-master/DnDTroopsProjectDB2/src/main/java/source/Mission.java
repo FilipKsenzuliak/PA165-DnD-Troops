@@ -28,6 +28,7 @@ public class Mission {
         this.objective=objective;
         this.reward=reward;
     }
+    
     @Override
     public String toString() {
         return String.format(

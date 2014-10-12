@@ -33,6 +33,13 @@ public class Hero {
     @ManyToOne(cascade=CascadeType.PERSIST)
     private Troop troop;
     
+    public Hero(String name, Race race, long age, long rank){
+        this.name=name;
+        this.race=race;
+        this.age=age;
+        this.rank=rank;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;
