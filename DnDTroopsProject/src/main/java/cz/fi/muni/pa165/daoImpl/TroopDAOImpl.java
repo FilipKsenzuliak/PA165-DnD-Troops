@@ -24,11 +24,10 @@ import org.springframework.test.context.ContextConfiguration;
  */
 public class TroopDAOImpl implements TroopDAO{
 
-    public EntityManager em;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("testingSetup");
     
-    @PersistenceContext
-    public void setEntityManager(EntityManager em) {
-        this.em = em;
+    public TroopDAOImpl() {
+        
     }
         
     @Override
@@ -41,8 +40,11 @@ public class TroopDAOImpl implements TroopDAO{
         {
             throw new IllegalArgumentException("Troop identifier is already set.");
         }
-        
-        this.em.persist(troop);
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(troop);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
@@ -51,7 +53,11 @@ public class TroopDAOImpl implements TroopDAO{
         {
             throw new IllegalArgumentException("Identifier should now be null.");
         }
-        return this.em.find(Troop.class, id);
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Troop troop = em.find(Troop.class, id);
+        em.close();
+        return troop;
     }
 
     @Override
@@ -61,8 +67,12 @@ public class TroopDAOImpl implements TroopDAO{
         }
         if(troop.getId() == null) {
             throw new IllegalArgumentException("Troop is not present in DB.");
-        }        
-        this.em.merge(troop);
+        }    
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(troop);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
@@ -73,11 +83,19 @@ public class TroopDAOImpl implements TroopDAO{
         if(troop.getId() == null) {
             throw new IllegalArgumentException("Troop is not present in DB.");
         } 
-        this.em.remove(troop);
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.remove(troop);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
     public List<Troop> getAllTroops() {
-        return this.em.createQuery("SELECT t FROM Troop t", Troop.class).getResultList();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Troop> roles = em.createQuery("SELECT t FROM Troop t", Troop.class).getResultList();
+        em.close();
+        return  roles;
     }
 }
