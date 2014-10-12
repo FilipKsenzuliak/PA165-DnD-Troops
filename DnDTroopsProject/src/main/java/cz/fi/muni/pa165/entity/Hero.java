@@ -12,9 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-enum Race {
-    ELF, HUMAN, HALFORC, GNOME, DWARF
-}
 
 /**
  *

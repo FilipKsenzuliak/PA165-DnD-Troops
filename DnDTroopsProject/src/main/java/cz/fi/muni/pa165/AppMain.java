@@ -17,7 +17,6 @@ public class AppMain {
 
 
 	public static void main(String[] args) throws SQLException {
-		//The following line is here just to start up a in-memory database 
 		new AnnotationConfigApplicationContext(DaoContext.class);
         }
 

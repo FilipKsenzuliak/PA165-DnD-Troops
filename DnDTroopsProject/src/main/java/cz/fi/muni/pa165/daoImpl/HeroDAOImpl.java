@@ -20,8 +20,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class HeroDAOImpl implements HeroDAO{
     
-    @PersistenceContext
     private EntityManager entityManager;
+    
+    @PersistenceContext
+    public void setEntityManager(EntityManager em) {
+        this.entityManager = em;
+    }
     
     @Override
     public void createHero(Hero hero) throws IllegalArgumentException {
