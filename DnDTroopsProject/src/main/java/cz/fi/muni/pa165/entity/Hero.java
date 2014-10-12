@@ -4,6 +4,7 @@
  */
 package cz.fi.muni.pa165.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import javax.persistence.NamedQuery;
  */
 @NamedQuery(name="findAll",query="SELECT h FROM Hero h")
 @Entity
-public class Hero {
+public class Hero implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
@@ -35,19 +36,19 @@ public class Hero {
     
     private int age;
     private int level;
-   
+    
     @ManyToMany
     private List<Role> role;
     
     @ManyToOne
     private Troop troop;
+    
+    @Column(nullable=false, unique=true)
+    private String name;
 
     public void setId(Long id) {
         this.id = id;
     }
-    
-    @Column(nullable=false, unique=true)
-    private String name;
     
     public Troop getTroop() {
         return troop;

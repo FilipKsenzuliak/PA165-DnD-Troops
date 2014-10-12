@@ -132,13 +132,42 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void createNonNullId() {
+        int count = em.createQuery("SELECT h FROM Hero h").getResultList().size();
         
+        Hero hero = new Hero();
+        hero.setAge(35);
+        hero.setLevel(20);
+        hero.setName("Filip");
+        hero.setRace(Race.ELF);
+        hero.setId(777L);
+        
+        Role role = new Role();
+        role.setName("Rogue");
+        role.setDescription("This is createTest description.");
+        role.setRoleLevel(10);
+        List<Role> roles = new ArrayList<Role>();
+        roles.add(role);
+        hero.setRole(roles);
+        
+        Troop troop = new Troop();
+        troop.setAmountOfMoney(100);
+        
+        Mission mission = new Mission();
+        mission.setName("Code.");
+        mission.setObjective("Write some code.");
+        mission.setReward(10);
+        
+        troop.setMission(mission);
+        hero.setTroop(troop);
+        
+        em.persist(hero);
+        int count2 = em.createQuery("SELECT h FROM Hero h").getResultList().size();
+        assertEquals(count, count2);
     }
     
     @Test
     public void updateTest() {
         Hero hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
-        
         hero.setAge(10);
     }
 }

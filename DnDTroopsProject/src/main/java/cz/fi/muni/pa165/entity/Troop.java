@@ -5,6 +5,7 @@
  */
 package cz.fi.muni.pa165.entity;
 
+import cz.fi.muni.pa165.entity.Mission;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;

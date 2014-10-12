@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Role {
+    @ManyToMany(mappedBy = "role")
+    private List<Hero> heros;
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
