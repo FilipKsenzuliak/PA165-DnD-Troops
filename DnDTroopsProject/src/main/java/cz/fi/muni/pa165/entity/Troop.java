@@ -25,19 +25,17 @@ import javax.persistence.OneToOne;
  * @UCO 396474
  */
 @Entity
-public class Troop {
+public class Troop implements Serializable{
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     
-    @Column(nullable = false)
     private String name;
     
     @ManyToOne
     private Mission mission;
     
-    @Column(nullable = false)
     private int amountOfMoney;
     
     @OneToMany(mappedBy = "troop")

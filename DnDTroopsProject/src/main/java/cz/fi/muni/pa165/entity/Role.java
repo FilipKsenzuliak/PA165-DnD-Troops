@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +20,7 @@ import javax.persistence.OneToMany;
  * @uco 396042
  */
 @Entity
-public class Role {
+public class Role implements Serializable{
     @ManyToMany
     private List<Hero> heroes;
     
@@ -27,13 +28,10 @@ public class Role {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
         
-    @Column(nullable = false)
     private String name;
     
-    @Column(nullable = false)
     private String description;
     
-    @Column(nullable = false)
     private int roleLevel = 1;
     
     public Long getId() {

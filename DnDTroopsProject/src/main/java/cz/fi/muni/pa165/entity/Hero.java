@@ -40,7 +40,6 @@ public class Hero implements Serializable {
     @ManyToOne(cascade=CascadeType.PERSIST)
     private Troop troop;
     
-    @Column(nullable=false)
     private String name;
 
     public void setId(Long id) {

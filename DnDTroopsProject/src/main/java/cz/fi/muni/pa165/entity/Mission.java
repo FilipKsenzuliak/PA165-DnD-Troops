@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,19 +18,16 @@ import javax.persistence.OneToMany;
  * @uco: 324662
  */
 @Entity
-public class Mission {
+public class Mission implements Serializable{
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     
-    @Column(nullable = false)
     private String name;
     
-    @Column(nullable = false)
     private String objective;
     
-    @Column(nullable = false)
     private int reward;
 
     public void setName(String name) {

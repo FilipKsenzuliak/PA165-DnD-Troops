@@ -56,7 +56,7 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     public void setup() {
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        impl = new HeroDAOImpl(em);
+        impl = new HeroDAOImpl();
         
         Hero hero = new Hero();
         hero.setAge(35L);

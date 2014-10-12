@@ -24,12 +24,9 @@ import org.springframework.test.context.ContextConfiguration;
  */
 public class RoleDAOImpl implements RoleDAO{
 
-    private EntityManager em;
-    private EntityManagerFactory emf;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("testingSetup");
     
     public RoleDAOImpl() {
-        emf = Persistence.createEntityManagerFactory("myUnit");
-        em = emf.createEntityManager();
     }
     
     @Override
@@ -42,10 +39,11 @@ public class RoleDAOImpl implements RoleDAO{
         {
             throw new IllegalArgumentException("Role identifier is already set.");
         }
-        this.em.getTransaction().begin();
-        this.em.persist(role);
-        this.em.getTransaction().commit();
-        this.em.close();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(role);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
@@ -54,9 +52,10 @@ public class RoleDAOImpl implements RoleDAO{
         {
             throw new IllegalArgumentException("Identifier should now be null.");
         }
-        this.em.getTransaction().begin();
-        Role role = this.em.find(Role.class, id);
-        this.em.close();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Role role = em.find(Role.class, id);
+        em.close();
         return role;
     }
 
@@ -67,11 +66,12 @@ public class RoleDAOImpl implements RoleDAO{
         }
         if(role.getId() == null) {
             throw new IllegalArgumentException("Role is not present in DB.");
-        }        
-        this.em.getTransaction().begin();
-        this.em.merge(role);
-        this.em.getTransaction().commit();
-        this.em.close();
+        }    
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.merge(role);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
@@ -82,17 +82,19 @@ public class RoleDAOImpl implements RoleDAO{
         if(role.getId() == null) {
             throw new IllegalArgumentException("Role is not present in DB.");
         } 
-        this.em.getTransaction().begin();
-        this.em.remove(role);
-        this.em.getTransaction().commit();
-        this.em.close();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.remove(role);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
     public List<Role> getAllRoles() {
-        this.em.getTransaction().begin();
-        List<Role> roles = this.em.createQuery("SELECT r FROM Role r", Role.class).getResultList();
-        this.em.close();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Role> roles = em.createQuery("SELECT r FROM Role r", Role.class).getResultList();
+        em.close();
         return  roles;
     }
 }

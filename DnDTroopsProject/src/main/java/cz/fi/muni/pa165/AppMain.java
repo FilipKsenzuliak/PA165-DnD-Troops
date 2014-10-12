@@ -24,12 +24,12 @@ public class AppMain {
 
 	public static void main(String[] args) throws SQLException {
 	 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("testingSetup");
     
         HeroDAOImpl impl;
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        impl = new HeroDAOImpl(em);
+        impl = new HeroDAOImpl();
         
         Hero hero = new Hero();
         hero.setAge(35L);
