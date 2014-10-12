@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Sun Oct 12 23:24:34 CEST 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0149-063f-a425-000002c344e0 
-on database directory memory:D:\Programy\PA165\DnDTroopsProject\PA165-DnD-Troops\DnDTroopsProject\CarParkDB with class loader sun.misc.Launcher$AppClassLoader@67ce08c7 
+Sun Oct 12 23:44:42 CEST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0149-0652-1408-000002c38620 
+on database directory memory:D:\Programy\PA165\DnDTroopsProject\PA165-DnD-Troops\DnDTroopsProject\CarParkDB with class loader sun.misc.Launcher$AppClassLoader@7a2760f 
 Loaded from file:/C:/Users/Filip/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_17-b02
