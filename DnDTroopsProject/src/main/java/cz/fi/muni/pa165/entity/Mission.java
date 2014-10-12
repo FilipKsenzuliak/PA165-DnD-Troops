@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -31,6 +33,21 @@ public class Mission {
     
     @Column(nullable = false)
     private int reward;
+    
+    @ManyToMany
+    private List<Troop> troops;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Troop> getTroops() {
+        return troops;
+    }
+
+    public void setTroops(List<Troop> troops) {
+        this.troops = troops;
+    }
 
     public void setName(String name) {
         this.name = name;

@@ -8,9 +8,13 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -18,6 +22,7 @@ import javax.persistence.ManyToOne;
  * @author Filip Ksenzuliak
  * @uco 396072
  */
+@NamedQuery(name="findAll",query="SELECT h FROM Hero h")
 @Entity
 public class Hero {
     @Id
@@ -25,16 +30,24 @@ public class Hero {
     private Long id;
     
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Race race;
+    
     private int age;
     private int level;
+   
+    @ManyToMany
     private List<Role> role;
-    
-    @Column(nullable=false, unique=true)
-    private String name;
     
     @ManyToOne
     private Troop troop;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    @Column(nullable=false, unique=true)
+    private String name;
     
     public Troop getTroop() {
         return troop;

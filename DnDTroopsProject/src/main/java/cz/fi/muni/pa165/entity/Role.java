@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
@@ -31,6 +33,17 @@ public class Role {
     
     @Column(nullable = false)
     private int roleLevel = 1;
+    
+    @ManyToMany
+    private List<Hero> heroes;
+
+    public List<Hero> getHeroes() {
+        return heroes;
+    }
+
+    public void setHeroes(List<Hero> heroes) {
+        this.heroes = heroes;
+    }
     
     public Long getId() {
         return id;
