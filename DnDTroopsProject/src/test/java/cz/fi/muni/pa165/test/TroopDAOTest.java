@@ -31,42 +31,42 @@ public class TroopDAOTest {
     @DirtiesContext
     @BeforeMethod
     public void setup(){
-    EntityManager em = emf.createEntityManager();
-		
-    em.getTransaction().begin();
-    
-    Troop troop1 = new Troop();
-    troop1.setName("Lovci Lebek");
-    Mission mission1 = new Mission();
-    mission1.setName("Lovenie lebiek");
-    mission1.setObjective("vrazdite vsetko okolo seba a doneste 20 lebiek");
-    mission1.setReward(500);
-    troop1.setMission(mission1);
-    troop1.setAmountOfMoney(750);
-    
-    Troop troop2 = new Troop();
-    troop2.setName("Zealoti");
-    Mission mission2 = new Mission();
-    mission2.setName("Obracanie na vieru");
-    mission2.setObjective("Konvertujte alebo zabite 20 obyvatelov Elkie");
-    mission2.setReward(1500);
-    troop2.setMission(mission1);
-    troop2.setAmountOfMoney(2500);
-    
-    Troop troop3 = new Troop();
-    troop3.setName("Zealoti");
-    Mission mission3 = new Mission();
-    mission3.setName("Obracanie na vieru");
-    mission3.setObjective("Konvertujte alebo zabite 20 obyvatelov Elkie");
-    mission3.setReward(1500);
-    troop3.setMission(mission1);
-    troop3.setAmountOfMoney(2500);
-    
-    em.persist(troop1);
-    em.persist(troop2);
-    em.persist(troop3);
-    em.getTransaction().commit();
-    em.close();
+        EntityManager em = emf.createEntityManager();
+
+        em.getTransaction().begin();
+
+        Troop troop1 = new Troop();
+        troop1.setName("Lovci Lebek");
+        Mission mission1 = new Mission();
+        mission1.setName("Lovenie lebiek");
+        mission1.setObjective("vrazdite vsetko okolo seba a doneste 20 lebiek");
+        mission1.setReward(500);
+        troop1.setMission(mission1);
+        troop1.setAmountOfMoney(750);
+
+        Troop troop2 = new Troop();
+        troop2.setName("Zealoti");
+        Mission mission2 = new Mission();
+        mission2.setName("Obracanie na vieru");
+        mission2.setObjective("Konvertujte alebo zabite 20 obyvatelov Elkie");
+        mission2.setReward(1500);
+        troop2.setMission(mission1);
+        troop2.setAmountOfMoney(2500);
+
+        Troop troop3 = new Troop();
+        troop3.setName("Zealoti");
+        Mission mission3 = new Mission();
+        mission3.setName("Obracanie na vieru");
+        mission3.setObjective("Konvertujte alebo zabite 20 obyvatelov Elkie");
+        mission3.setReward(1500);
+        troop3.setMission(mission1);
+        troop3.setAmountOfMoney(2500);
+
+        em.persist(troop1);
+        em.persist(troop2);
+        em.persist(troop3);
+        em.getTransaction().commit();
+        em.close();
     }
     
     @Test

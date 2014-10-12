@@ -26,9 +26,7 @@ public class RoleDAOImpl implements RoleDAO{
 
     private EntityManager em;
     
-    @PersistenceContext
-    public void setEntityManager(EntityManager em) {
-        this.em = em;
+    public RoleDAOImpl() {
     }
     
     @Override
@@ -41,8 +39,10 @@ public class RoleDAOImpl implements RoleDAO{
         {
             throw new IllegalArgumentException("Role identifier is already set.");
         }
-        
+        this.em.getTransaction().begin();
         this.em.persist(role);
+        this.em.getTransaction().commit();
+        this.em.close();
     }
 
     @Override
@@ -51,7 +51,10 @@ public class RoleDAOImpl implements RoleDAO{
         {
             throw new IllegalArgumentException("Identifier should now be null.");
         }
-        return this.em.find(Role.class, id);
+        this.em.getTransaction().begin();
+        Role role = this.em.find(Role.class, id);
+        this.em.close();
+        return role;
     }
 
     @Override
@@ -62,7 +65,10 @@ public class RoleDAOImpl implements RoleDAO{
         if(role.getId() == null) {
             throw new IllegalArgumentException("Role is not present in DB.");
         }        
+        this.em.getTransaction().begin();
         this.em.merge(role);
+        this.em.getTransaction().commit();
+        this.em.close();
     }
 
     @Override
@@ -73,11 +79,17 @@ public class RoleDAOImpl implements RoleDAO{
         if(role.getId() == null) {
             throw new IllegalArgumentException("Role is not present in DB.");
         } 
+        this.em.getTransaction().begin();
         this.em.remove(role);
+        this.em.getTransaction().commit();
+        this.em.close();
     }
 
     @Override
     public List<Role> getAllRoles() {
-        return this.em.createQuery("SELECT r FROM Role r", Role.class).getResultList();   
+        this.em.getTransaction().begin();
+        List<Role> roles = this.em.createQuery("SELECT r FROM Role r", Role.class).getResultList();
+        this.em.close();
+        return  roles;
     }
 }
