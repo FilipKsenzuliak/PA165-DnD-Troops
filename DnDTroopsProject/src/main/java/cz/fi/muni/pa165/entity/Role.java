@@ -36,17 +36,6 @@ public class Role {
     @Column(nullable = false)
     private int roleLevel = 1;
     
-    @ManyToMany
-    private List<Hero> heroes;
-
-    public List<Hero> getHeroes() {
-        return heroes;
-    }
-
-    public void setHeroes(List<Hero> heroes) {
-        this.heroes = heroes;
-    }
-    
     public Long getId() {
         return id;
     }
