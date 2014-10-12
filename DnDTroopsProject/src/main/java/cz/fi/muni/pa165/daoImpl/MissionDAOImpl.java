@@ -20,15 +20,16 @@ import org.springframework.test.context.ContextConfiguration;
 /**
  *
  * @author Tomas Javorsky a.k.a. Tomus
- * uco: 324662
+ * @uco 324662
  */
 public class MissionDAOImpl implements MissionDAO{
 
     private EntityManager em;
+    private EntityManagerFactory emf;
     
-    @PersistenceContext
-    public void setEntityManager(EntityManager em) {
-        this.em = em;
+    public MissionDAOImpl() {
+        emf = Persistence.createEntityManagerFactory("myUnit");
+        em = emf.createEntityManager();
     }
     
     @Override
@@ -41,17 +42,22 @@ public class MissionDAOImpl implements MissionDAO{
         {
             throw new IllegalArgumentException("Mission identifier is already set.");
         }
-        
+        this.em.getTransaction().begin();
         this.em.persist(mission);
+        this.em.getTransaction().commit();
+        this.em.close();
     }
 
     @Override
     public Mission getMissionById(Long id) throws IllegalArgumentException {
         if(id == null)
         {
-            throw new IllegalArgumentException("Identifier should now be null.");
+            throw new IllegalArgumentException("Identifier should not be null.");
         }
-        return this.em.find(Mission.class, id);
+        this.em.getTransaction().begin();
+        Mission mission = this.em.find(Mission.class, id);
+        this.em.close();
+        return mission;
     }
 
     @Override
@@ -62,7 +68,10 @@ public class MissionDAOImpl implements MissionDAO{
         if(mission.getId() == null) {
             throw new IllegalArgumentException("Mission is not present in DB.");
         }        
+        this.em.getTransaction().begin();
         this.em.merge(mission);
+        this.em.getTransaction().commit();
+        this.em.close();
     }
 
     @Override
@@ -73,11 +82,17 @@ public class MissionDAOImpl implements MissionDAO{
         if(mission.getId() == null) {
             throw new IllegalArgumentException("Mission is not present in DB.");
         } 
+        this.em.getTransaction().begin();
         this.em.remove(mission);
+        this.em.getTransaction().commit();
+        this.em.close();
     }
 
     @Override
     public List<Mission> getAllMissions() {
-        return this.em.createQuery("SELECT r FROM Mission r", Mission.class).getResultList();   
+        this.em.getTransaction().begin();
+        List<Mission> missions = this.em.createQuery("SELECT r FROM Mission r", Mission.class).getResultList();
+        this.em.close();
+        return  missions;
     }
 }
