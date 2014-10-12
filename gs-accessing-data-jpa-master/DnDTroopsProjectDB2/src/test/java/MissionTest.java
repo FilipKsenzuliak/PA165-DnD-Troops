@@ -23,7 +23,7 @@ public class MissionTest {
     MissionRepository repository = context.getBean(MissionRepository.class);
     
     @Test
-    public void CreateTest() {
+    public void createTest() {
         int count = 0;
         repository.save(new Mission("Killing", "Kill them all", 20000));
         repository.save(new Mission("Feeding", "Feed the poor", 500));
