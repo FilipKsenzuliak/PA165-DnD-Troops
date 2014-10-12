@@ -34,6 +34,10 @@ public class Role implements Serializable{
     
     private int roleLevel = 1;
     
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public Long getId() {
         return id;
     }
