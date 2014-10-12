@@ -8,7 +8,8 @@ package cz.fi.muni.pa165.entity;
 
 /**
  *
- * @author Dávid
+ * @author Dávid hubac
+ * @uco 396042
  */
 public enum Race {
     ELF, HUMAN, HALFORC, GNOME, DWARF
