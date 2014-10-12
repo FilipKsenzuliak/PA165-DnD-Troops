@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.jpa.internal.util.PersistenceUtilHelper;
@@ -32,16 +33,18 @@ import org.testng.annotations.Test;
  * @uco 396042
  */
 @ContextConfiguration(classes=DaoContext.class)
-@DirtiesContext(classMode=ClassMode.AFTER_EACH_TEST_METHOD)
 public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     
-    @PersistenceContext
+   /* @PersistenceContext
     private EntityManagerFactory emf;
     
     private HeroDAOImpl impl;
     private EntityManager em;
     
+    @DirtiesContext
+    @BeforeMethod
     public void setup() {
+        emf = Persistence.createEntityManagerFactory("UnitName");
         em = emf.createEntityManager();
         em.getTransaction().begin();
         impl = new HeroDAOImpl();
@@ -81,7 +84,7 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         em.createQuery("DELETE FROM Hero").executeUpdate();
         em.close();
    }*/
-    
+  /*  
     @Test
     public void createTest(){
         Hero hero = new Hero();
@@ -110,7 +113,6 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         hero.setTroop(troop);
         
         try {
-            setup();
             em.createQuery("DELETE FROM Hero").executeUpdate();
             List<Hero> heroes = em.createQuery("SELECT h FROM Hero h").getResultList();
             assertEquals(0, heroes.size());
@@ -138,5 +140,5 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         Hero hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
         
         hero.setAge(10);
-    }
+    }*/
 }

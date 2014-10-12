@@ -4,11 +4,14 @@
  */
 package cz.fi.muni.pa165.test;
 
+import cz.fi.muni.pa165.DaoContext;
 import cz.fi.muni.pa165.dao.RoleDAO;
 import cz.fi.muni.pa165.daoImpl.RoleDAOImpl;
 import cz.fi.muni.pa165.entity.Role;
 import java.util.List;
 import java.util.Random;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,7 +21,7 @@ import org.testng.annotations.Test;
  * @396474  
  */
 public class RoleDAOTest {
-    private final RoleDAO testRole;
+    /*private final RoleDAO testRole;
     
     public RoleDAOTest() {
         this.testRole = new RoleDAOImpl();
@@ -89,5 +92,5 @@ public class RoleDAOTest {
         Role role = createSomeRole();
         Role databaseRole = testRole.getRoleById(role.getId());
         Assert.assertNotNull(databaseRole);
-    }   
+    }   */
 }
