@@ -48,7 +48,7 @@ public class MissionDAOTest{
     }
 
     @Test
-    public void testCreateBranch() {
+    public void testCreateMission() {
         missionDAO.createMission(m1);
 
         Mission result = m1;

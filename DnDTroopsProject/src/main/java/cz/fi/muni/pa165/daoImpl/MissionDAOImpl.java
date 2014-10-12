@@ -22,13 +22,12 @@ public class MissionDAOImpl implements MissionDAO{
 
     private EntityManagerFactory emf;
     
-    public MissionDAOImpl(EntityManagerFactory emf)
-    {
+    public MissionDAOImpl(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
     @Override
-    public Mission createMission(Mission mission) throws IllegalArgumentException {
+    public void createMission(Mission mission) throws IllegalArgumentException {
         if(mission == null)
         {
             throw new IllegalArgumentException("Mission cannot be null.");
@@ -42,7 +41,6 @@ public class MissionDAOImpl implements MissionDAO{
         em.persist(mission);
         em.getTransaction().commit();
         em.close();
-        return mission;
     }
 
     @Override
@@ -60,7 +58,7 @@ public class MissionDAOImpl implements MissionDAO{
     }
 
     @Override
-    public boolean updateMission(Mission mission) throws IllegalArgumentException {
+    public void updateMission(Mission mission) throws IllegalArgumentException {
         if(mission == null) {
             throw new IllegalArgumentException("Mission can't be null.");
         }
@@ -69,19 +67,13 @@ public class MissionDAOImpl implements MissionDAO{
         }        
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();   
-        if(!em.contains(mission)) {
-            em.getTransaction().commit();
-            em.close(); 
-            return false;
-        }
         em.merge(mission);
         em.getTransaction().commit();
         em.close();
-        return true;
     }
 
     @Override
-    public boolean deleteMission(Mission mission) throws IllegalArgumentException {
+    public void deleteMission(Mission mission) throws IllegalArgumentException {
         if(mission == null) {
             throw new IllegalArgumentException("Mission can't be null.");
         }
@@ -90,15 +82,9 @@ public class MissionDAOImpl implements MissionDAO{
         } 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();   
-        if(!em.contains(mission)) {
-            em.getTransaction().commit();
-            em.close(); 
-            return false;
-        }
         em.remove(mission);
         em.getTransaction().commit();
         em.close();
-        return true;
     }
 
     @Override

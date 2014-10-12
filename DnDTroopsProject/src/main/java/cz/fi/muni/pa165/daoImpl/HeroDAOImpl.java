@@ -26,7 +26,7 @@ public class HeroDAOImpl implements HeroDAO{
     }
     
     @Override
-    public Hero createHero(Hero hero) throws IllegalArgumentException {
+    public void createHero(Hero hero) throws IllegalArgumentException {
         if(hero == null || hero.getId() != null || hero.getRace() == null || 
                 hero.getAge() == null || hero.getRank() == null ||
                 hero.getRole() == null || hero.getTroop() == null) {
@@ -37,7 +37,6 @@ public class HeroDAOImpl implements HeroDAO{
         em.persist(hero);
         em.getTransaction().commit();
         em.close();
-        return hero;
     }
 
     @Override
@@ -54,7 +53,7 @@ public class HeroDAOImpl implements HeroDAO{
     }
 
     @Override
-    public boolean updateHero(Hero hero) throws IllegalArgumentException {
+    public void updateHero(Hero hero) throws IllegalArgumentException {
         if(hero == null || hero.getId() != null || hero.getRace() == null || 
                 hero.getAge() == 0 || hero.getRank() == 0 ||
                 hero.getRole() == null || hero.getTroop() == null) {
@@ -63,33 +62,21 @@ public class HeroDAOImpl implements HeroDAO{
         
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();   
-        if(!em.contains(hero)) {
-            em.getTransaction().commit();
-            em.close(); 
-            return false;
-        }
         em.merge(hero);
         em.getTransaction().commit();
         em.close();
-        return true;
     }
 
     @Override
-    public boolean removeHero(Hero hero) throws IllegalArgumentException {
+    public void removeHero(Hero hero) throws IllegalArgumentException {
         if(hero == null || hero.getId() == null) {
             throw new IllegalArgumentException("Remove hero called with wrong param");
         }
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();   
-        if(!em.contains(hero)) {
-            em.getTransaction().commit();
-            em.close(); 
-            return false;
-        }
         em.remove(hero);
         em.getTransaction().commit();
         em.close();
-        return true;
     }
 
     @Override
@@ -110,7 +97,6 @@ public class HeroDAOImpl implements HeroDAO{
         Query query = em.createQuery("SELECT h FROM Hero h WHERE h.name = :name ORDER BY h.id");
         //query.setParameter("name", name);
         hero = query.getResultList();
-        em.detach(hero);
         em.close();
         return hero;
     }

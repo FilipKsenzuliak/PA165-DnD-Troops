@@ -23,10 +23,10 @@ import javax.persistence.PersistenceUnit;
  */
 public class TroopDAOImpl implements TroopDAO{
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("testingSetup");
+    private EntityManagerFactory emf;
     
-    public TroopDAOImpl() {
-        
+    public TroopDAOImpl(EntityManagerFactory emf) {
+        this.emf = emf;
     }
         
     @Override

@@ -39,7 +39,7 @@ public interface TroopDAO {
      * @param troop troop to be updated.
      * @throws IllegalArgumentException when troop is null, or has null id.
      */
-    void updateTroop(Troop troop) throws IllegalArgumentException;
+    public void updateTroop(Troop troop) throws IllegalArgumentException;
     
     /**
      * Remove troop from database.
@@ -47,13 +47,13 @@ public interface TroopDAO {
      * @param troop troop to be removed from database.
      * @throws IllegalArgumentException when troop is null, or has null id.
      */
-    void deleteTroop(Troop troop) throws IllegalArgumentException;
+    public void deleteTroop(Troop troop) throws IllegalArgumentException;
     
     /**
      * Return list of all troops in the database.
      *
      * @return list of all troops.
      */
-    List<Troop> getAllTroops();
+    public List<Troop> getAllTroops();
     
 }

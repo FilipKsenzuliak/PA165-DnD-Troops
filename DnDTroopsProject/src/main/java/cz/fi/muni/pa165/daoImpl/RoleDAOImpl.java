@@ -7,6 +7,7 @@
 package cz.fi.muni.pa165.daoImpl;
 
 import cz.fi.muni.pa165.dao.RoleDAO;
+import cz.fi.muni.pa165.entity.Mission;
 import cz.fi.muni.pa165.entity.Role;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,10 @@ import javax.persistence.PersistenceUnit;
  */
 public class RoleDAOImpl implements RoleDAO{
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("testingSetup");
+    private EntityManagerFactory emf;
     
-    public RoleDAOImpl() {
+    public RoleDAOImpl(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     
     @Override
@@ -54,6 +56,7 @@ public class RoleDAOImpl implements RoleDAO{
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Role role = em.find(Role.class, id);
+        em.getTransaction().commit();
         em.close();
         return role;
     }
@@ -67,7 +70,7 @@ public class RoleDAOImpl implements RoleDAO{
             throw new IllegalArgumentException("Role is not present in DB.");
         }    
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        em.getTransaction().begin();   
         em.merge(role);
         em.getTransaction().commit();
         em.close();
@@ -82,7 +85,7 @@ public class RoleDAOImpl implements RoleDAO{
             throw new IllegalArgumentException("Role is not present in DB.");
         } 
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        em.getTransaction().begin();   
         em.remove(role);
         em.getTransaction().commit();
         em.close();
@@ -92,8 +95,9 @@ public class RoleDAOImpl implements RoleDAO{
     public List<Role> getAllRoles() {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        List<Role> roles = em.createQuery("SELECT r FROM Role r", Role.class).getResultList();
+        List<Role> roles = em.createQuery("SELECT r FROM Roles r", Role.class).getResultList();
+        em.getTransaction().commit();
         em.close();
-        return  roles;
+        return roles;
     }
 }
