@@ -24,7 +24,7 @@ public class AppMain {
 
 	public static void main(String[] args) throws SQLException {
 	 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnitName");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
     
         HeroDAOImpl impl;
         EntityManager em = emf.createEntityManager();
@@ -32,8 +32,8 @@ public class AppMain {
         impl = new HeroDAOImpl(em);
         
         Hero hero = new Hero();
-        hero.setAge(35);
-        hero.setRank(20);
+        hero.setAge(35L);
+        hero.setRank(20L);
         hero.setName("Andrej");
         hero.setRace(Race.DWARF);
         
@@ -61,6 +61,7 @@ public class AppMain {
         
         List<Hero> heroes = em.createQuery("SELECT h FROM Hero h").getResultList();
             System.out.println(heroes.get(0).toString());
+            
                 
         }
 

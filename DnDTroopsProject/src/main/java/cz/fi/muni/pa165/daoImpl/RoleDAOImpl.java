@@ -25,8 +25,11 @@ import org.springframework.test.context.ContextConfiguration;
 public class RoleDAOImpl implements RoleDAO{
 
     private EntityManager em;
+    private EntityManagerFactory emf;
     
     public RoleDAOImpl() {
+        emf = Persistence.createEntityManagerFactory("myUnit");
+        em = emf.createEntityManager();
     }
     
     @Override
