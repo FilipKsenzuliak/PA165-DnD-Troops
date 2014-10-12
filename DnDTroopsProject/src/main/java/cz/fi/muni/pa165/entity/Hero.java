@@ -4,12 +4,14 @@
  */
 package cz.fi.muni.pa165.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -19,7 +21,7 @@ import javax.persistence.ManyToOne;
  * @uco 396072
  */
 @Entity
-public class Hero {
+public class Hero implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
@@ -28,9 +30,11 @@ public class Hero {
     private Race race;
     private int age;
     private int level;
+    
+    @ManyToMany
     private List<Role> role;
     
-    @Column(nullable=false, unique=true)
+    @Column(nullable=false)
     private String name;
     
     @ManyToOne
