@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
  * @396474  
  */
 public class RoleDAOTest {
-    /*private final RoleDAO testRole;
+    private final RoleDAO testRole;
     
     public RoleDAOTest() {
         this.testRole = new RoleDAOImpl();
@@ -92,5 +92,5 @@ public class RoleDAOTest {
         Role role = createSomeRole();
         Role databaseRole = testRole.getRoleById(role.getId());
         Assert.assertNotNull(databaseRole);
-    }   */
+    }   
 }

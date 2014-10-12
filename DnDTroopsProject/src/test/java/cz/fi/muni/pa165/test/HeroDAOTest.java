@@ -11,19 +11,22 @@ import cz.fi.muni.pa165.dao.HeroDAO;
 import cz.fi.muni.pa165.daoImpl.HeroDAOImpl;
 import cz.fi.muni.pa165.entity.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.jpa.internal.util.PersistenceUtilHelper;
+import javax.persistence.PersistenceUnit;
+
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -32,10 +35,11 @@ import org.testng.annotations.Test;
  * @author Dávid Hubaè
  * @uco 396042
  */
+@DirtiesContext(classMode=DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @ContextConfiguration(classes=DaoContext.class)
 public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     
-    @PersistenceContext
+    @PersistenceUnit
     private EntityManagerFactory emf;
     
     private HeroDAOImpl impl;
@@ -44,7 +48,6 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     @DirtiesContext
     @BeforeMethod
     public void setup() {
-        emf = Persistence.createEntityManagerFactory("UnitName");
         em = emf.createEntityManager();
         em.getTransaction().begin();
         impl = new HeroDAOImpl();
@@ -160,7 +163,7 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         troop.setMission(mission);
         hero.setTroop(troop);
         
-        em.persist(hero);
+        impl.createHero(hero);
         int count2 = em.createQuery("SELECT h FROM Hero h").getResultList().size();
         assertEquals(count, count2);
     }
@@ -168,6 +171,10 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void updateTest() {
         Hero hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
+        int age = hero.getAge();
         hero.setAge(10);
+        impl.updateHero(hero);
+        hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
+        assertNotEquals(age, hero.getAge());
     }
 }

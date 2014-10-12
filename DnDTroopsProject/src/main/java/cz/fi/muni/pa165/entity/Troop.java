@@ -7,12 +7,17 @@ package cz.fi.muni.pa165.entity;
 
 import cz.fi.muni.pa165.entity.Mission;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -30,10 +35,14 @@ public class Troop {
     private String name;
     
     @Column(nullable = false)
+    @ManyToOne
     private Mission mission;
     
     @Column(nullable = false)
     private int amountOfMoney;
+    
+    @OneToMany
+    private List<Hero> heroes;
    
     public Long getId() {
         return id;

@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 /**
  *
  * @author Tomas Javorsky a.k.a. Tomus
- * uco: 324662
+ * @uco: 324662
  */
 @Entity
 public class Mission {
