@@ -34,7 +34,6 @@ public class Troop {
     @Column(nullable = false)
     private String name;
     
-    @Column(nullable = false)
     @ManyToOne
     private Mission mission;
     

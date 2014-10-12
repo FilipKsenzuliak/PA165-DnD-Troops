@@ -24,12 +24,15 @@ import javax.persistence.PersistenceUnit;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.Assert;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertNotNull;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import java.util.List;
+import javax.persistence.EntityManager;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 /**
  *
  * @author Dávid Hubaè
@@ -49,13 +52,11 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         
     }
     
-    @DirtiesContext
-    @BeforeMethod
+    @Before
     public void setup() {
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        impl = new HeroDAOImpl();
-        impl.setEntityManager(em);
+        impl = new HeroDAOImpl(em);
         
         Hero hero = new Hero();
         hero.setAge(35);
@@ -180,5 +181,30 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         impl.updateHero(hero);
         hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
         assertNotEquals(age, hero.getAge());
+        
+        hero.setId(null);
+        impl.updateHero(hero);
+        Long id = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0).getId();
+        assertNotEquals(null, id);
+    }
+    
+    @Test
+    public void deleteTest() {
+        int count = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().size();
+        Hero hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
+        
+        impl.removeHero(hero);
+        int count2 = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().size();
+        assertNotEquals(count, count2);
+    }
+    
+    @Test
+    public void getByIdTest() {
+        Hero hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
+        Long id = hero.getId();
+        Hero hero2 = impl.getHero(id + 11111);
+        assertNull(hero2);
+        hero2 = impl.getHero(id);
+        assertNotNull(hero2);
     }
 }

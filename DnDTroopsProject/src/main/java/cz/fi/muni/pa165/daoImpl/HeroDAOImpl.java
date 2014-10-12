@@ -22,9 +22,8 @@ public class HeroDAOImpl implements HeroDAO{
     
     private EntityManager entityManager;
     
-    @PersistenceContext
-    public void setEntityManager(EntityManager em) {
-        this.entityManager = em;
+    public HeroDAOImpl(EntityManager em) {
+        entityManager = em;
     }
     
     @Override

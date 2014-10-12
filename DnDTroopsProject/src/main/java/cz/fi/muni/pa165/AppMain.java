@@ -23,15 +23,13 @@ public class AppMain {
 
 
 	public static void main(String[] args) throws SQLException {
-		new AnnotationConfigApplicationContext(DaoContext.class);
-                
+	 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnitName");
     
         HeroDAOImpl impl;
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        impl = new HeroDAOImpl();
-        impl.setEntityManager(em);
+        impl = new HeroDAOImpl(em);
         
         Hero hero = new Hero();
         hero.setAge(35);
