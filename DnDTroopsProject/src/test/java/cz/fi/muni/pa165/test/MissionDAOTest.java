@@ -29,11 +29,10 @@ public class MissionDAOTest{
     private Mission m1;
     private Mission m2;
     private MissionDAO missionDAO;
-
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
 
     @Before
-    public void setUp() {
+    public void setup() {
         m1 = new Mission();
         m1.setName("Slay them all!");
         m1.setObjective("Slay everyone");
@@ -51,10 +50,10 @@ public class MissionDAOTest{
     public void testCreateMission() {
         missionDAO.createMission(m1);
 
-        Mission result = m1;
-        Mission result2 = missionDAO.getAllMissions().get(0);
+        Mission mission = m1;
+        Mission missionDB = missionDAO.getMissionById(m1.getId());
 
-        assertEquals(result, result2);
+        assertEquals(mission, missionDB);
 
     }
 }
