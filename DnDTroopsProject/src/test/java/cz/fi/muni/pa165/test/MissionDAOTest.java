@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 
 import cz.fi.muni.pa165.entity.Mission;
 import javax.persistence.Persistence;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,9 +53,35 @@ public class MissionDAOTest{
 
         Mission mission = m1;
         Mission missionDB = missionDAO.getMissionById(m1.getId());
-
+        
+        assertNotNull(mission.getId());
         assertEquals(mission, missionDB);
     }
+    
+    @Test
+    public void testUpdateMission() {
+        missionDAO.createMission(m1);
+        Mission mission = m1;
+        mission.setName("Don't slay anyone");
+        mission.setObjective("Keep away from everyone");
+        mission.setReward(1);
+        missionDAO.updateMission(mission);
+
+        assertEquals("Don't slay anyone", m1.getName());
+        assertEquals("Keep away from everyone", m1.getObjective());
+        assertEquals(1, m1.getReward());
+    }
+    
+    @Test
+    public void testDeleteMission() {
+        missionDAO.createMission(m1);
+
+        Mission mission = m1;
+        missionDAO.deleteMission(mission);
+        Mission missionDB = missionDAO.getMissionById(mission.getId());
+        assertNull(missionDB);
+    }
+  
     
     
 }

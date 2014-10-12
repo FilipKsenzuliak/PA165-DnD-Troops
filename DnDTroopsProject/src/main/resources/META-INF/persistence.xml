@@ -7,9 +7,6 @@
 	<persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
              <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:CarParkDB;create=true"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="root"/>
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
