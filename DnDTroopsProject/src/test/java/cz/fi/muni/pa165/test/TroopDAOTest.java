@@ -15,6 +15,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import cz.fi.muni.pa165.entity.Mission;
+import cz.fi.muni.pa165.daoImpl.TroopDAOImpl;
 
 /**
  *
@@ -24,16 +25,35 @@ import cz.fi.muni.pa165.entity.Mission;
 @ContextConfiguration(classes=DaoContext.class)
 @DirtiesContext(classMode=DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TroopDAOTest {
+    private final TroopDAO testTroop;
     
     @PersistenceUnit
     public EntityManagerFactory emf;
     
-    @DirtiesContext
-    @BeforeMethod
-    public void setup(){
+    public TroopDAOTest(){
+        this.testTroop = new TroopDAOImpl();
+    }
+    
+    @Test
+    public void createTroopTest(){
         EntityManager em = emf.createEntityManager();
-
         em.getTransaction().begin();
+        Troop troop4 = new Troop();
+        troop4.setName("Usmrcovaci");
+        Mission mission4 = new Mission();
+        mission4.setName("plienenie");
+        mission4.setObjective("vrazdite vsetko okolo seba a doneste 20 mrtvol");
+        mission4.setReward(666);
+        troop4.setMission(mission4);
+        troop4.setAmountOfMoney(50);
+        em.close();
+        Assert.assertEquals(testTroop.getTroopById(troop4.getId()), troop4);
+    }
+    
+    @Test
+    public void findAllTroopsTest() {
+		EntityManager em = emf.createEntityManager();
+                em.getTransaction().begin();
 
         Troop troop1 = new Troop();
         troop1.setName("Lovci Lebek");
@@ -67,14 +87,10 @@ public class TroopDAOTest {
         em.persist(troop3);
         em.getTransaction().commit();
         em.close();
+        List<Troop> troops = em.createQuery("SELECT p FROM Troop p",Troop.class).getResultList();
+	em.close();
+		
+        Assert.assertEquals(troops.size(), 3);
     }
     
-    @Test
-    public void findAllTroops() {
-		EntityManager em = emf.createEntityManager();
-		List<Troop> troops = em.createQuery("SELECT p FROM Troop p",Troop.class).getResultList();
-		em.close();
-		
-		Assert.assertEquals(troops.size(), 3);
-    }
 }
