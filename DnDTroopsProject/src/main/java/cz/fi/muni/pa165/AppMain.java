@@ -35,7 +35,7 @@ public class AppMain {
         
         Hero hero = new Hero();
         hero.setAge(35);
-        hero.setLevel(20);
+        hero.setRank(20);
         hero.setName("Andrej");
         hero.setRace(Race.DWARF);
         

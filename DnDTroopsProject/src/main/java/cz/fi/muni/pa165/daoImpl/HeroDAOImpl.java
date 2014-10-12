@@ -30,7 +30,7 @@ public class HeroDAOImpl implements HeroDAO{
     @Override
     public void createHero(Hero hero) throws IllegalArgumentException {
         if(hero == null || hero.getId() != null || hero.getRace() == null || 
-                hero.getAge() == 0 || hero.getLevel() == 0 ||
+                hero.getAge() == 0 || hero.getRank() == 0 ||
                 hero.getRole() == null || hero.getTroop() == null) {
             throw new IllegalArgumentException("Create hero called with wrong param.");
         } 
@@ -52,7 +52,7 @@ public class HeroDAOImpl implements HeroDAO{
     @Override
     public void updateHero(Hero hero) throws IllegalArgumentException {
         if(hero == null || hero.getId() != null || hero.getRace() == null || 
-                hero.getAge() == 0 || hero.getLevel() == 0 ||
+                hero.getAge() == 0 || hero.getRank() == 0 ||
                 hero.getRole() == null || hero.getTroop() == null) {
             throw new IllegalArgumentException("Update hero called with wrong param.");
         }

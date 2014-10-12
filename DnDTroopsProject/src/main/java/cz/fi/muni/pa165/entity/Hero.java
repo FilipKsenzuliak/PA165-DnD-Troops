@@ -7,8 +7,11 @@ package cz.fi.muni.pa165.entity;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -26,18 +29,18 @@ public class Hero implements Serializable {
     @GeneratedValue
     private Long id;
     
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Race race;
     private int age;
-    private int level;
+    private int rank;
     
     @ManyToMany
     private List<Role> role;
     
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Troop troop;
     
-    @Column(nullable=false, unique=true)
+    @Column(nullable=false)
     private String name;
 
     public void setId(Long id) {
@@ -71,12 +74,12 @@ public class Hero implements Serializable {
         this.age = age;
     }
 
-    public int getLevel() {
-        return level;
+    public int getRank() {
+        return rank;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
     public String getName() {
@@ -131,7 +134,7 @@ public class Hero implements Serializable {
         return "Hero{" + "id=" + id 
                 + ", race=" + race + ","
                 + " age=" + age + ","
-                + " level=" + level + ","
+                + " level=" + rank + ","
                 + " name=" + name + ","
                 + " role=" + role + '}';
     }     

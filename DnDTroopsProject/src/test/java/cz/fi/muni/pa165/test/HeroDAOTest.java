@@ -55,7 +55,7 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         
         Hero hero = new Hero();
         hero.setAge(35);
-        hero.setLevel(20);
+        hero.setRank(20);
         hero.setName("Andrej");
         hero.setRace(Race.DWARF);
         
@@ -92,7 +92,7 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     public void createTest(){
         Hero hero = new Hero();
         hero.setAge(35);
-        hero.setLevel(20);
+        hero.setRank(20);
         hero.setName("Filip");
         hero.setRace(Race.ELF);
         
@@ -139,7 +139,7 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         
         Hero hero = new Hero();
         hero.setAge(35);
-        hero.setLevel(20);
+        hero.setRank(20);
         hero.setName("Filip");
         hero.setRace(Race.ELF);
         hero.setId(777L);
