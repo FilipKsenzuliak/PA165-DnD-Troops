@@ -7,6 +7,7 @@ import source.Application;
 import source.Troop;
 import source.Hero;
 import source.TroopRepository;
+import source.Race;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,8 +27,8 @@ public class TroopTest {
     @Test
     public void createTest() {
         int count = 0;
-        repository.save(new Troop("Fiskusovia", new Hero()));
-        repository.save(new Troop("Lolobriadkovia", new Hero()));
+        repository.save(new Troop("Fiskusovia", new Hero("Jozo", Race.ELF, 20,2)));
+        repository.save(new Troop("Lolobriadkovia", new Hero("Ivo", Race.DWARF, 50,1)));
         Iterable<Troop> troops = repository.findAll();
         for (Troop troop : troops) {
             count++;
@@ -37,13 +38,13 @@ public class TroopTest {
     }
     @Test
     public void nameLookupTest(){
-        Troop troop = new Troop("Fiskusovia", new Hero());
-        repository.save(troop);
-        Assert.assertEquals(repository.findByName("Fiskusovia").contains(troop), true);
+        Troop troop1 = new Troop("Fiskusovia", new Hero("Jana", Race.HUMAN, 22,2));
+        repository.save(troop1);
+        Assert.assertEquals(repository.findByName("Fiskusovia").contains(troop1), true);
     }
     @Test
     public void deleteTest(){
-        Troop troop = new Troop("Fiskusovia", new Hero());
+        Troop troop = new Troop("Fiskusovia", new Hero("Lolo", Race.GNOME, 15,1));
         repository.save(troop);
         repository.delete(troop);
         Assert.assertEquals(repository.findByName("Fiskusovia").contains(troop), false);
