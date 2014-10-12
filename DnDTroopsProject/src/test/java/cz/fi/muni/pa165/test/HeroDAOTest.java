@@ -45,6 +45,10 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     private HeroDAOImpl impl;
     private EntityManager em;
     
+    public HeroDAOTest() {
+        
+    }
+    
     @DirtiesContext
     @BeforeMethod
     public void setup() {
