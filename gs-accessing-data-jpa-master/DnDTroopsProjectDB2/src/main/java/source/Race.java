@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package source;
 
 /**
  *
- * @author Eduard
+ * @author D�vid
  */
-public class Troop {
-    
+public enum Race {
+    ELF, HUMAN, HALFORC, GNOME, DWARF
 }

@@ -4,8 +4,6 @@ import org.junit.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import source.Application;
-import source.Customer;
-import source.CustomerRepository;
 import source.Mission;
 import source.MissionRepository;
 
