@@ -56,6 +56,7 @@ public class AppMain {
         troop.setMission(mission);
         hero.setTroop(troop);
         
+        em.getTransaction().begin();
         em.persist(hero);
         em.getTransaction().commit();  
         
