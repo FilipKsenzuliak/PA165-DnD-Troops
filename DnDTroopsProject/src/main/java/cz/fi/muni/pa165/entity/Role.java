@@ -15,13 +15,13 @@ import javax.persistence.OneToMany;
 
 /**
  * 
- * @author Dávid Hubac
+ * @author Dï¿½vid Hubac
  * @uco 396042
  */
 @Entity
 public class Role {
-    @ManyToMany(mappedBy = "role")
-    private List<Hero> heros;
+    @ManyToMany
+    private List<Hero> heroes;
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -48,6 +48,14 @@ public class Role {
         return description;
     }
 
+    public List<Hero> getHeroes() {
+        return heroes;
+    }
+
+    public void setHeroes(List<Hero> heroes) {
+        this.heroes = heroes;
+    }
+    
     public void setDescription(String description) {
         this.description = description;
     }

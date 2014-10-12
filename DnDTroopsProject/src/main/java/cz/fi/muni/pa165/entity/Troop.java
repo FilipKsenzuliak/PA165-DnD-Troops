@@ -40,7 +40,7 @@ public class Troop {
     @Column(nullable = false)
     private int amountOfMoney;
     
-    @OneToMany
+    @OneToMany(mappedBy = "troop")
     private List<Hero> heroes;
    
     public Long getId() {

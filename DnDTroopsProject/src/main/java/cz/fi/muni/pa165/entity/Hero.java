@@ -31,8 +31,8 @@ public class Hero implements Serializable {
     
     @Enumerated(EnumType.STRING)
     private Race race;
-    private int age;
-    private int rank;
+    private Long age;
+    private Long rank;
     
     @ManyToMany
     private List<Role> role;
@@ -66,21 +66,22 @@ public class Hero implements Serializable {
         this.race = race;
     }
 
-    public int getAge() {
+    public Long getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Long age) {
         this.age = age;
     }
 
-    public int getRank() {
+    public Long getRank() {
         return rank;
     }
 
-    public void setRank(int rank) {
+    public void setRank(Long rank) {
         this.rank = rank;
     }
+
 
     public String getName() {
         return name;

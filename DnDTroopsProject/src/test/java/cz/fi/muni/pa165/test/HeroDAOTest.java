@@ -59,8 +59,8 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         impl = new HeroDAOImpl(em);
         
         Hero hero = new Hero();
-        hero.setAge(35);
-        hero.setRank(20);
+        hero.setAge(35L);
+        hero.setRank(20L);
         hero.setName("Andrej");
         hero.setRace(Race.DWARF);
         
@@ -96,8 +96,8 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void createTest(){
         Hero hero = new Hero();
-        hero.setAge(35);
-        hero.setRank(20);
+        hero.setAge(35L);
+        hero.setRank(20L);
         hero.setName("Filip");
         hero.setRace(Race.ELF);
         
@@ -143,8 +143,8 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         int count = em.createQuery("SELECT h FROM Hero h").getResultList().size();
         
         Hero hero = new Hero();
-        hero.setAge(35);
-        hero.setRank(20);
+        hero.setAge(35L);
+        hero.setRank(20L);
         hero.setName("Filip");
         hero.setRace(Race.ELF);
         hero.setId(777L);
@@ -176,8 +176,8 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     @Test
     public void updateTest() {
         Hero hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
-        int age = hero.getAge();
-        hero.setAge(10);
+        Long age = hero.getAge();
+        hero.setAge(10L);
         impl.updateHero(hero);
         hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
         assertNotEquals(age, hero.getAge());
