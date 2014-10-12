@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
 @ContextConfiguration(classes=DaoContext.class)
 public class HeroDAOTest extends AbstractTestNGSpringContextTests {
     
-   /* @PersistenceContext
+    @PersistenceContext
     private EntityManagerFactory emf;
     
     private HeroDAOImpl impl;
@@ -84,7 +84,7 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         em.createQuery("DELETE FROM Hero").executeUpdate();
         em.close();
    }*/
-  /*  
+   
     @Test
     public void createTest(){
         Hero hero = new Hero();
@@ -140,5 +140,5 @@ public class HeroDAOTest extends AbstractTestNGSpringContextTests {
         Hero hero = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList().get(0);
         
         hero.setAge(10);
-    }*/
+    }
 }
