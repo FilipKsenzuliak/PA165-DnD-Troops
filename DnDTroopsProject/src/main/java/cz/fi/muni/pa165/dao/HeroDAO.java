@@ -19,7 +19,7 @@ public interface HeroDAO {
      * @param hero hero to be created.
      * @throws IllegalArgumentException when hero is null, hero already has id assigned
      */
-    public void createHero(Hero hero) throws IllegalArgumentException;
+    public Hero createHero(Hero hero) throws IllegalArgumentException;
     
    /**
      * Return hero with given id.
@@ -36,7 +36,7 @@ public interface HeroDAO {
      * @param hero hero to be updated.
      * @throws IllegalArgumentException when hero is null, or has null id.
      */
-    void updateHero(Hero hero) throws IllegalArgumentException;
+    public boolean updateHero(Hero hero) throws IllegalArgumentException;
     
     /**
      * Remove hero from database.
@@ -44,14 +44,14 @@ public interface HeroDAO {
      * @param hero hero to be removed from database.
      * @throws IllegalArgumentException when hero is null, or has null id.
      */
-    void removeHero(Hero hero) throws IllegalArgumentException;
+    public boolean removeHero(Hero hero) throws IllegalArgumentException;
     
     /**
      * Return list of all heroes in the database.
      *
      * @return list of all heroes.
      */
-    List<Hero> getAllHeroes();
+    public List<Hero> getAllHeroes();
     
     /**
      * Method to find hero by name.
@@ -60,5 +60,5 @@ public interface HeroDAO {
      * @return list of all heroes with given name.
      * @throws IllegalArgumentException when given name is null.
      */
-    List<Hero> findHeroByName(String Name) throws IllegalArgumentException;
+    public List<Hero> findHeroByName(String Name) throws IllegalArgumentException;
 }

@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun Oct 12 22:46:05 CEST 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0149-061c-66da-000002cdcf40 
+on database directory memory:D:\Programy\PA165\DnDTroopsProject\PA165-DnD-Troops\DnDTroopsProject\CarParkDB with class loader sun.misc.Launcher$AppClassLoader@67ce08c7 
+Loaded from file:/C:/Users/Filip/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_17-b02
+user.dir=D:\Programy\PA165\DnDTroopsProject\PA165-DnD-Troops\DnDTroopsProject
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

@@ -9,26 +9,24 @@ import cz.fi.muni.pa165.entity.Hero;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Filip Ksenzuliak
  * @uco 396072
  */
-@Repository
+
 public class HeroDAOImpl implements HeroDAO{
     
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("testingSetup");
+    private EntityManagerFactory emf;
     
-    public HeroDAOImpl() {
+    public HeroDAOImpl(EntityManagerFactory emf) {
+        this.emf = emf;
     }
     
     @Override
-    public void createHero(Hero hero) throws IllegalArgumentException {
+    public Hero createHero(Hero hero) throws IllegalArgumentException {
         if(hero == null || hero.getId() != null || hero.getRace() == null || 
                 hero.getAge() == null || hero.getRank() == null ||
                 hero.getRole() == null || hero.getTroop() == null) {
@@ -39,6 +37,7 @@ public class HeroDAOImpl implements HeroDAO{
         em.persist(hero);
         em.getTransaction().commit();
         em.close();
+        return hero;
     }
 
     @Override
@@ -48,14 +47,14 @@ public class HeroDAOImpl implements HeroDAO{
         }
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Hero result = em.find(Hero.class,id);
-        em.detach(result);
+        Hero hero = em.find(Hero.class, id);
+        em.getTransaction().commit();
         em.close();
-        return result;
+        return hero;
     }
 
     @Override
-    public void updateHero(Hero hero) throws IllegalArgumentException {
+    public boolean updateHero(Hero hero) throws IllegalArgumentException {
         if(hero == null || hero.getId() != null || hero.getRace() == null || 
                 hero.getAge() == 0 || hero.getRank() == 0 ||
                 hero.getRole() == null || hero.getTroop() == null) {
@@ -63,29 +62,42 @@ public class HeroDAOImpl implements HeroDAO{
         }
         
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        em.getTransaction().begin();   
+        if(!em.contains(hero)) {
+            em.getTransaction().commit();
+            em.close(); 
+            return false;
+        }
         em.merge(hero);
         em.getTransaction().commit();
         em.close();
+        return true;
     }
 
     @Override
-    public void removeHero(Hero hero) throws IllegalArgumentException {
+    public boolean removeHero(Hero hero) throws IllegalArgumentException {
         if(hero == null || hero.getId() == null) {
             throw new IllegalArgumentException("Remove hero called with wrong param");
         }
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        em.getTransaction().begin();   
+        if(!em.contains(hero)) {
+            em.getTransaction().commit();
+            em.close(); 
+            return false;
+        }
         em.remove(hero);
         em.getTransaction().commit();
         em.close();
+        return true;
     }
 
     @Override
     public List<Hero> getAllHeroes() {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        List<Hero> heroes = em.createQuery("SELECT r FROM Role r", Hero.class).getResultList();
+        List<Hero> heroes = em.createQuery("SELECT h FROM Hero h", Hero.class).getResultList();
+        em.getTransaction().commit();
         em.close();
         return heroes;
     }
@@ -95,7 +107,7 @@ public class HeroDAOImpl implements HeroDAO{
         List<Hero> hero;
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT c FROM Customer c WHERE c.name = :name ORDER BY c.id");
+        Query query = em.createQuery("SELECT h FROM Hero h WHERE h.name = :name ORDER BY h.id");
         //query.setParameter("name", name);
         hero = query.getResultList();
         em.detach(hero);

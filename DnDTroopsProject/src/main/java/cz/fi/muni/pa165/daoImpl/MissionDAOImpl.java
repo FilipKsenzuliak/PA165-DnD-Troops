@@ -8,14 +8,10 @@ package cz.fi.muni.pa165.daoImpl;
 
 import cz.fi.muni.pa165.dao.MissionDAO;
 import cz.fi.muni.pa165.entity.Mission;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
-import org.springframework.test.context.ContextConfiguration;
+
 
 /**
  *
@@ -24,16 +20,15 @@ import org.springframework.test.context.ContextConfiguration;
  */
 public class MissionDAOImpl implements MissionDAO{
 
-    private EntityManager em;
     private EntityManagerFactory emf;
     
-    public MissionDAOImpl() {
-        emf = Persistence.createEntityManagerFactory("myUnit");
-        em = emf.createEntityManager();
+    public MissionDAOImpl(EntityManagerFactory emf)
+    {
+        this.emf = emf;
     }
     
     @Override
-    public void createMission(Mission mission) throws IllegalArgumentException {
+    public Mission createMission(Mission mission) throws IllegalArgumentException {
         if(mission == null)
         {
             throw new IllegalArgumentException("Mission cannot be null.");
@@ -42,10 +37,12 @@ public class MissionDAOImpl implements MissionDAO{
         {
             throw new IllegalArgumentException("Mission identifier is already set.");
         }
-        this.em.getTransaction().begin();
-        this.em.persist(mission);
-        this.em.getTransaction().commit();
-        this.em.close();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(mission);
+        em.getTransaction().commit();
+        em.close();
+        return mission;
     }
 
     @Override
@@ -54,45 +51,63 @@ public class MissionDAOImpl implements MissionDAO{
         {
             throw new IllegalArgumentException("Identifier should not be null.");
         }
-        this.em.getTransaction().begin();
-        Mission mission = this.em.find(Mission.class, id);
-        this.em.close();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Mission mission = em.find(Mission.class, id);
+        em.getTransaction().commit();
+        em.close();
         return mission;
     }
 
     @Override
-    public void updateMission(Mission mission) throws IllegalArgumentException {
+    public boolean updateMission(Mission mission) throws IllegalArgumentException {
         if(mission == null) {
             throw new IllegalArgumentException("Mission can't be null.");
         }
         if(mission.getId() == null) {
             throw new IllegalArgumentException("Mission is not present in DB.");
         }        
-        this.em.getTransaction().begin();
-        this.em.merge(mission);
-        this.em.getTransaction().commit();
-        this.em.close();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();   
+        if(!em.contains(mission)) {
+            em.getTransaction().commit();
+            em.close(); 
+            return false;
+        }
+        em.merge(mission);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
-    public void deleteMission(Mission mission) throws IllegalArgumentException {
+    public boolean deleteMission(Mission mission) throws IllegalArgumentException {
         if(mission == null) {
             throw new IllegalArgumentException("Mission can't be null.");
         }
         if(mission.getId() == null) {
             throw new IllegalArgumentException("Mission is not present in DB.");
         } 
-        this.em.getTransaction().begin();
-        this.em.remove(mission);
-        this.em.getTransaction().commit();
-        this.em.close();
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();   
+        if(!em.contains(mission)) {
+            em.getTransaction().commit();
+            em.close(); 
+            return false;
+        }
+        em.remove(mission);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
     public List<Mission> getAllMissions() {
-        this.em.getTransaction().begin();
-        List<Mission> missions = this.em.createQuery("SELECT r FROM Mission r", Mission.class).getResultList();
-        this.em.close();
-        return  missions;
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Mission> missions = em.createQuery("SELECT m FROM Mission m", Mission.class).getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return missions;
     }
 }

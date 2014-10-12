@@ -5,32 +5,15 @@
 package cz.fi.muni.pa165.test;
 
 import cz.fi.muni.pa165.dao.MissionDAO;
-import java.util.List;
-
-import javax.persistence.EntityManager;
+import cz.fi.muni.pa165.daoImpl.MissionDAOImpl;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import static org.junit.Assert.*;
 
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.testng.annotations.Test;
-
 import cz.fi.muni.pa165.entity.Mission;
-import org.junit.After;
-import org.junit.AfterClass;
+import javax.persistence.Persistence;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.junit.Test;
+
 
 /**
  *
@@ -38,43 +21,40 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
  * @uco 396072
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/application-context.xml"})
-@TransactionConfiguration(defaultRollback=true)
-public class MissionDAOTest extends AbstractTestNGSpringContextTests {
+public class MissionDAOTest{
         
-    @Autowired
-    MissionDAO missionDAO;
-    
     public MissionDAOTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
+    private Mission m1;
+    private Mission m2;
+    private MissionDAO missionDAO;
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
 
     @Before
     public void setUp() {
+        m1 = new Mission();
+        m1.setName("Slay them all!");
+        m1.setObjective("Slay everyone");
+        m1.setReward(10);
+
+        m2 = new Mission();
+        m2.setName("Relaxing!");
+        m2.setObjective("Just relax");
+        m2.setReward(1);
+
+        missionDAO = new MissionDAOImpl(emf);
     }
 
-    @After
-    public void tearDown() {
-    }
-    
     @Test
-    public void testFindAllAccounts() {
-        List<Mission> miss = missionDAO.getAllMissions();
-        assertEquals("Check DB is empty first", 0, miss.size());
-        Mission m = new Mission();
-        m.setName("nieco");
-        m.setObjective("kill it with fire");
-        m.setReward(150);
-        missionDAO.createMission(m);
-        miss = missionDAO.getAllMissions();
-        assertEquals("check Account has been created", 1, miss.size());
+    public void testCreateBranch() {
+        missionDAO.createMission(m1);
+
+        Mission result = m1;
+        Mission result2 = missionDAO.getAllMissions().get(0);
+
+        assertEquals(result, result2);
+
     }
 }

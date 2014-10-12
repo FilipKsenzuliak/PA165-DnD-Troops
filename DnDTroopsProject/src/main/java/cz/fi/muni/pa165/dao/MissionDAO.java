@@ -6,7 +6,7 @@ import java.util.List;
 /**
  *
  * @author Tomas Javorsky a.k.a. Tomus
- * uco: 324662
+ * @uco: 324662
  */
 
 public interface MissionDAO {
@@ -18,7 +18,7 @@ public interface MissionDAO {
      * @param mission mission to be created.
      * @throws IllegalArgumentException when mission is null, mission already has id assigned
      */
-    public void createMission(Mission mission) throws IllegalArgumentException;
+    public Mission createMission(Mission mission) throws IllegalArgumentException;
     
     /**
      * Return mission with given id.
@@ -35,7 +35,7 @@ public interface MissionDAO {
      * @param mission mission to be updated.
      * @throws IllegalArgumentException when mission is null, or has null id.
      */
-    public void updateMission(Mission mission) throws IllegalArgumentException;
+    public boolean updateMission(Mission mission) throws IllegalArgumentException;
     
     /**
      * Remove mission from database.
@@ -43,7 +43,7 @@ public interface MissionDAO {
      * @param mission mission to be removed from database.
      * @throws IllegalArgumentException when mission is null, or has null id.
      */
-    public void deleteMission(Mission mission) throws IllegalArgumentException;
+    public boolean deleteMission(Mission mission) throws IllegalArgumentException;
     
     /**
      * Return list of all missions in the database.
