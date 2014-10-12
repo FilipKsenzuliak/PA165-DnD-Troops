@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -29,6 +30,8 @@ public class Hero implements Serializable {
     private Race race;
     private int age;
     private int level;
+    
+    @ManyToMany
     private List<Role> role;
     
     @ManyToOne
