@@ -54,6 +54,7 @@ public class MissionDAOTest{
         Mission missionDB = missionDAO.getMissionById(m1.getId());
 
         assertEquals(mission, missionDB);
-
     }
+    
+    
 }

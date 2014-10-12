@@ -18,11 +18,13 @@ import source.MissionRepository;
  * @UCO 396474
  */
 public class MissionTest {
+    
+    ConfigurableApplicationContext context = SpringApplication.run(Application.class);
+    MissionRepository repository = context.getBean(MissionRepository.class);
+    
     @Test
-    public void AppTest() {
+    public void createTest() {
         int count = 0;
-        ConfigurableApplicationContext context = SpringApplication.run(Application.class);
-        MissionRepository repository = context.getBean(MissionRepository.class);
         repository.save(new Mission("Killing", "Kill them all", 20000));
         repository.save(new Mission("Feeding", "Feed the poor", 500));
         Iterable<Mission> missions = repository.findAll();
@@ -32,5 +34,17 @@ public class MissionTest {
         context.close();
         Assert.assertEquals(2, count);
     }
-    
+    @Test
+    public void nameLookupTest(){
+        Mission mission = new Mission("Obliterating", "Slay everything that moves", 200);
+        repository.save(mission);
+        Assert.assertEquals(repository.findByName("Obliterating").contains(mission), true);
+    }
+    @Test
+    public void deleteTest(){
+        Mission mission = new Mission("Obliterating", "Slay everything that moves", 200);
+        repository.save(mission);
+        repository.delete(mission);
+        Assert.assertEquals(repository.findByName("Obliterating").contains(mission), false);
+    }
 }
