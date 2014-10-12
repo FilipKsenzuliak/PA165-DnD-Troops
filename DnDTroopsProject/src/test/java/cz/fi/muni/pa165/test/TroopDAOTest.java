@@ -70,7 +70,7 @@ public class TroopDAOTest {
     }
     
     @Test
-	public void findAllTroops() {
+    public void findAllTroops() {
 		EntityManager em = emf.createEntityManager();
 		List<Troop> troops = em.createQuery("SELECT p FROM Troop p",Troop.class).getResultList();
 		em.close();
