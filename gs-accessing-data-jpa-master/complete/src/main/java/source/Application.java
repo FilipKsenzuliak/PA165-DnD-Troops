@@ -14,7 +14,6 @@ public class Application {
     public static void main(String[] args) {
     	
         ConfigurableApplicationContext context = SpringApplication.run(Application.class);
-        CustomerRepository repository = context.getBean(CustomerRepository.class);
         MissionRepository mRepository = context.getBean(MissionRepository.class);
         // save a couple of customers
         /**repository.save(new Customer("Jack", "Bauer"));
@@ -43,7 +42,9 @@ public class Application {
             System.out.println(mission);
         }
 
-        // fetch an individual customer by ID
+        
+/**
+// fetch an individual customer by ID
         Customer customer = repository.findOne(1L);
         System.out.println("Customer found with findOne(1L):");
         System.out.println("--------------------------------");
@@ -57,6 +58,7 @@ public class Application {
         for (Customer bauer : bauers) {
             System.out.println(bauer);
         }
+        * */
 
         context.close();
     }
