@@ -8,7 +8,7 @@ package cz.fi.muni.pa165.entity;
 
 /**
  *
- * @author Dávid hubac
+ * @author David Hubac
  * @uco 396042
  */
 public enum Race {

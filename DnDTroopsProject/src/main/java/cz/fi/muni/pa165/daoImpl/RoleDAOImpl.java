@@ -19,7 +19,7 @@ import javax.persistence.PersistenceUnit;
 
 /**
  *
- * @author Dávid
+ * @author David Hubac
  * @uco 396042
  */
 public class RoleDAOImpl implements RoleDAO{

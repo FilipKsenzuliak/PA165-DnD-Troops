@@ -10,7 +10,7 @@ import cz.fi.muni.pa165.entity.Role;
 import java.util.List;
 /**
  *
- * @author Dávid Hubac
+ * @author David Hubac
  * @uco 396042
  */
 public interface RoleDAO {
