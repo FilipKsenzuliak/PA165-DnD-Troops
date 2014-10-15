@@ -54,7 +54,7 @@ public class HeroDAOImpl implements HeroDAO{
 
     @Override
     public void updateHero(Hero hero) throws IllegalArgumentException {
-        if(hero == null || hero.getId() != null || hero.getRace() == null || 
+        if(hero == null || hero.getRace() == null || 
                 hero.getAge() == 0 || hero.getRank() == 0 ||
                 hero.getRole() == null || hero.getTroop() == null) {
             throw new IllegalArgumentException("Update hero called with wrong param.");
@@ -74,8 +74,16 @@ public class HeroDAOImpl implements HeroDAO{
         }
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();   
-        em.remove(hero);
+        Hero present = em.find(Hero.class, hero.getId());
         em.getTransaction().commit();
+        
+        if(present == null) {
+            throw new IllegalArgumentException("Car is not present in DB.");
+        } else {
+            em.getTransaction().begin();   
+            em.remove(em.contains(hero) ? hero : em.merge(hero));
+            em.getTransaction().commit();
+        }
         em.close();
     }
 
@@ -90,13 +98,13 @@ public class HeroDAOImpl implements HeroDAO{
     }
 
     @Override
-    public List<Hero> findHeroByName(String Name) throws IllegalArgumentException {
+    public List<Hero> findHeroByName(String name) throws IllegalArgumentException {
         List<Hero> hero;
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Query query = em.createQuery("SELECT h FROM Hero h WHERE h.name = :name ORDER BY h.id");
+        hero = em.createQuery("SELECT h FROM Hero h WHERE h.name = :name").setParameter("name", name).getResultList();
         //query.setParameter("name", name);
-        hero = query.getResultList();
+        em.getTransaction().commit();
         em.close();
         return hero;
     }
