@@ -82,7 +82,11 @@ public class MissionDAOImpl implements MissionDAO{
         } 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();   
-        em.remove(mission);
+        if (em.contains(mission)){
+            em.remove(mission);
+        }else{
+            em.remove(em.merge(mission));
+        }
         em.getTransaction().commit();
         em.close();
     }

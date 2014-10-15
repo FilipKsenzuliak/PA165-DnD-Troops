@@ -9,7 +9,6 @@ import cz.fi.muni.pa165.entity.Hero;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 
 /**
  *

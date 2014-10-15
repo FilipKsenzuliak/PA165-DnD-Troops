@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 
 import cz.fi.muni.pa165.entity.Mission;
 import javax.persistence.Persistence;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,12 +20,9 @@ import org.junit.Test;
  * @author Filip Ksenzuliak
  * @uco 396072
  */
-/*
-public class MissionDAOTest{
-        
-    public MissionDAOTest() {
-    }
 
+public class MissionDAOTest{
+     
     private Mission m1;
     private Mission m2;
     private MissionDAO missionDAO;
@@ -36,12 +32,12 @@ public class MissionDAOTest{
     public void setup() {
         m1 = new Mission();
         m1.setName("Slay them all!");
-        m1.setObjective("Slay everyone");
+        m1.setObjective("Just some casual slaying.");
         m1.setReward(10);
 
         m2 = new Mission();
         m2.setName("Relaxing!");
-        m2.setObjective("Just relax");
+        m2.setObjective("Calm and relax.");
         m2.setReward(1);
 
         missionDAO = new MissionDAOImpl(emf);
@@ -50,12 +46,14 @@ public class MissionDAOTest{
     @Test
     public void testCreateMission() {
         missionDAO.createMission(m1);
-
+        missionDAO.createMission(m2);
+        
         Mission mission = m1;
         Mission missionDB = missionDAO.getMissionById(m1.getId());
         
         assertNotNull(mission.getId());
         assertEquals(mission, missionDB);
+        assertEquals(missionDAO.getAllMissions().size(),2);
     }
     
     @Test
@@ -75,14 +73,11 @@ public class MissionDAOTest{
     @Test
     public void testDeleteMission() {
         missionDAO.createMission(m1);
-
-        Mission mission = m1;
-        missionDAO.deleteMission(mission);
-        Mission missionDB = missionDAO.getMissionById(mission.getId());
+        missionDAO.deleteMission(m1);
+        
+        Mission missionDB = missionDAO.getMissionById(m1.getId());
         assertNull(missionDB);
+        assertEquals(missionDAO.getAllMissions().size(), 0); 
     }
-  
-    
-    
+     
 }
-*/
