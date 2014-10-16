@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package cz.fi.muni.pa165.daoImpl;
 
 import cz.fi.muni.pa165.dao.MissionDAO;
@@ -99,5 +93,16 @@ public class MissionDAOImpl implements MissionDAO{
         em.getTransaction().commit();
         em.close();
         return missions;
+    }
+    
+    @Override
+    public List<Mission> findMissionByName(String name) throws IllegalArgumentException {
+        List<Mission> mission;
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        mission = em.createQuery("SELECT h FROM Mission h WHERE h.name = :name").setParameter("name", name).getResultList();
+        em.getTransaction().commit();
+        em.close();
+        return mission;
     }
 }
