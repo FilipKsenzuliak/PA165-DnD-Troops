@@ -39,7 +39,7 @@ public class HeroDAOImpl implements HeroDAO{
     }
 
     @Override
-    public Hero getHero(Long id) throws IllegalArgumentException {
+    public Hero getHeroById(Long id) throws IllegalArgumentException {
         if(id == null) {
             throw new IllegalArgumentException("getHero called with null.");
         }
@@ -67,22 +67,18 @@ public class HeroDAOImpl implements HeroDAO{
     }
 
     @Override
-    public void removeHero(Hero hero) throws IllegalArgumentException {
+    public void deleteHero(Hero hero) throws IllegalArgumentException {
         if(hero == null || hero.getId() == null) {
             throw new IllegalArgumentException("Remove hero called with wrong param");
         }
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();   
-        Hero present = em.find(Hero.class, hero.getId());
-        em.getTransaction().commit();
-        
-        if(present == null) {
-            throw new IllegalArgumentException("Troop is not present in DB.");
+        em.getTransaction().begin();    
+        if(em.contains(hero)) {
+            em.remove(hero);
         } else {
-            em.getTransaction().begin();   
-            em.remove(em.contains(hero) ? hero : em.merge(hero));
-            em.getTransaction().commit();
+            em.remove(em.merge(hero));
         }
+        em.getTransaction().commit();         
         em.close();
     }
 

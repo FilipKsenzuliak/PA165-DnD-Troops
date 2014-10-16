@@ -28,7 +28,7 @@ public interface HeroDAO {
      * @return hero with given id or null if such hero is not in database.
      * @throws IllegalArgumentException when given id is null.
      */
-    public Hero getHero(Long id) throws IllegalArgumentException;
+    public Hero getHeroById(Long id) throws IllegalArgumentException;
     
     /**
      * Updates hero in database.
@@ -44,7 +44,7 @@ public interface HeroDAO {
      * @param hero hero to be removed from database.
      * @throws IllegalArgumentException when hero is null, or has null id.
      */
-    public void removeHero(Hero hero) throws IllegalArgumentException;
+    public void deleteHero(Hero hero) throws IllegalArgumentException;
     
     /**
      * Return list of all heroes in the database.
