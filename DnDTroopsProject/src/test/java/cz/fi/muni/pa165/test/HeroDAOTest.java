@@ -55,7 +55,7 @@ public class HeroDAOTest {
         h1.setRole(roles);
         
         Troop troop = new Troop();
-        troop.setAmountOfMoney(100000l);
+        troop.setAmountOfMoney(100000L);
         
         Mission mission = new Mission();
         mission.setName("Ryan.");
@@ -81,7 +81,7 @@ public class HeroDAOTest {
         h2.setRole(roles2);
         
         Troop troop2 = new Troop();
-        troop2.setAmountOfMoney(1000l);
+        troop2.setAmountOfMoney(1000L);
         
         Mission mission2 = new Mission();
         mission2.setName("Paul.");
@@ -130,7 +130,7 @@ public class HeroDAOTest {
     }
     
     @Test
-    public void testDeleteHero() {
+    public void testRemoveHero() {
         heroDAO.createHero(h1);
         heroDAO.createHero(h2);
         heroDAO.deleteHero(h1);

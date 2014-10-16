@@ -72,7 +72,6 @@ public class TroopDAOTest {
         em.getTransaction().commit();
         em.close();
         
-        
         troopDAO = new TroopDAOImpl(emf);
     }
     
