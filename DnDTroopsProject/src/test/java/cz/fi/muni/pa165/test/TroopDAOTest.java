@@ -6,10 +6,8 @@
 package cz.fi.muni.pa165.test;
 
 import cz.fi.muni.pa165.dao.TroopDAO;
-import cz.fi.muni.pa165.entity.Mission;
-import cz.fi.muni.pa165.entity.Troop;
 import cz.fi.muni.pa165.daoImpl.TroopDAOImpl;
-import java.util.List;
+import cz.fi.muni.pa165.entity.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -48,7 +46,6 @@ public class TroopDAOTest {
         troop2.setAmountOfMoney(750L);
         troop3.setAmountOfMoney(2750L);
         
-        
         mission1.setName("Plienenie");
         mission2.setName("Zamorovanie");
         mission3.setName("RaidSWP");
@@ -81,7 +78,6 @@ public class TroopDAOTest {
     
     @Test
     public void testCreateTroop(){
-        System.out.println("***");
         troopDAO.createTroop(troop1);
         
         Troop troopDB = troopDAO.getTroop(troop1.getId());
@@ -96,7 +92,7 @@ public class TroopDAOTest {
         String name = troop1.getName();
         Long goldz = troop1.getAmountOfMoney();
         Troop troopDB = troopDAO.getTroop(troop1.getId());
-        troopDB.setName("Honikladovia");
+        troopDB.setName("Lolobriadkovia");
         troopDAO.updateTroop(troopDB);
         Troop troopDB2 = troopDAO.getTroop(troopDB.getId());
         
