@@ -117,11 +117,4 @@ public class TroopDAOTest {
         Troop troop = troopDAO.getTroop(troop3.getId());
         assertNotNull(troop);
     }
-    
-    @Test
-    public void testFindTroopByName() {
-        troopDAO.createTroop(troop3);
-        List<Troop> troop = troopDAO.findTroopByName(troop3.getName());
-        assertNotNull(troop);
-    }
 }
