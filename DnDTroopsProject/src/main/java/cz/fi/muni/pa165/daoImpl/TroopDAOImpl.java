@@ -26,11 +26,6 @@ public class TroopDAOImpl implements TroopDAO{
         
     @Override
     public void createTroop(Troop troop) throws IllegalArgumentException {
-        if(troop == null){System.out.println("1");}
-        if(troop.getId() != null){System.out.println("2");}
-        if(troop.getName() == null){System.out.println("3");}
-        if(troop.getMission() == null){System.out.println("4");}
-        if(troop.getAmountOfMoney() == null){System.out.println("5");}
         
         if(troop == null || troop.getId() != null || troop.getName() == null || 
                 troop.getMission()== null || troop.getAmountOfMoney() == null) {
@@ -59,7 +54,14 @@ public class TroopDAOImpl implements TroopDAO{
 
     @Override
     public void updateTroop(Troop troop) throws IllegalArgumentException {
-        if(troop == null || troop.getId() != null || troop.getName() == null || 
+        /**
+        if(troop == null){System.out.println("1");}
+        if(troop.getId() != null){System.out.println("2");}
+        if(troop.getName() == null){System.out.println("3");}
+        if(troop.getMission() == null){System.out.println("4");}
+        if(troop.getAmountOfMoney() == null){System.out.println("5");}
+        * */
+        if(troop == null || troop.getName() == null || 
                 troop.getMission()== null || troop.getAmountOfMoney()== null) {
             throw new IllegalArgumentException("Update troop called with wrong param");
         }   

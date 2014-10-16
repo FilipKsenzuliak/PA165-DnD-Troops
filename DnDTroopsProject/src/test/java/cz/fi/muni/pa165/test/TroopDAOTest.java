@@ -65,9 +65,6 @@ public class TroopDAOTest {
         em.persist(mission1);
         em.persist(mission2);
         em.persist(mission3);
-        //em.persist(troop1);
-        //em.persist(troop2);
-        //em.persist(troop3);
 
         em.getTransaction().commit();
         em.close();
@@ -114,6 +111,13 @@ public class TroopDAOTest {
     public void testGetTroop() {
         troopDAO.createTroop(troop3);
         Troop troop = troopDAO.getTroop(troop3.getId());
+        assertNotNull(troop);
+    }
+    
+    @Test
+    public void testFindTroopByName() {
+        troopDAO.createTroop(troop3);
+        List<Troop> troop = troopDAO.findTroopByName(troop3.getName());
         assertNotNull(troop);
     }
 }
