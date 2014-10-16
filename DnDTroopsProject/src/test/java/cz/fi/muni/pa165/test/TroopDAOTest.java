@@ -65,9 +65,9 @@ public class TroopDAOTest {
         em.persist(mission1);
         em.persist(mission2);
         em.persist(mission3);
-        em.persist(troop1);
-        em.persist(troop2);
-        em.persist(troop3);
+        //em.persist(troop1);
+        //em.persist(troop2);
+        //em.persist(troop3);
 
         em.getTransaction().commit();
         em.close();
