@@ -21,7 +21,7 @@ import org.junit.Test;
  * @author Filip Ksenzuliak
  * @uco 396072
  */
-/*
+
 public class MissionDAOTest{
         
     public MissionDAOTest() {
@@ -72,7 +72,7 @@ public class MissionDAOTest{
         assertEquals(1, m1.getReward());
     }
     
-    @Test
+   /* @Test
     public void testDeleteMission() {
         missionDAO.createMission(m1);
 
@@ -80,9 +80,8 @@ public class MissionDAOTest{
         missionDAO.deleteMission(mission);
         Mission missionDB = missionDAO.getMissionById(mission.getId());
         assertNull(missionDB);
-    }
+    }*/
   
     
     
 }
-*/
