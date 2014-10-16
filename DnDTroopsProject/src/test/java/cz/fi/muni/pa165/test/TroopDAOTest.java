@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.fi.muni.pa165.test;
 
 import cz.fi.muni.pa165.dao.TroopDAO;
 import cz.fi.muni.pa165.daoImpl.TroopDAOImpl;
 import cz.fi.muni.pa165.entity.*;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -85,7 +81,7 @@ public class TroopDAOTest {
         assertEquals("Berserkovia", troopDB.getName());
         troopDAO.removeTroop(troop1);
     }
-    /**
+    
     @Test
     public void testUpdateTroop(){
         troopDAO.createTroop(troop1);
@@ -124,5 +120,4 @@ public class TroopDAOTest {
         List<Troop> troop = troopDAO.findTroopByName(troop3.getName());
         assertNotNull(troop);
     }
-    */
 }
