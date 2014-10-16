@@ -130,7 +130,7 @@ public class HeroDAOTest {
     }
     
     @Test
-    public void testRemoveHero() {
+    public void testDeleteHero() {
         heroDAO.createHero(h1);
         heroDAO.createHero(h2);
         heroDAO.deleteHero(h1);
