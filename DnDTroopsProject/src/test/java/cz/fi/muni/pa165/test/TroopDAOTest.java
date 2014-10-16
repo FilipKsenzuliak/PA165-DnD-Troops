@@ -18,7 +18,9 @@ import org.junit.Test;
  */
 public class TroopDAOTest {
     
-    private Troop troop1,troop2,troop3;
+    private Troop troop1;
+    private Troop troop2;
+    private Troop troop3;
     private Mission mission1,mission2,mission3;
     private TroopDAO troopDAO;
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
@@ -59,15 +61,17 @@ public class TroopDAOTest {
         troop3.setMission(mission3);
         
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(troop1);
-        em.persist(troop2);
-        em.persist(troop3);
+       /** em.getTransaction().begin();
         em.persist(mission1);
         em.persist(mission2);
         em.persist(mission3);
+        em.persist(troop1);
+        em.persist(troop2);
+        em.persist(troop3);
+
         em.getTransaction().commit();
         em.close();
+        * */
         
         troopDAO = new TroopDAOImpl(emf);
     }
