@@ -75,5 +75,10 @@ public class Mission implements Serializable{
         return this.name.equals(other.name) && (this.objective.equals(other.objective)) && this.reward == other.reward;
     }
     
+    @Override
+    public String toString(){
+        return "Mission[" + name + "]: " + reward + "gold. Objective: " + objective;
+    }
+    
     
 }
