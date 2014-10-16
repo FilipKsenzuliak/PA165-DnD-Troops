@@ -27,7 +27,7 @@ public class TroopDAOImpl implements TroopDAO{
     @Override
     public void createTroop(Troop troop) throws IllegalArgumentException {
         if(troop == null || troop.getId() != null || troop.getName() == null || 
-                troop.getMission()== null || troop.getAmountOfMoney()== null) {
+                troop.getMission()== null || troop.getAmountOfMoney() == null) {
             throw new IllegalArgumentException("Create troop called with wrong param");
         } 
         EntityManager em = emf.createEntityManager();
