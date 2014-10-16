@@ -55,7 +55,7 @@ public class HeroDAOTest {
         h1.setRole(roles);
         
         Troop troop = new Troop();
-        troop.setAmountOfMoney(100000);
+        troop.setAmountOfMoney(100000l);
         
         Mission mission = new Mission();
         mission.setName("Ryan.");
@@ -81,7 +81,7 @@ public class HeroDAOTest {
         h2.setRole(roles2);
         
         Troop troop2 = new Troop();
-        troop2.setAmountOfMoney(1000);
+        troop2.setAmountOfMoney(1000l);
         
         Mission mission2 = new Mission();
         mission2.setName("Paul.");

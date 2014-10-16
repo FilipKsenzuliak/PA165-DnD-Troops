@@ -5,7 +5,6 @@
  */
 package cz.fi.muni.pa165.entity;
 
-import cz.fi.muni.pa165.entity.Mission;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -33,7 +32,7 @@ public class Troop implements Serializable{
     @ManyToOne
     private Mission mission;
     
-    private int amountOfMoney;
+    private Long amountOfMoney;
     
     @OneToMany(mappedBy = "troop")
     private List<Hero> heroes;
@@ -58,20 +57,20 @@ public class Troop implements Serializable{
         this.mission = mission;
     }
 
-    public int getAmountOfMoney() {
+    public Long getAmountOfMoney() {
         return amountOfMoney;
     }
 
-    public void setAmountOfMoney(int amountOfMoney) {
+    public void setAmountOfMoney(Long amountOfMoney) {
         this.amountOfMoney = amountOfMoney;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.getName());
-        hash = 17 * hash + Objects.hashCode(this.getMission());
-        hash = 17 * hash + this.getAmountOfMoney();
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.mission);
+        hash = 79 * hash + Objects.hashCode(this.amountOfMoney);
         return hash;
     }
 
@@ -90,10 +89,7 @@ public class Troop implements Serializable{
         if (!Objects.equals(this.mission, other.mission)) {
             return false;
         }
-        if (this.getAmountOfMoney() != other.getAmountOfMoney()) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.getAmountOfMoney(), other.getAmountOfMoney());
     }
 
     @Override

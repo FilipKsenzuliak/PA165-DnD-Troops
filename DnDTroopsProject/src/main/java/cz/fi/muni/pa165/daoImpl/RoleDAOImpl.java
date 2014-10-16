@@ -85,9 +85,17 @@ public class RoleDAOImpl implements RoleDAO{
             throw new IllegalArgumentException("Role is not present in DB.");
         } 
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();   
-        em.remove(role);
+        em.getTransaction().begin();  
+        Role present = em.find(Role.class, role.getId());
         em.getTransaction().commit();
+        
+        if(present == null) {
+            throw new IllegalArgumentException("Role is not present in DB.");
+        } else {
+            em.getTransaction().begin();   
+            em.remove(em.contains(role) ? role : em.merge(role));
+            em.getTransaction().commit();
+        }
         em.close();
     }
 

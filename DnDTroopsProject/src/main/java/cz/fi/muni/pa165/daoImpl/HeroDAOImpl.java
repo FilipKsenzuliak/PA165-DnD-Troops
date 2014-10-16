@@ -77,7 +77,7 @@ public class HeroDAOImpl implements HeroDAO{
         em.getTransaction().commit();
         
         if(present == null) {
-            throw new IllegalArgumentException("Car is not present in DB.");
+            throw new IllegalArgumentException("Troop is not present in DB.");
         } else {
             em.getTransaction().begin();   
             em.remove(em.contains(hero) ? hero : em.merge(hero));

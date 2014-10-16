@@ -60,5 +60,5 @@ public interface HeroDAO {
      * @return list of all heroes with given name.
      * @throws IllegalArgumentException when given name is null.
      */
-    public List<Hero> findHeroByName(String Name) throws IllegalArgumentException;
+    public List<Hero> findHeroByName(String name) throws IllegalArgumentException;
 }
