@@ -109,10 +109,10 @@ public class HeroDAOTest {
     public void testCreateHero() {
         heroDAO.createHero(h1);
 
-        Hero heroDB = heroDAO.getHero(h1.getId());
+        Hero heroDB = heroDAO.getHeroById(h1.getId());
         assertNotNull(heroDB.getId());
         assertEquals("Andrej", heroDB.getName());
-        heroDAO.removeHero(h1);
+        heroDAO.deleteHero(h1);
     }
     
     @Test
@@ -120,10 +120,10 @@ public class HeroDAOTest {
         heroDAO.createHero(h1);
         String name = h1.getName();
         Long rank = h1.getRank();
-        Hero heroDB = heroDAO.getHero(h1.getId());
+        Hero heroDB = heroDAO.getHeroById(h1.getId());
         heroDB.setName("Killer");
         heroDAO.updateHero(heroDB);
-        Hero heroDB2 = heroDAO.getHero(heroDB.getId());
+        Hero heroDB2 = heroDAO.getHeroById(heroDB.getId());
 
         assertNotEquals(name, heroDB2.getName());
         assertEquals(rank, heroDB2.getRank());
@@ -133,7 +133,7 @@ public class HeroDAOTest {
     public void testRemoveHero() {
         heroDAO.createHero(h1);
         heroDAO.createHero(h2);
-        heroDAO.removeHero(h1);
+        heroDAO.deleteHero(h1);
         
         List<Hero> heroes = heroDAO.getAllHeroes();
         assertNotNull(heroes);
@@ -151,7 +151,7 @@ public class HeroDAOTest {
     @Test
     public void testGetHero() {
         heroDAO.createHero(h1);
-        Hero hero = heroDAO.getHero(h1.getId());
+        Hero hero = heroDAO.getHeroById(h1.getId());
         assertNotNull(hero);
     }
     
