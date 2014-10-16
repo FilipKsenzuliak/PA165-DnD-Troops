@@ -61,7 +61,7 @@ public class TroopDAOTest {
         troop3.setMission(mission3);
         
         EntityManager em = emf.createEntityManager();
-       /** em.getTransaction().begin();
+        em.getTransaction().begin();
         em.persist(mission1);
         em.persist(mission2);
         em.persist(mission3);
@@ -71,7 +71,7 @@ public class TroopDAOTest {
 
         em.getTransaction().commit();
         em.close();
-        * */
+        
         
         troopDAO = new TroopDAOImpl(emf);
     }
