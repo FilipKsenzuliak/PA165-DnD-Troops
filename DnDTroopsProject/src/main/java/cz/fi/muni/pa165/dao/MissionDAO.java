@@ -52,4 +52,14 @@ public interface MissionDAO {
      */
     public List<Mission> getAllMissions();
     
+    /**
+     * Method to find mission by name.
+     * 
+     * @param name name to find Mission
+     * @return list of all missions with given name.
+     * @throws IllegalArgumentException when given name is null.
+     */
+    public List<Mission> findMissionByName(String name) throws IllegalArgumentException;
+    
+    
 }
