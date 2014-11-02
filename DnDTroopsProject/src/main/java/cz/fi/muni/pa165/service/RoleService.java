@@ -44,4 +44,15 @@ public interface RoleService {
      * @param role 
      */
     void createRole(RoleDTO role);
+    
+    /**
+     * Method deletes all roles present in DB.
+     */
+    void deleteAllRoles();
+    
+    /**
+     * Method updates roles from list.
+     * @param roles 
+     */
+    void updateRoles(List<RoleDTO> roles);
 }

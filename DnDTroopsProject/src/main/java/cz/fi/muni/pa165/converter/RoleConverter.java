@@ -24,13 +24,16 @@ public class RoleConverter {
         roleDTO.setRoleLevel(role.getRoleLevel());
         List<HeroDTO> heroes = null;
         if(role.getHeroes() != null) {
-            heroes = listConvert(role.getHeroes(), HeroDTO.class);
+            heroes = new ArrayList<HeroDTO>();
+            for(Hero hero : role.getHeroes()) {
+                heroes.add(HeroConverter.HeroToHeroDTO(hero));
+            }
         }
         roleDTO.setHeroes(heroes);
         return roleDTO;
     }
     
-    private static <T> List<T> listConvert(List<?> list, Class<T> c) {
+    /*private static <T> List<T> listConvert(List<?> list, Class<T> c) {
         List returnList = new ArrayList();
         boolean listIsHero = false;
         if(c.equals(HeroDTO.class)) {
@@ -42,7 +45,7 @@ public class RoleConverter {
         }
         
         return (List<T>) returnList;
-    }
+    }*/
     
     public static Role RoleDTOtoRole(RoleDTO roleDTO) {
         Role role = new Role();
@@ -52,7 +55,10 @@ public class RoleConverter {
         role.setRoleLevel(roleDTO.getRoleLevel());
         List<Hero> heroes = null;
         if(roleDTO.getHeroes() != null) {
-            heroes = listConvert(roleDTO.getHeroes(), Hero.class);
+            heroes = new ArrayList<Hero> ();
+            for(HeroDTO hero : roleDTO.getHeroes()) {
+                heroes.add(HeroConverter.HeroDTOToHero(hero));
+            }
         }
         role.setHeroes(heroes);
         return role;
