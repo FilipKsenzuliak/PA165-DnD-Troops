@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.358" tests="6" errors="0" skipped="0" failures="0">
+<testsuite name="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.897" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files (x86)\Java\jre\bin"/>
@@ -62,10 +62,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testUpdateHero" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.077"/>
-  <testcase name="testFindHeroByName" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.044"/>
-  <testcase name="testGetHero" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.039"/>
-  <testcase name="testGetAllHeroes" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.041"/>
-  <testcase name="testRemoveHero" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.075"/>
-  <testcase name="testCreateHero" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.082"/>
+  <testcase name="testUpdateHero" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.304"/>
+  <testcase name="testFindHeroByName" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.234"/>
+  <testcase name="testGetHero" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.086"/>
+  <testcase name="testGetAllHeroes" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.061"/>
+  <testcase name="testRemoveHero" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.109"/>
+  <testcase name="testCreateHero" classname="cz.fi.muni.pa165.testDAO.HeroDAOTest" time="0.103"/>
 </testsuite>
