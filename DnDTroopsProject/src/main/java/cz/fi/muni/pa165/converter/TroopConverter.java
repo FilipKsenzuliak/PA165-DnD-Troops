@@ -6,10 +6,8 @@
 package cz.fi.muni.pa165.converter;
 
 import cz.fi.muni.pa165.dto.HeroDTO;
-import cz.fi.muni.pa165.dto.RoleDTO;
 import cz.fi.muni.pa165.dto.TroopDTO;
 import cz.fi.muni.pa165.entity.Hero;
-import cz.fi.muni.pa165.entity.Role;
 import cz.fi.muni.pa165.entity.Troop;
 import java.util.ArrayList;
 import java.util.List;
