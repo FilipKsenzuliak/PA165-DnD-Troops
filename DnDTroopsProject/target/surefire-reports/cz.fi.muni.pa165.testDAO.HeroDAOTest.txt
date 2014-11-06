@@ -1,4 +1,23 @@
 -------------------------------------------------------------------------------
 Test set: cz.fi.muni.pa165.testDAO.HeroDAOTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.627 sec - in cz.fi.muni.pa165.testDAO.HeroDAOTest
+Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 9.876 sec <<< FAILURE! - in cz.fi.muni.pa165.testDAO.HeroDAOTest
+testUpdateHero(cz.fi.muni.pa165.testDAO.HeroDAOTest)  Time elapsed: 0.017 sec  <<< ERROR!
+javax.persistence.PersistenceException: Unable to build entity manager factory
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl$AggregatedClassLoader.findClass(ClassLoaderServiceImpl.java:228)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:270)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.classForName(ClassLoaderServiceImpl.java:240)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.buildHibernateConfiguration(EntityManagerFactoryBuilderImpl.java:1112)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:846)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl$4.perform(EntityManagerFactoryBuilderImpl.java:843)
+	at org.hibernate.boot.registry.classloading.internal.ClassLoaderServiceImpl.withTccl(ClassLoaderServiceImpl.java:397)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:842)
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:75)
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:54)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:39)
+	at cz.fi.muni.pa165.testDAO.HeroDAOTest.<init>(HeroDAOTest.java:38)
+

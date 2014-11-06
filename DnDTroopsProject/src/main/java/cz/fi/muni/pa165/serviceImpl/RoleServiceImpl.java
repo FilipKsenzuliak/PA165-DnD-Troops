@@ -13,6 +13,8 @@ import cz.fi.muni.pa165.entity.Role;
 import cz.fi.muni.pa165.service.RoleService;
 import java.util.ArrayList;
 import java.util.List;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,11 +29,13 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDAO roleDAO;
     
+    private Mapper mapper = new DozerBeanMapper();
+    
     public RoleDAO getRoleDAO() {
         return roleDAO;
     }
     
-    public void serRoleDAO(RoleDAO roleDAO) {
+    public void setRoleDAO(RoleDAO roleDAO) {
         this.roleDAO = roleDAO;
     }
     
@@ -40,7 +44,7 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDTO> getAllRoles() {
         List<RoleDTO> rolesDTO = new ArrayList<RoleDTO>();
         for(Role role : roleDAO.getAllRoles()) {
-            rolesDTO.add(RoleConverter.RoleToRoleDTO(role));
+            rolesDTO.add(mapper.map(role, RoleDTO.class));
         }
         return rolesDTO;
     }
@@ -49,7 +53,7 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public RoleDTO getRoleById(Long id) {
         Validate.isTrue(id > 0, "Invalid id. Id < 0!");
-        RoleDTO role = RoleConverter.RoleToRoleDTO(roleDAO.getRoleById(id));
+        RoleDTO role = mapper.map(roleDAO.getRoleById(id), RoleDTO.class);
         return role;
     }
     
@@ -58,7 +62,7 @@ public class RoleServiceImpl implements RoleService {
     public void updateRole(RoleDTO role) {
         Validate.notNull(role, "Null argument.");
         Validate.isTrue(role.getId() > 0, "Role is not present in DB.");
-        roleDAO.updateRole(RoleConverter.RoleDTOtoRole(role));
+        roleDAO.updateRole(mapper.map(role, Role.class));
     }
     
     @Override
@@ -66,14 +70,14 @@ public class RoleServiceImpl implements RoleService {
     public void deleteRole(RoleDTO role) {
         Validate.notNull(role, "Null argument.");
         Validate.isTrue(role.getId() > 0, "Role is not present in DB.");
-        roleDAO.deleteRole(RoleConverter.RoleDTOtoRole(role));
+        roleDAO.deleteRole(mapper.map(role, Role.class));
     }
     
     @Override
     @Transactional
     public void createRole(RoleDTO roledto) {
         Validate.notNull(roledto, "Null argument.");
-        Role role = RoleConverter.RoleDTOtoRole(roledto);
+        Role role = mapper.map(roledto, Role.class);
         roleDAO.createRole(role);
         roledto.setId(role.getId());
     }
@@ -83,7 +87,7 @@ public class RoleServiceImpl implements RoleService {
     public void updateRoles(List<RoleDTO> roles) {
         Validate.notNull(roles, "Null argument.");
         for(RoleDTO role : roles) {
-            roleDAO.updateRole(RoleConverter.RoleDTOtoRole(role));
+            roleDAO.updateRole(mapper.map(role, Role.class));
         }
     }
     

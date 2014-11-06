@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: cz.fi.muni.pa165.testService.RoleServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.132 sec <<< FAILURE! - in cz.fi.muni.pa165.testService.RoleServiceTest
-initializationError(cz.fi.muni.pa165.testService.RoleServiceTest)  Time elapsed: 0.018 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.031 sec <<< FAILURE! - in cz.fi.muni.pa165.testService.RoleServiceTest
+initializationError(cz.fi.muni.pa165.testService.RoleServiceTest)  Time elapsed: 0 sec  <<< ERROR!
 org.mockito.exceptions.base.MockitoException: 
 
 No tests found in RoleServiceTest
