@@ -5,6 +5,9 @@ import cz.fi.muni.pa165.entity.Mission;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 
 /**
@@ -12,12 +15,21 @@ import javax.persistence.EntityManagerFactory;
  * @author Tomas Javorsky a.k.a. Tomus
  * @uco 324662
  */
+@Repository
 public class MissionDAOImpl implements MissionDAO{
 
-    private EntityManagerFactory emf;
+    @Autowired
+    EntityManager entityManager;
     
-    public MissionDAOImpl(EntityManagerFactory emf) {
-        this.emf = emf;
+    public MissionDAOImpl(){
+    }
+    
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
     
     @Override
@@ -30,11 +42,7 @@ public class MissionDAOImpl implements MissionDAO{
         {
             throw new IllegalArgumentException("Mission identifier is already set.");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(mission);
-        em.getTransaction().commit();
-        em.close();
+        entityManager.persist(mission);
     }
 
     @Override
@@ -43,11 +51,8 @@ public class MissionDAOImpl implements MissionDAO{
         {
             throw new IllegalArgumentException("Identifier should not be null.");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Mission mission = em.find(Mission.class, id);
-        em.getTransaction().commit();
-        em.close();
+        Mission mission = entityManager.find(Mission.class, id);
+
         return mission;
     }
 
@@ -58,12 +63,8 @@ public class MissionDAOImpl implements MissionDAO{
         }
         if(mission.getId() == null) {
             throw new IllegalArgumentException("Mission is not present in DB.");
-        }        
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();   
-        em.merge(mission);
-        em.getTransaction().commit();
-        em.close();
+        }         
+        entityManager.merge(mission);
     }
 
     @Override
@@ -73,36 +74,26 @@ public class MissionDAOImpl implements MissionDAO{
         }
         if(mission.getId() == null) {
             throw new IllegalArgumentException("Mission is not present in DB.");
-        } 
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();   
-        if (em.contains(mission)){
-            em.remove(mission);
+        }   
+        if (entityManager.contains(mission)){
+            entityManager.remove(mission);
         }else{
-            em.remove(em.merge(mission));
+            entityManager.remove(entityManager.merge(mission));
         }
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public List<Mission> getAllMissions() {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        List<Mission> missions = em.createQuery("SELECT m FROM Mission m", Mission.class).getResultList();
-        em.getTransaction().commit();
-        em.close();
+        List<Mission> missions = entityManager.createQuery("SELECT m FROM Mission m", Mission.class).getResultList();
+        
         return missions;
     }
     
     @Override
     public List<Mission> findMissionByName(String name) throws IllegalArgumentException {
         List<Mission> mission;
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        mission = em.createQuery("SELECT h FROM Mission h WHERE h.name = :name").setParameter("name", name).getResultList();
-        em.getTransaction().commit();
-        em.close();
+        mission = entityManager.createQuery("SELECT h FROM Mission h WHERE h.name = :name").setParameter("name", name).getResultList();
+
         return mission;
     }
 }

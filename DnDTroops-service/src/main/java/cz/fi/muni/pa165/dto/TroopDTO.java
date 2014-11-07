@@ -30,10 +30,6 @@ public class TroopDTO {
         
     }
     
-    public TroopDTO(Long id) {
-        this(id, null, null, null, null);
-    }
-    
     public TroopDTO(String name, MissionDTO mission, Long amountOfMoney, List<HeroDTO> heroes) {
         this(-1L, name, mission, amountOfMoney, heroes);
     }

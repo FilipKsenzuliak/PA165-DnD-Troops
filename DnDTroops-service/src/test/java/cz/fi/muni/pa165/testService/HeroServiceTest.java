@@ -109,6 +109,27 @@ public class HeroServiceTest {
         heroService.deleteHero(hero);
         Mockito.verify(heroDAOMock).deleteHero(mapper.map(hero, Hero.class));
     }
+        
+    @Test
+    public void testDeleteAllHeroes() {
+        TroopDTO troop = new TroopDTO();
+        RoleDTO role = new RoleDTO();                
+        List<RoleDTO> roles = new ArrayList();
+        roles.add(role);
+        
+        TroopDTO troop2 = new TroopDTO();
+        RoleDTO role2 = new RoleDTO();                
+        List<RoleDTO> roles2 = new ArrayList();
+        roles2.add(role2);
+        
+        HeroDTO hero = new HeroDTO(Race.ELF, 150L, 10L, "Jozef",  troop, roles);
+        HeroDTO hero2 = new HeroDTO(Race.DWARF, 100L, 7L, "Jan",  troop2, roles2);
+        heroService.createHero(hero);
+        heroService.createHero(hero2);
+        heroService.deleteAllHeroes();
+        
+        Mockito.verify(heroDAOMock).getAllHeroes();
+    }
     
     @Test
     public void testGetHeroById() {
@@ -128,5 +149,4 @@ public class HeroServiceTest {
         HeroDTO returnedHero = heroService.getHeroById(1L);
         Mockito.verify(heroDAOMock).getHeroById(returnedHero.getId());
     }
-
 }

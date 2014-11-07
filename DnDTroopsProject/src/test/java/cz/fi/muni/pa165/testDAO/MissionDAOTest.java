@@ -11,10 +11,14 @@ import static org.junit.Assert.*;
 
 import cz.fi.muni.pa165.entity.Mission;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -22,16 +26,20 @@ import org.junit.Test;
  * @author Filip Ksenzuliak
  * @uco 396072
  */
-
+@Transactional
+@ContextConfiguration("file:src/main/resources/META-INF/testContext.xml")
 public class MissionDAOTest{
         
     public MissionDAOTest() {
     }
 
+    @Autowired
+    private MissionDAOImpl missionDAO;
+    
     private Mission m1;
     private Mission m2;
-    private MissionDAO missionDAO;
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
+    private EntityManager em;
 
     @Before
     public void setup() {
@@ -44,16 +52,19 @@ public class MissionDAOTest{
         m2.setName("Relaxing!");
         m2.setObjective("Just relax");
         m2.setReward(1);
-
-        missionDAO = new MissionDAOImpl(emf);
+        
+        em = emf.createEntityManager();
+        missionDAO = new MissionDAOImpl();
+        missionDAO.setEntityManager(em);
     }
 
     @Test
     public void testCreateMission() {
+        em.getTransaction().begin();
         missionDAO.createMission(m1);
-
         Mission mission = m1;
         Mission missionDB = missionDAO.getMissionById(m1.getId());
+        em.getTransaction().commit();
         
         assertNotNull(mission.getId());
         assertEquals(mission, missionDB);
@@ -61,13 +72,15 @@ public class MissionDAOTest{
     
     @Test
     public void testUpdateMission() {
+        em.getTransaction().begin();
         missionDAO.createMission(m1);
         Mission mission = m1;
         mission.setName("Don't slay anyone");
         mission.setObjective("Keep away from everyone");
         mission.setReward(1);
         missionDAO.updateMission(mission);
-
+        em.getTransaction().commit();
+        
         assertEquals("Don't slay anyone", m1.getName());
         assertEquals("Keep away from everyone", m1.getObjective());
         assertEquals(1, m1.getReward());
@@ -75,19 +88,23 @@ public class MissionDAOTest{
     
     @Test
     public void testDeleteMission() {
+        em.getTransaction().begin();
         missionDAO.createMission(m1);
-
         Mission mission = m1;
         missionDAO.deleteMission(mission);
         Mission missionDB = missionDAO.getMissionById(mission.getId());
+        em.getTransaction().commit();
+        
         assertNull(missionDB);
     }
     
     @Test
     public void testGetMission() {
+        em.getTransaction().begin();
         missionDAO.createMission(m2);
-        
         Mission mission = missionDAO.getMissionById(m2.getId());
+        em.getTransaction().commit();        
+
         assertNotNull(mission);
         assertEquals(mission.getId(), m2.getId());
     }
@@ -95,8 +112,8 @@ public class MissionDAOTest{
     @Test
     public void testFindMissionByName() {
         missionDAO.createMission(m2);
-        
         List<Mission> mission = missionDAO.findMissionByName(m2.getName());
+        
         assertNotNull(mission);
     }
 }

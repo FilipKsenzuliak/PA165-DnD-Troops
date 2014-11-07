@@ -14,8 +14,8 @@ public class MissionDTO {
     
     private int reward;
     
-    public MissionDTO(Long id){
-        this(id, null, null, 0); //int nemoze byt null, ak sa kvoli tomuto nieco dojebe tak sorry
+    public MissionDTO(){
+        
     }
     
     public MissionDTO(String name, String objective, int reward){

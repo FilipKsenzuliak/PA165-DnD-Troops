@@ -27,10 +27,6 @@ public class RoleDTO {
         
     }
     
-    public RoleDTO(Long id) {
-        this(id, null, null, null);
-    }
-    
     public RoleDTO(List<HeroDTO> heroes, String name, String description) {
         this(-1L, heroes, name, description);
     }
