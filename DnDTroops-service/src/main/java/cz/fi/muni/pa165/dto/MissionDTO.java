@@ -57,4 +57,8 @@ public class MissionDTO {
         return reward;
     }
     
+    public void setId(Long id){
+        this.id = id;
+    }
+    
 }

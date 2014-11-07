@@ -12,7 +12,6 @@ import cz.fi.muni.pa165.dto.RoleDTO;
 import cz.fi.muni.pa165.dto.TroopDTO;
 import cz.fi.muni.pa165.entity.Hero;
 import cz.fi.muni.pa165.entity.Race;
-import cz.fi.muni.pa165.entity.Troop;
 import cz.fi.muni.pa165.serviceImpl.HeroServiceImpl;
 import static org.mockito.Mockito.mock;
 import org.junit.runner.RunWith;
@@ -94,5 +93,39 @@ public class HeroServiceTest {
         heroService.updateHero(hero);
         Mockito.verify(heroDAOMock).updateHero(mapper.map(hero, Hero.class));
     }
-
+    
+    @Test
+    public void testDeleteHero() {
+        Mapper mapper = new DozerBeanMapper();
+        
+        TroopDTO troop = new TroopDTO();
+        RoleDTO role = new RoleDTO();                
+        List<RoleDTO> roles = new ArrayList();
+        roles.add(role);
+        
+        HeroDTO hero = new HeroDTO(Race.ELF, 150L, 10L, "Jozef",  troop, roles);
+        
+        heroService.createHero(hero);
+        heroService.deleteHero(hero);
+        Mockito.verify(heroDAOMock).deleteHero(mapper.map(hero, Hero.class));
+    }
+    
+    @Test
+    public void testGetHeroById() {
+        Mapper mapper = new DozerBeanMapper();
+        
+        TroopDTO troop = new TroopDTO();
+        RoleDTO role = new RoleDTO();                
+        List<RoleDTO> roles = new ArrayList();
+        roles.add(role);
+        
+        HeroDTO hero = new HeroDTO(Race.ELF, 150L, 10L, "Jozef",  troop, roles);
+        heroService.createHero(hero);
+        hero.setId(1L);
+               
+        Mockito.when(heroDAOMock.getHeroById(hero.getId()))
+               .thenReturn(mapper.map(hero, Hero.class));
+        HeroDTO returnedHero = heroService.getHeroById(1L);
+        Mockito.verify(heroDAOMock).getHeroById(returnedHero.getId());
+    }
 }

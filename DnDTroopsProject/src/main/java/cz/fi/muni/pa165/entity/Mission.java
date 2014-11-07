@@ -25,7 +25,7 @@ public class Mission implements Serializable{
     private String objective;
     
     private int reward;
-
+    
     public void setName(String name) {
         this.name = name;
     }

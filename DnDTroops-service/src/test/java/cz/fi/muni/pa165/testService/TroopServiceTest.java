@@ -65,7 +65,7 @@ public class TroopServiceTest {
     public void smt(){
         
     }
-    /*
+    
     @Test
     public void testCreateTroop() {
         Mapper mapper = new DozerBeanMapper();
@@ -125,5 +125,5 @@ public class TroopServiceTest {
         troopService.createTroop(troop);
         TroopDTO troopT = troopService.getTroopById(1L);
         Mockito.verify(troopDAOMock).getTroop(1L);
-    }*/
+    }
 }

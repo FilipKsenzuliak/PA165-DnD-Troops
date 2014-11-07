@@ -28,7 +28,6 @@ public class HeroServiceImpl implements HeroService{
 
     @Autowired
     private HeroDAO heroDAO;
-    
     private Mapper mapper = new DozerBeanMapper();
     
     public HeroDAO getHeroDAO() {
@@ -94,20 +93,24 @@ public class HeroServiceImpl implements HeroService{
         Validate.isTrue(id != null, "Id is null.");
         
         HeroDTO hero = mapper.map(heroDAO.getHeroById(id), HeroDTO.class);
+                System.out.println(hero);
         return hero;
     }
 
     @Override
-    public List<HeroDTO> getHeroByName(String name) {
-        Validate.isTrue(name.isEmpty(), "Empty name!");
+    public List<HeroDTO> findHeroByName(String name) {
+        Validate.isTrue(!name.isEmpty(), "Empty name!");
         
         List<HeroDTO> heroes = new ArrayList<HeroDTO>();   
         try{
-            heroes.add(mapper.map(heroDAO.findHeroByName(name), HeroDTO.class));
+            System.out.println(name);
+            for(Hero hero : heroDAO.findHeroByName(name)) {
+                heroes.add(mapper.map(hero, HeroDTO.class));
+            }
         }catch(Exception e){
             throw new DataAccessException("persistance error") {};
         }
-
+                System.out.println(heroes);
         return heroes;
     }
     
