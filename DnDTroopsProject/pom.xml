@@ -8,6 +8,7 @@
     <packaging>jar</packaging>        
     <name>DnDTroopsProject</name>
     <url>http://maven.apache.org</url>
+     
         
     <dependencyManagement>
         <dependencies>
@@ -50,6 +51,11 @@
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DnDTroops-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>

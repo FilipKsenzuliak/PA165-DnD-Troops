@@ -28,7 +28,7 @@ import org.junit.Before;
 import org.junit.Test;
 /**
  *
- * @author Dávid
+ * @author David Hubac
  */
 public class HeroDAOTest {
     
