@@ -12,7 +12,7 @@ public class MissionDTO {
     
     private String objective;
     
-    private int reward;
+    private int reward ;
     
     public MissionDTO(){
         
