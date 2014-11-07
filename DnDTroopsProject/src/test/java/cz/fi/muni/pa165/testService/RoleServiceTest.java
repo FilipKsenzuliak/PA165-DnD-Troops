@@ -120,9 +120,12 @@ public class RoleServiceTest {
         HeroDTO hero = new HeroDTO();
         List<HeroDTO> heroes = new ArrayList();
         heroes.add(hero);
-        RoleDTO role = new RoleDTO(1L, heroes, "Magician", "Magician uses spells.");
-        
+        RoleDTO role = new RoleDTO(heroes, "Magician", "Magician uses spells.");
         roleService.createRole(role);
+        role.setId(1L);
+                
+        Mockito.when(roleDAOMock.getRoleById(role.getId())).thenReturn(mapper.map(role, Role.class));
+        
         RoleDTO roleR = roleService.getRoleById(1L);
         Mockito.verify(roleDAOMock).getRoleById(1L);
     }

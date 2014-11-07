@@ -52,6 +52,7 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public RoleDTO getRoleById(Long id) {
         Validate.isTrue(id > 0, "Invalid id. Id < 0!");
+        Validate.isTrue(id != null, "Id is null.");
         RoleDTO role = mapper.map(roleDAO.getRoleById(id), RoleDTO.class);
         return role;
     }
@@ -60,7 +61,6 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public void updateRole(RoleDTO role) {
         Validate.notNull(role, "Null argument.");
-        Validate.isTrue(role.getId() > 0, "Role is not present in DB.");
         roleDAO.updateRole(mapper.map(role, Role.class));
     }
     
@@ -68,7 +68,6 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public void deleteRole(RoleDTO role) {
         Validate.notNull(role, "Null argument.");
-        Validate.isTrue(role.getId() > 0, "Role is not present in DB.");
         roleDAO.deleteRole(mapper.map(role, Role.class));
     }
     
