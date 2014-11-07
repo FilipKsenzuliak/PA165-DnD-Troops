@@ -37,22 +37,36 @@ public class MissionServiceImpl implements MissionService{
     @Override
     public void createMission(MissionDTO mission) {
         Validate.notNull(mission, "Argument is null (on Create)");
-        Mission createdMission = mapper.map(mission, Mission.class);
-        missionDAO.createMission(createdMission);
-        mission.setId(mission.getId());
+        try{
+            Mission createdMission = mapper.map(mission, Mission.class);
+            missionDAO.createMission(createdMission);
+            mission.setId(mission.getId());
+        }
+        catch(Exception e){
+            throw new DataAccessException("persistance error"){};
+        }
     }
 
     @Override
     public void updateMission(MissionDTO mission) {
         Validate.notNull(mission, "Argument is null (on Update)");
-        missionDAO.updateMission(mapper.map(mission, Mission.class));
+        try{
+            missionDAO.updateMission(mapper.map(mission, Mission.class));
+        }
+        catch(Exception e){
+            throw new DataAccessException("persistance error"){};
+        }
     }
     
     @Override
     public void deleteMission(MissionDTO mission) {
         Validate.notNull(mission, "Argument is null (on delete)");
-        
-        missionDAO.deleteMission(mapper.map(mission, Mission.class));
+        try{
+            missionDAO.deleteMission(mapper.map(mission, Mission.class));
+        }
+        catch(Exception e){
+            throw new DataAccessException("persistance error"){};
+        }
    }
 
     @Override
@@ -67,26 +81,43 @@ public class MissionServiceImpl implements MissionService{
     public void updateMissions(List<MissionDTO> missions) {
         Validate.notNull(missions, "Argument is null. (Mass update)");
         
-        for(MissionDTO mission : missions){
-            missionDAO.updateMission(mapper.map(mission, Mission.class));
+        try{
+            for(MissionDTO mission : missions){
+                missionDAO.updateMission(mapper.map(mission, Mission.class));
+            }
+        }
+        catch(Exception e){
+            throw new DataAccessException("persistance error"){};
         }
     }
 
     @Override
     public List<MissionDTO> getAllMissions() {
         List<MissionDTO> missionsDTO = new ArrayList<MissionDTO>();
-        for(Mission mission : missionDAO.getAllMissions()){
-            missionsDTO.add(mapper.map(mission, MissionDTO.class));
+        try{
+            for(Mission mission : missionDAO.getAllMissions()){
+                missionsDTO.add(mapper.map(mission, MissionDTO.class));
+            }
+        }
+        catch(Exception e){
+            throw new DataAccessException("persistance error"){};
         }
         return missionsDTO;
     }
 
     @Override
     public MissionDTO getMissionById(Long id) {
+        MissionDTO mission;
         Validate.isTrue(id>0, "Invalid ID (get mission by id)");
         Validate.isTrue(id != null, "ID is null (get mission by id)");
         
-        MissionDTO mission = mapper.map(missionDAO.getMissionById(id), MissionDTO.class);
+        try{
+            mission = mapper.map(missionDAO.getMissionById(id), MissionDTO.class);
+        }
+        catch(Exception e){
+            throw new DataAccessException("persistance error"){};
+        }
+        
         return mission;
     }
 
