@@ -65,25 +65,29 @@ public class TroopServiceTest {
     public void smt(){
         
     }
-    /*
+    
     @Test
     public void testCreateTroop() {
         Mapper mapper = new DozerBeanMapper();
-        MissionDTO mission = new MissionDTO(); //awaiting implementation
+        
+        MissionDTO mission = new MissionDTO();
         HeroDTO hero = new HeroDTO();
         List<HeroDTO> heroes = new ArrayList();
         heroes.add(hero);
+        
         TroopDTO troop = new TroopDTO("Punishers", mission, 5000L, heroes);
         
+        /*
         hero = new HeroDTO();
         heroes = new ArrayList();
         heroes.add(hero);
         TroopDTO troop2 = new TroopDTO("GuysFromHell", mission, 20000L, heroes);
+        */
         
         troopService.createTroop(troop);
         Mockito.verify(troopDAOMock).createTroop(mapper.map(troop, Troop.class));
     }
-    
+    /*
     @Test
     public void testUpdateTroop() {
         Mapper mapper = new DozerBeanMapper();
