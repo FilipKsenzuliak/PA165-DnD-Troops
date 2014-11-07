@@ -12,7 +12,7 @@ public class MissionDTO {
     
     private String objective;
     
-    private int reward;
+    private int reward ;
     
     public MissionDTO(Long id){
         this(id, null, null, 0); //int nemoze byt null, ak sa kvoli tomuto nieco dojebe tak sorry

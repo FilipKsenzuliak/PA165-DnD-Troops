@@ -98,10 +98,10 @@ public class MissionServiceTest {
         
         MissionDTO mission = new MissionDTO("Vyvrazdovanie Ogrov","Pobijte vsechny ogry", 200);
         missionService.createMission(mission);
-        mission.setId(777L);
+        mission.setId(1L);
         
         Mockito.when(missionDAOMock.getMissionById(mission.getId())).thenReturn(mapper.map(mission, Mission.class));
-        MissionDTO returnedMission = missionService.getMissionById(777L);
+        MissionDTO returnedMission = missionService.getMissionById(1L);
         Mockito.verify(missionDAOMock).getMissionById(returnedMission.getId());
     }
     
