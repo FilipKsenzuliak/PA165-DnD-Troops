@@ -5,7 +5,6 @@
  */
 package cz.fi.muni.pa165.serviceImpl;
 
-import cz.fi.muni.pa165.converter.TroopConverter;
 import cz.fi.muni.pa165.dao.TroopDAO;
 import cz.fi.muni.pa165.dto.TroopDTO;
 import cz.fi.muni.pa165.entity.Troop;

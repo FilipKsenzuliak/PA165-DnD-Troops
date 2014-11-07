@@ -6,7 +6,6 @@
 
 package cz.fi.muni.pa165.serviceImpl;
 
-import cz.fi.muni.pa165.converter.RoleConverter;
 import cz.fi.muni.pa165.dao.RoleDAO;
 import cz.fi.muni.pa165.dto.RoleDTO;
 import cz.fi.muni.pa165.entity.Role;

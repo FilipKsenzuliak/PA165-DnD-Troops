@@ -5,7 +5,6 @@
  */
 
 package cz.fi.muni.pa165.testService;
-import cz.fi.muni.pa165.converter.RoleConverter;
 import cz.fi.muni.pa165.dao.RoleDAO;
 import cz.fi.muni.pa165.daoImpl.RoleDAOImpl;
 import cz.fi.muni.pa165.dto.HeroDTO;
