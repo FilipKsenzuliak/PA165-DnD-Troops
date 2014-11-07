@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package cz.fi.muni.pa165.serviceImpl;
 
 import cz.fi.muni.pa165.dao.TroopDAO;
@@ -15,14 +16,15 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 /**
  *
  * @author Andrej
  */
+@Service
 public class TroopServiceImpl implements TroopService {
-
+    
     @Autowired
     private TroopDAO troopDAO;
     
@@ -45,40 +47,39 @@ public class TroopServiceImpl implements TroopService {
         }
         return troopsDTO;
     }
-
+    
     @Override
     @Transactional
     public TroopDTO getTroopById(Long id) {
         Validate.isTrue(id > 0, "Invalid id. Id < 0!");
+        Validate.isTrue(id != null, "Id is null.");
         TroopDTO troop = mapper.map(troopDAO.getTroop(id), TroopDTO.class);
         return troop;
     }
-
+    
     @Override
     @Transactional
     public void updateTroop(TroopDTO troop) {
         Validate.notNull(troop, "Null argument.");
-        Validate.isTrue(troop.getId() > 0, "Troop is not present in DB.");
         troopDAO.updateTroop(mapper.map(troop, Troop.class));
     }
-
+    
     @Override
     @Transactional
     public void deleteTroop(TroopDTO troop) {
         Validate.notNull(troop, "Null argument.");
-        Validate.isTrue(troop.getId() > 0, "Troop is not present in DB.");
         troopDAO.removeTroop(mapper.map(troop, Troop.class));
     }
-
+    
     @Override
     @Transactional
-    public void createTroop(TroopDTO troopDTO) {
-        Validate.notNull(troopDTO, "Null argument.");
-        Troop troop = mapper.map(troopDTO, Troop.class);
+    public void createTroop(TroopDTO troopdto) {
+        Validate.notNull(troopdto, "Null argument.");
+        Troop troop = mapper.map(troopdto, Troop.class);
         troopDAO.createTroop(troop);
-        troopDTO.setId(troop.getId());
+        troopdto.setId(troop.getId());
     }
-
+    
     @Override
     @Transactional
     public void updateTroops(List<TroopDTO> troops) {
@@ -87,7 +88,7 @@ public class TroopServiceImpl implements TroopService {
             troopDAO.updateTroop(mapper.map(troop, Troop.class));
         }
     }
-
+    
     @Override
     @Transactional
     public void deleteAllTroops() {
@@ -96,5 +97,4 @@ public class TroopServiceImpl implements TroopService {
             troopDAO.removeTroop(troop);
         }
     }
-    
 }

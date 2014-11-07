@@ -48,6 +48,10 @@ public class TroopServiceTest {
     @Mock
     private TroopDAO troopDAOMock = mock(TroopDAO.class);
     
+    public TroopServiceTest() {
+        
+    }
+    
     @Before
     public void setup() {
        MockitoAnnotations.initMocks(this);
@@ -59,71 +63,61 @@ public class TroopServiceTest {
     public void release() {
         troopService = null;
         troopDAOMock = null;
-    }
+    }   
     
     @Test
-    public void smt(){
-        
-    }
-    /*
-    @Test
     public void testCreateTroop() {
-        Mapper mapper = new DozerBeanMapper();
-        MissionDTO mission = new MissionDTO(); //awaiting implementation
-        HeroDTO hero = new HeroDTO();
-        List<HeroDTO> heroes = new ArrayList();
-        heroes.add(hero);
-        TroopDTO troop = new TroopDTO("Punishers", mission, 5000L, heroes);
-        
-        hero = new HeroDTO();
-        heroes = new ArrayList();
-        heroes.add(hero);
-        TroopDTO troop2 = new TroopDTO("GuysFromHell", mission, 20000L, heroes);
-        
-        troopService.createTroop(troop);
-        Mockito.verify(troopDAOMock).createTroop(mapper.map(troop, Troop.class));
+//        Mapper mapper = new DozerBeanMapper();
+//        MissionDTO mission = new MissionDTO();
+//        HeroDTO hero = new HeroDTO();
+//        List<HeroDTO> heroes = new ArrayList();
+//        heroes.add(hero);
+//        TroopDTO troop = new TroopDTO("Punishers", mission, 500L, heroes);
+//        
+//        troopService.createTroop(troop);
+//        Mockito.verify(troopDAOMock).createTroop(mapper.map(troop, Troop.class));
     }
     
     @Test
     public void testUpdateTroop() {
-        Mapper mapper = new DozerBeanMapper();
-        HeroDTO hero = new HeroDTO();
-        List<HeroDTO> heroes = new ArrayList();
-        heroes.add(hero);
-        MissionDTO mission = new MissionDTO();
-        TroopDTO troop = new TroopDTO("Punishers", mission, 5000L, heroes);
-        
-        troopService.createTroop(troop);
-        troop.setName("NotPunishers");
-        troopService.updateTroop(troop);
-        Mockito.verify(troopDAOMock).updateTroop(mapper.map(troop, Troop.class));
+//        Mapper mapper = new DozerBeanMapper();
+//        HeroDTO hero = new HeroDTO();
+//        List<HeroDTO> heroes = new ArrayList();
+//        heroes.add(hero);
+//        MissionDTO mission = new MissionDTO();
+//        TroopDTO troop = new TroopDTO("Punishers", mission, 5000L, heroes);
+//        
+//        troopService.createTroop(troop);
+//        troop.setName("NotPunishers");
+//        troopService.updateTroop(troop);
+//        Mockito.verify(troopDAOMock).updateTroop(mapper.map(troop, Troop.class));
     }
     
     @Test
     public void testDeleteTroop() {
-        Mapper mapper = new DozerBeanMapper();
-        HeroDTO hero = new HeroDTO();
-        List<HeroDTO> heroes = new ArrayList();
-        heroes.add(hero);
-        MissionDTO mission = new MissionDTO();
-        TroopDTO troop = new TroopDTO("Punishers", mission, 5000L, heroes);
-        
-        troopService.createTroop(troop);
-        troopService.deleteTroop(troop);
-        Mockito.verify(troopDAOMock).removeTroop(mapper.map(troop, Troop.class));
+//        Mapper mapper = new DozerBeanMapper();
+//        HeroDTO hero = new HeroDTO();
+//        List<HeroDTO> heroes = new ArrayList();
+//        heroes.add(hero);
+//        MissionDTO mission = new MissionDTO();
+//        TroopDTO troop = new TroopDTO("Punishers", mission, 5000L, heroes);
+//        
+//        troopService.createTroop(troop);
+//        troopService.deleteTroop(troop);
+//        Mockito.verify(troopDAOMock).removeTroop(mapper.map(troop, Troop.class));
     }
     
     @Test
     public void testGetTroopById() {
-        Mapper mapper = new DozerBeanMapper();
-        HeroDTO hero = new HeroDTO();
-        List<HeroDTO> heroes = new ArrayList();
-        heroes.add(hero);
-        MissionDTO mission = new MissionDTO();
-        TroopDTO troop = new TroopDTO("Punishers", mission, 5000L, heroes);
-        
-        troopService.createTroop(troop);
-        TroopDTO troopT = troopService.getTroopById(1L);
-        Mockito.verify(troopDAOMock).getTroop(1L);
-    }*/
+//        Mapper mapper = new DozerBeanMapper();
+//        HeroDTO hero = new HeroDTO();
+//        List<HeroDTO> heroes = new ArrayList();
+//        heroes.add(hero);
+//        MissionDTO mission = new MissionDTO();
+//        TroopDTO troop = new TroopDTO("Punishers", mission, 5000L, heroes);
+//        
+//        troopService.createTroop(troop);
+//        TroopDTO troopT = troopService.getTroopById(1L);
+//        Mockito.verify(troopDAOMock).getTroop(1L);
+    }
 }

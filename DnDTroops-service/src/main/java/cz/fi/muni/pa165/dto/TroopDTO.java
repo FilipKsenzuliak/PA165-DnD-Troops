@@ -8,6 +8,7 @@ package cz.fi.muni.pa165.dto;
 import cz.fi.muni.pa165.entity.Hero;
 import cz.fi.muni.pa165.entity.Mission;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -80,6 +81,36 @@ public class TroopDTO {
 
     public void setHeroes(List<HeroDTO> heroes) {
         this.heroes = heroes;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + Objects.hashCode(this.mission);
+        hash = 67 * hash + Objects.hashCode(this.amountOfMoney);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TroopDTO other = (TroopDTO) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.mission, other.mission)) {
+            return false;
+        }
+        if (!Objects.equals(this.amountOfMoney, other.amountOfMoney)) {
+            return false;
+        }
+        return true;
     }
     
     

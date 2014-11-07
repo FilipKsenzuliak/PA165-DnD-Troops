@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.dto;
 
+import java.util.Objects;
+
 /**
  *
  * @author Tomas Javorsky
@@ -59,6 +61,33 @@ public class MissionDTO {
     
     public void setId(Long id){
         this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 73 * hash + Objects.hashCode(this.name);
+        hash = 73 * hash + Objects.hashCode(this.objective);
+        hash = 73 * hash + this.reward;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MissionDTO other = (MissionDTO) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.objective, other.objective)) {
+            return false;
+        }
+        return true;
     }
     
 }

@@ -7,6 +7,7 @@
 package cz.fi.muni.pa165.dto;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -76,6 +77,36 @@ public class RoleDTO {
 
     public void setRoleLevel(int roleLevel) {
         this.roleLevel = roleLevel;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + Objects.hashCode(this.name);
+        hash = 31 * hash + Objects.hashCode(this.description);
+        hash = 31 * hash + this.roleLevel;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RoleDTO other = (RoleDTO) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (this.roleLevel != other.roleLevel) {
+            return false;
+        }
+        return true;
     }
     
     
