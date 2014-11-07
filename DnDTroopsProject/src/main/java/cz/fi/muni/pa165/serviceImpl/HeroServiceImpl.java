@@ -8,11 +8,13 @@ import cz.fi.muni.pa165.dao.HeroDAO;
 import cz.fi.muni.pa165.dto.HeroDTO;
 import cz.fi.muni.pa165.entity.Hero;
 import cz.fi.muni.pa165.service.HeroService;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.Validate;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -49,6 +51,15 @@ public class HeroServiceImpl implements HeroService{
         
         heroDAO.updateHero(mapper.map(hero, Hero.class));
     }
+    
+    @Override
+    public void updateHeroes(List<HeroDTO> heroes) {
+        Validate.notNull(heroes, "Argument is null.");
+        
+        for(HeroDTO hero : heroes) {
+            heroDAO.updateHero(mapper.map(hero, Hero.class));
+        }
+    }
 
     @Override
     public void deleteHero(HeroDTO hero) {
@@ -60,27 +71,41 @@ public class HeroServiceImpl implements HeroService{
 
     @Override
     public void deleteAllHeroes() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void updateHeroes(List<HeroDTO> heroes) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<Hero> heroes = heroDAO.getAllHeroes();
+        for(Hero h : heroes) {
+            heroDAO.deleteHero(h);
+        }
     }
 
     @Override
     public List<HeroDTO> getAllHeroes() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<HeroDTO> heroesDTO = new ArrayList<HeroDTO>();
+        for(Hero hero : heroDAO.getAllHeroes()) {
+            heroesDTO.add(mapper.map(hero, HeroDTO.class));
+        }
+        return heroesDTO;
     }
 
     @Override
     public HeroDTO getHeroById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Validate.isTrue(id > 0, "Invalid id!");
+        
+        HeroDTO hero = mapper.map(heroDAO.getHeroById(id), HeroDTO.class);
+        return hero;
     }
 
     @Override
     public List<HeroDTO> getHeroByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Validate.isTrue(name.isEmpty(), "Empty name!");
+        
+        List<HeroDTO> heroes = new ArrayList<HeroDTO>();   
+        try{
+            heroes.add(mapper.map(heroDAO.findHeroByName(name), HeroDTO.class));
+        }catch(Exception e){
+            throw new DataAccessException("DAE persistance error") {};
+        }
+
+        return heroes;
     }
     
 }
