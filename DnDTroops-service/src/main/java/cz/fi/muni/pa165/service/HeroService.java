@@ -52,6 +52,6 @@ public interface HeroService {
      * @param name
      * @return heroes with specific name
      */
-    List<HeroDTO> getHeroByName(String name);
+    List<HeroDTO> findHeroByName(String name);
 
 }

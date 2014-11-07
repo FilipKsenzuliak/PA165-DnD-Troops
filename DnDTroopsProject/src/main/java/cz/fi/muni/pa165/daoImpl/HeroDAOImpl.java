@@ -98,7 +98,6 @@ public class HeroDAOImpl implements HeroDAO{
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         hero = em.createQuery("SELECT h FROM Hero h WHERE h.name = :name").setParameter("name", name).getResultList();
-        //query.setParameter("name", name);
         em.getTransaction().commit();
         em.close();
         return hero;
