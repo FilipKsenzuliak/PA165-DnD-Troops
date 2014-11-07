@@ -115,7 +115,7 @@ public class MissionServiceImpl implements MissionService{
             mission = mapper.map(missionDAO.getMissionById(id), MissionDTO.class);
         }
         catch(Exception e){
-            throw new DataAccessException("persistance error"){};
+            throw new DataAccessException("persistance error in getMission by ID"){};
         }
         
         return mission;
