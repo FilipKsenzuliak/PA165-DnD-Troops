@@ -30,6 +30,11 @@
         <property name="roleDAO" ref="roleDAO"/>
     </bean>    
     <bean id="roleDAO" class="cz.fi.muni.pa165.daoImpl.RoleDAOImpl"/>
+    
+    <bean id="heroService" class="cz.fi.muni.pa165.serviceImpl.HeroServiceImpl">
+        <property name="heroDAO" ref="heroDAO"/>
+    </bean>    
+    <bean id="heroDAO" class="cz.fi.muni.pa165.daoImpl.HeroDAOImpl"/>
      
 
 </beans>

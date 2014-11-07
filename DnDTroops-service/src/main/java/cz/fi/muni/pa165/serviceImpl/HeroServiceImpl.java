@@ -15,11 +15,15 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Filip Ksenzuliak
  */
+@Service
+@Transactional
 public class HeroServiceImpl implements HeroService{
 
     @Autowired
@@ -47,7 +51,6 @@ public class HeroServiceImpl implements HeroService{
     @Override
     public void updateHero(HeroDTO hero) {
         Validate.notNull(hero, "Argument is null.");
-        Validate.isTrue(hero.getId() > 0, "Hero is not present in DB.");
         
         heroDAO.updateHero(mapper.map(hero, Hero.class));
     }
@@ -64,7 +67,6 @@ public class HeroServiceImpl implements HeroService{
     @Override
     public void deleteHero(HeroDTO hero) {
         Validate.notNull(hero, "Argument is null.");
-        Validate.isTrue(hero.getId() > 0, "Hero is not present in DB.");
         
         heroDAO.deleteHero(mapper.map(hero, Hero.class));
     }
@@ -89,6 +91,7 @@ public class HeroServiceImpl implements HeroService{
     @Override
     public HeroDTO getHeroById(Long id) {
         Validate.isTrue(id > 0, "Invalid id!");
+        Validate.isTrue(id != null, "Id is null.");
         
         HeroDTO hero = mapper.map(heroDAO.getHeroById(id), HeroDTO.class);
         return hero;
@@ -102,7 +105,7 @@ public class HeroServiceImpl implements HeroService{
         try{
             heroes.add(mapper.map(heroDAO.findHeroByName(name), HeroDTO.class));
         }catch(Exception e){
-            throw new DataAccessException("DAE persistance error") {};
+            throw new DataAccessException("persistance error") {};
         }
 
         return heroes;

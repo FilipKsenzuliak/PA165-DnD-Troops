@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import static org.junit.Assert.*;
 
 import cz.fi.muni.pa165.entity.Mission;
+import java.util.List;
 import javax.persistence.Persistence;
 import org.junit.Assert;
 import org.junit.Before;
@@ -81,7 +82,21 @@ public class MissionDAOTest{
         Mission missionDB = missionDAO.getMissionById(mission.getId());
         assertNull(missionDB);
     }
-  
     
+    @Test
+    public void testGetMission() {
+        missionDAO.createMission(m2);
+        
+        Mission mission = missionDAO.getMissionById(m2.getId());
+        assertNotNull(mission);
+        assertEquals(mission.getId(), m2.getId());
+    }
     
+    @Test
+    public void testFindMissionByName() {
+        missionDAO.createMission(m2);
+        
+        List<Mission> mission = missionDAO.findMissionByName(m2.getName());
+        assertNotNull(mission);
+    }
 }
