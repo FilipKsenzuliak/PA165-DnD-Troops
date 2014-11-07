@@ -128,4 +128,5 @@ public class HeroServiceTest {
         HeroDTO returnedHero = heroService.getHeroById(1L);
         Mockito.verify(heroDAOMock).getHeroById(returnedHero.getId());
     }
+
 }

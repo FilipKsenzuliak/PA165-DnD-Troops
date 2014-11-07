@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Filip Ksenzuliak
  */
 @Service
-@Transactional
 public class HeroServiceImpl implements HeroService{
 
     @Autowired
@@ -39,6 +38,7 @@ public class HeroServiceImpl implements HeroService{
     }
        
     @Override
+    @Transactional
     public void createHero(HeroDTO hero) {
         Validate.notNull(hero, "Argument is null.");
         
@@ -48,6 +48,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
+    @Transactional
     public void updateHero(HeroDTO hero) {
         Validate.notNull(hero, "Argument is null.");
         
@@ -55,6 +56,7 @@ public class HeroServiceImpl implements HeroService{
     }
     
     @Override
+    @Transactional
     public void updateHeroes(List<HeroDTO> heroes) {
         Validate.notNull(heroes, "Argument is null.");
         
@@ -64,6 +66,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
+    @Transactional
     public void deleteHero(HeroDTO hero) {
         Validate.notNull(hero, "Argument is null.");
         
@@ -71,6 +74,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
+    @Transactional
     public void deleteAllHeroes() {
         List<Hero> heroes = heroDAO.getAllHeroes();
         for(Hero h : heroes) {
@@ -79,6 +83,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
+    @Transactional
     public List<HeroDTO> getAllHeroes() {
         List<HeroDTO> heroesDTO = new ArrayList<HeroDTO>();
         for(Hero hero : heroDAO.getAllHeroes()) {
@@ -88,6 +93,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
+    @Transactional
     public HeroDTO getHeroById(Long id) {
         Validate.isTrue(id > 0, "Invalid id!");
         Validate.isTrue(id != null, "Id is null.");
@@ -98,19 +104,18 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
+    @Transactional
     public List<HeroDTO> findHeroByName(String name) {
         Validate.isTrue(!name.isEmpty(), "Empty name!");
         
         List<HeroDTO> heroes = new ArrayList<HeroDTO>();   
         try{
-            System.out.println(name);
             for(Hero hero : heroDAO.findHeroByName(name)) {
                 heroes.add(mapper.map(hero, HeroDTO.class));
             }
         }catch(Exception e){
             throw new DataAccessException("persistance error") {};
         }
-                System.out.println(heroes);
         return heroes;
     }
     

@@ -27,15 +27,15 @@ public class HeroDTO {
     public HeroDTO(){
     }
     
-    public HeroDTO(Long id) {
-        this(id, null, null, null, null, null, null);
-    }
-    
-    public HeroDTO(Race race, Long age, Long rank, String name, TroopDTO troop, List<RoleDTO> role) {
+    public HeroDTO(Race race, Long age, Long rank,
+                   String name, TroopDTO troop, List<RoleDTO> role) {
+        
         this(-1L, race, age, rank, name, troop, role);
     }
     
-    public HeroDTO(Long id, Race race, Long age, Long rank, String name, TroopDTO troop, List<RoleDTO> role) {
+    public HeroDTO(Long id, Race race, Long age, Long rank,
+                   String name, TroopDTO troop, List<RoleDTO> role) {
+        
         this.id = id;
         this.race = race;
         this.age = age;
