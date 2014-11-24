@@ -4,6 +4,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Hero</title>
+        <style>
+            table.mytable { border-collapse: collapse; margin: 10px; }
+            table.mytable th, table.mytable td {  border: solid 1px black; padding: 4px; }
+        </style>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script>
         function getContextPath() {
@@ -76,6 +80,7 @@
             $('#heroId').val('0');
             update_hero();
         }
+        
         </script>
     </head>
     
@@ -89,9 +94,9 @@
 
         </table>
 
-        <br><button onclick="load_heros()">Load table</button>
-        <br><button onclick="create_hero()">Create book</button>
-        <br><button onclick="update_hero()">Update book</button>
+        <br><button onclick="load_heroes()">Load table</button>
+        <br><button onclick="create_hero()">Create hero</button>
+        <br><button onclick="update_hero()">Update hero</button>
 
         <form id="f1" name="f1" onsubmit="submit_hero()">
             <table>
