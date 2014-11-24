@@ -65,7 +65,7 @@ public class TroopServiceTest {
     public void smt(){
         
     }
-    /*
+    
     @Test
     public void testCreateTroop() {
         Mapper mapper = new DozerBeanMapper();
@@ -113,7 +113,7 @@ public class TroopServiceTest {
         Mockito.verify(troopDAOMock).removeTroop(mapper.map(troop, Troop.class));
     }
     
-    @Test
+   /* @Test
     public void testGetTroopById() {
         Mapper mapper = new DozerBeanMapper();
         HeroDTO hero = new HeroDTO();

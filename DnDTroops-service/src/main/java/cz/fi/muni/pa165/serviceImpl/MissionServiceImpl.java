@@ -107,18 +107,17 @@ public class MissionServiceImpl implements MissionService{
 
     @Override
     public MissionDTO getMissionById(Long id) {
-        MissionDTO mission;
-        Validate.isTrue(id>0, "Invalid ID (get mission by id)");
-        Validate.isTrue(id != null, "ID is null (get mission by id)");
-        
         try{
+            MissionDTO mission;
+            Validate.isTrue(id>0, "Invalid ID (get mission by id)");
+            Validate.isTrue(id != null, "ID is null (get mission by id)");
             mission = mapper.map(missionDAO.getMissionById(id), MissionDTO.class);
+            mission.setId(id);
+            return mission;
         }
         catch(Exception e){
             throw new DataAccessException("persistance error in getMission by ID"){};
         }
-        
-        return mission;
     }
 
     @Override

@@ -50,6 +50,7 @@ public class TroopServiceImpl implements TroopService {
     @Transactional
     public TroopDTO getTroopById(Long id) {
         Validate.isTrue(id > 0, "Invalid id. Id < 0!");
+        Validate.isTrue(id != null, "Id is null.");
         TroopDTO troop = mapper.map(troopDAO.getTroop(id), TroopDTO.class);
         return troop;
     }
@@ -58,7 +59,6 @@ public class TroopServiceImpl implements TroopService {
     @Transactional
     public void updateTroop(TroopDTO troop) {
         Validate.notNull(troop, "Null argument.");
-        Validate.isTrue(troop.getId() > 0, "Troop is not present in DB.");
         troopDAO.updateTroop(mapper.map(troop, Troop.class));
     }
 
@@ -66,7 +66,6 @@ public class TroopServiceImpl implements TroopService {
     @Transactional
     public void deleteTroop(TroopDTO troop) {
         Validate.notNull(troop, "Null argument.");
-        Validate.isTrue(troop.getId() > 0, "Troop is not present in DB.");
         troopDAO.removeTroop(mapper.map(troop, Troop.class));
     }
 

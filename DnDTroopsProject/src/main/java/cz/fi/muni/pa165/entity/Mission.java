@@ -53,6 +53,10 @@ public class Mission implements Serializable{
     public int getReward() {
         return reward;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
     @Override
     public int hashCode() {
@@ -62,7 +66,7 @@ public class Mission implements Serializable{
         hash = 37 * hash + Objects.hashCode(this.reward);
         return hash;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -72,8 +76,22 @@ public class Mission implements Serializable{
             return false;
         }
         final Mission other = (Mission) obj;
-        return this.name.equals(other.name) && (this.objective.equals(other.objective)) && this.reward == other.reward;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.objective, other.objective)) {
+            return false;
+        }
+        if (this.reward != other.reward) {
+            return false;
+        }
+        return true;
     }
+    
+    
     
     @Override
     public String toString(){

@@ -44,7 +44,7 @@ public class HeroServiceImpl implements HeroService{
         
         Hero createdHero = mapper.map(hero, Hero.class);
         heroDAO.createHero(createdHero);
-        hero.setId(hero.getId());
+        hero.setId(createdHero.getId());
     }
 
     @Override

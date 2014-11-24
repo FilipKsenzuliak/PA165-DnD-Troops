@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Fri Nov 07 23:06:13 CET 2014:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0149-8c4b-1dee-000008276db0 
-on database directory memory:D:\Desktop\Git\PA165-DnD-Troops\DnDTroopsProject\jpa with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
-Loaded from file:/C:/Users/Tomus/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
+Mon Nov 24 20:24:20 CET 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0149-e343-055d-00000432e758 
+on database directory memory:E:\DNDTroops\PA165-DnD-Troops\DnDTroopsProject\jpa with class loader sun.misc.Launcher$AppClassLoader@41556f4c 
+Loaded from file:/C:/Users/D%c3%a1vid/.m2/repository/org/apache/derby/derby/10.10.2.0/derby-10.10.2.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_05-b13
-user.dir=D:\Desktop\Git\PA165-DnD-Troops\DnDTroopsProject
-os.name=Windows 7
+java.runtime.version=1.7.0_51-b13
+user.dir=E:\DNDTroops\PA165-DnD-Troops\DnDTroopsProject
+os.name=Windows 8
 os.arch=amd64
-os.version=6.1
+os.version=6.2
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''

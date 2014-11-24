@@ -91,7 +91,7 @@ public class MissionServiceTest {
         
         Mockito.verify(missionDAOMock).deleteMission(mapper.map(mission, Mission.class));
     }
-    /*
+    
     @Test
     public void testGetMissionById(){
         Mapper mapper = new DozerBeanMapper();
@@ -104,6 +104,6 @@ public class MissionServiceTest {
         MissionDTO returnedMission = missionService.getMissionById(1L);
         Mockito.verify(missionDAOMock).getMissionById(returnedMission.getId());
     }
-    */
+    
     
 }
