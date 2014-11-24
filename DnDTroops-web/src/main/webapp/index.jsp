@@ -1,6 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" session="false" %>
 
 <html>
     <head>
@@ -16,7 +14,10 @@
             load_heroes();
         });
         function load_heroes() {
-
+            var tabe = '';
+            tabe ='<tr><td>afef</td><td>afaefaefaefa</td></tr>'
+            $('#heroes').html(tabe);
+                                
             $.ajax({
                 type: 'GET',
                 url: getContextPath()+'/mvc/hero/list',
@@ -66,14 +67,14 @@
                     }
                 }
             }).done(function (data) {
-                load_books();
+                load_heroes();
                 $('#msgarea').html('heroes updated');
             });
         }
 
-        function create_book() {
+        function create_hero() {
             $('#heroId').val('0');
-            update_book();
+            update_hero();
         }
         </script>
     </head>
@@ -89,8 +90,8 @@
         </table>
 
         <br><button onclick="load_heros()">Load table</button>
-        <br><button onclick="create_book()">Create book</button>
-        <br><button onclick="update_book()">Update book</button>
+        <br><button onclick="create_hero()">Create book</button>
+        <br><button onclick="update_hero()">Update book</button>
 
         <form id="f1" name="f1" onsubmit="submit_hero()">
             <table>
