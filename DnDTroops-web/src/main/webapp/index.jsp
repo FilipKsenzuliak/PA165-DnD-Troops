@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Hero</title>
-        
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script>
         function getContextPath() {
             return $('#contextPath').val();
@@ -35,9 +35,45 @@
                                 '<td><button onclick="edit_hero('+hero.id+')">edit</button></td>'+
                                 '</tr>';
                     });
-                    $('#heros').html(tab);
+                    $('#heroes').html(tab);
                 }
             });
+        }
+        function update_hero() {
+            $.ajax({
+                type: 'POST',
+                url: getContextPath()+'/mvc/hero/update',
+                contentType: "application/json",
+                data: JSON.stringify({
+                    'id': parseInt($('#heroId').val()),
+                    'name': $('#heroName').val(),
+                    'role': $('#heroRole').val(),
+                    'race': $('#heroRace').val(),
+                    'troop': $('#heroTroop').val(),
+                    'rank': $('#heroRank').val(),
+                    'age': $('#heroAge').val()
+                }),
+                statusCode: {
+                    404: function(a,b,c) {
+                        $('#msgarea').html('hero not found');
+                    },
+                    422: function(a,b,c) {
+                        var msg='';
+                        $.each(a.responseJSON.fieldErrors,function(key,value){
+                            msg+='<br>'+key+": "+value;
+                        });
+                        $('#msgarea').html(msg);
+                    }
+                }
+            }).done(function (data) {
+                load_books();
+                $('#msgarea').html('heroes updated');
+            });
+        }
+
+        function create_book() {
+            $('#heroId').val('0');
+            update_book();
         }
         </script>
     </head>
@@ -48,18 +84,13 @@
         
         <div id="msgarea"></div>
 
-        <table class="mytable" id="heros">
+        <table class="mytable" id="heroes">
 
         </table>
 
         <br><button onclick="load_heros()">Load table</button>
-        <br><button onclick="delete_hero(100)">Delete non-existent</button>
-        <br><a href="${pageContext.request.contextPath}/mvc/hero/list">JSON list</a>
-        <br>
-        <br><button onclick="create_hero()">Create hero</button>
-        <br><button onclick="update_hero()">Update hero</button>
-
-        <input id="contextPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}">
+        <br><button onclick="create_book()">Create book</button>
+        <br><button onclick="update_book()">Update book</button>
 
         <form id="f1" name="f1" onsubmit="submit_hero()">
             <table>

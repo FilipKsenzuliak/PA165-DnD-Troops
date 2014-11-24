@@ -58,23 +58,46 @@ public class HeroController {
 
     @RequestMapping(value = "/delete/{id}", method = {RequestMethod.POST, RequestMethod.DELETE}, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void delete(@PathVariable Long id, HttpServletResponse response) {
+    public Object delete(@PathVariable Long id, HttpServletResponse response) {
         HeroDTO hero = heroService.getHeroById(id);
         if (hero == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         } else {
             heroService.deleteHero(hero);
         }
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        return map;
     }
 
     @RequestMapping(value = "/update", method = {RequestMethod.POST, RequestMethod.PUT},
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void update(@RequestBody @Valid HeroDTO hero, BindingResult bindingResult,
+    public Object update(@RequestBody @Valid HeroDTO hero, BindingResult bindingResult,
                          UriComponentsBuilder uriBuilder, HttpServletResponse response) throws IOException {
+        if (bindingResult.hasErrors()) {
+            Map<String,Object> map = new HashMap<>();
+            if(bindingResult.hasGlobalErrors()) {
+                Map<String,String> fes = new HashMap<>();
+                for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                    fes.put(ge.getObjectName(), ge.getDefaultMessage());
+                }
+                map.put("globalErrors",fes);
+            }
+            if(bindingResult.hasFieldErrors()) {
+                Map<String,String> fes = new HashMap<>();
+                for (FieldError fe : bindingResult.getFieldErrors()) {
+                    fes.put(fe.getField(),fe.getDefaultMessage());
+                }
+                map.put("fieldErrors",fes);
+            }
+            response.setStatus(422);
+            return map;
+        }
         if(hero==null) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return null;
         }
         if(hero.getId()==0) {
             heroService.createHero(hero);
@@ -82,18 +105,21 @@ public class HeroController {
             HeroDTO heroById = heroService.getHeroById(hero.getId());
             if (heroById == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                return null;
             }
             heroService.updateHero(hero);
         }
         //redirect not allowed for Cross-Origin Request with Preflight, return updated data directly
+        return hero;
     }
 
     @RequestMapping(value = "/add", method = {RequestMethod.POST, RequestMethod.PUT},
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void add(@RequestBody @Valid HeroDTO hero, BindingResult bindingResult,
+    public Object add(@RequestBody @Valid HeroDTO hero, BindingResult bindingResult,
                       UriComponentsBuilder uriBuilder, HttpServletResponse response) throws IOException {
         hero.setId(0L);
+        return update(hero,bindingResult,uriBuilder,response);
     }
 }
