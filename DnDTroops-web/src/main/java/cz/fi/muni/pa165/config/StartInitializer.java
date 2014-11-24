@@ -17,11 +17,11 @@ import javax.validation.Validator;
  * Replaces web.xml file, initializes Spring MVC dispatcher servlet, that in turn uses SpringMvcConfig class
  * for Spring MVC configuration.
  *
- * @author 
+ * @author David Hubac, Filip Ksenzulia, Andrej Nemex, Tomas
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "cz.muni.fi.pa165")
+@ComponentScan(basePackages = "cz.fi.muni.pa165")
 public class StartInitializer implements WebApplicationInitializer {
 
     @Override
