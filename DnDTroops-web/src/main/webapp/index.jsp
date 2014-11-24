@@ -108,7 +108,7 @@
                 </tr>
                 <tr>
                     <td>race</td>
-                    <td><input type="checkbox" name="heroRace" id="heroRace"></td>
+                    <td><input type="text" name="heroRace" id="heroRace"></td>
                 </tr>
                 <tr>
                     <td>troop</td>
