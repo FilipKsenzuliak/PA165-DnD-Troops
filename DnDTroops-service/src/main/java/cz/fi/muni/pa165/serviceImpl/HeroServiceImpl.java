@@ -15,6 +15,7 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Filip Ksenzuliak
  */
-@Service
+@Component("heroService")
 public class HeroServiceImpl implements HeroService{
 
     @Autowired
@@ -38,7 +39,7 @@ public class HeroServiceImpl implements HeroService{
     }
        
     @Override
-    @Transactional
+    
     public void createHero(HeroDTO hero) {
         Validate.notNull(hero, "Argument is null.");
         
@@ -48,7 +49,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
-    @Transactional
+    
     public void updateHero(HeroDTO hero) {
         Validate.notNull(hero, "Argument is null.");
         
@@ -56,7 +57,7 @@ public class HeroServiceImpl implements HeroService{
     }
     
     @Override
-    @Transactional
+    
     public void updateHeroes(List<HeroDTO> heroes) {
         Validate.notNull(heroes, "Argument is null.");
         
@@ -66,7 +67,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
-    @Transactional
+    
     public void deleteHero(HeroDTO hero) {
         Validate.notNull(hero, "Argument is null.");
         
@@ -74,7 +75,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
-    @Transactional
+    
     public void deleteAllHeroes() {
         List<Hero> heroes = heroDAO.getAllHeroes();
         for(Hero h : heroes) {
@@ -83,7 +84,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
-    @Transactional
+    
     public List<HeroDTO> getAllHeroes() {
         List<HeroDTO> heroesDTO = new ArrayList<HeroDTO>();
         for(Hero hero : heroDAO.getAllHeroes()) {
@@ -93,7 +94,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
-    @Transactional
+    
     public HeroDTO getHeroById(Long id) {
         Validate.isTrue(id > 0, "Invalid id!");
         Validate.isTrue(id != null, "Id is null.");
@@ -104,7 +105,7 @@ public class HeroServiceImpl implements HeroService{
     }
 
     @Override
-    @Transactional
+    
     public List<HeroDTO> findHeroByName(String name) {
         Validate.isTrue(!name.isEmpty(), "Empty name!");
         

@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class RoleServiceImpl implements RoleService {
     
-    @Autowired
+    
     private RoleDAO roleDAO;
     
     private Mapper mapper = new DozerBeanMapper();
@@ -34,6 +34,7 @@ public class RoleServiceImpl implements RoleService {
         return roleDAO;
     }
     
+    @Autowired
     public void setRoleDAO(RoleDAO roleDAO) {
         this.roleDAO = roleDAO;
     }

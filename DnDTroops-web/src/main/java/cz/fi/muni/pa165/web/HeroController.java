@@ -42,8 +42,9 @@ public class HeroController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<HeroDTO> show(HttpServletResponse response) {
-        return heroService.getAllHeroes();
+    public String show(HttpServletResponse response) {
+        
+        return "DAVID SEXY";
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

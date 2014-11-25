@@ -37,9 +37,13 @@
     <bean id="heroDAO" class="cz.fi.muni.pa165.daoImpl.HeroDAOImpl"/>
     
     <bean id="missionService" class="cz.fi.muni.pa165.serviceImpl.MissionServiceImpl">
-        <property name="missionDAO" ref="missionService">
+        <property name="missionDAO" ref="missionDAO"/>
     </bean>
     <bean id="missionDAO" class="cz.fi.muni.pa165.daoImpl.MissionDAOImpl"/>
-     
+    
+     <bean id="troopService" class="cz.fi.muni.pa165.serviceImpl.TroopServiceImpl">
+        <property name="troopDAO" ref="troopDAO"/>
+    </bean>
+    <bean id="troopDAO" class="cz.fi.muni.pa165.daoImpl.TroopDAOImpl"/>
 
 </beans>
