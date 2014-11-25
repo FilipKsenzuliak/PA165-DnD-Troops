@@ -23,7 +23,7 @@ public class TroopDAOTest {
     private Troop troop3;
     private Mission mission1,mission2,mission3;
     private TroopDAO troopDAO;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestUnit");
     private EntityManager em = emf.createEntityManager();
     
     @Before

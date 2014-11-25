@@ -15,12 +15,14 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Andrej
  */
+@Component("troopService")
 public class TroopServiceImpl implements TroopService {
 
     @Autowired

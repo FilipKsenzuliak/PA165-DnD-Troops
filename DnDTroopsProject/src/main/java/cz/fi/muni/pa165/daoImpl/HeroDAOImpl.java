@@ -18,16 +18,15 @@ import org.springframework.stereotype.Repository;
  * @author Filip Ksenzuliak
  * @uco 396072
  */
-
 @Repository("heroDAO")
 @Transactional
-public class HeroDAOImpl implements HeroDAO{
-    
+public class HeroDAOImpl implements HeroDAO {
+
     @PersistenceContext
     private EntityManager em;
-    
+
     public HeroDAOImpl() {
-        
+
     }
 
     public EntityManager getEm() {
@@ -37,21 +36,20 @@ public class HeroDAOImpl implements HeroDAO{
     public void setEm(EntityManager em) {
         this.em = em;
     }
-    
-    
+
     @Override
     public void createHero(Hero hero) throws IllegalArgumentException {
-        if(hero == null || hero.getId() != null || hero.getRace() == null || 
-                hero.getAge() == null || hero.getRank() == null ||
-                hero.getRole() == null || hero.getTroop() == null) {
+        if (hero == null || hero.getId() != null || hero.getRace() == null
+                || hero.getAge() == null || hero.getRank() == null
+                || hero.getRole() == null || hero.getTroop() == null) {
             throw new IllegalArgumentException("Create hero called with wrong param.");
-        } 
+        }
         em.persist(hero);
     }
 
     @Override
     public Hero getHeroById(Long id) throws IllegalArgumentException {
-        if(id == null) {
+        if (id == null) {
             throw new IllegalArgumentException("getHero called with null.");
         }
         Hero hero = em.find(Hero.class, id);
@@ -60,21 +58,21 @@ public class HeroDAOImpl implements HeroDAO{
 
     @Override
     public void updateHero(Hero hero) throws IllegalArgumentException {
-        if(hero == null || hero.getRace() == null || 
-                hero.getAge() == 0 || hero.getRank() == 0 ||
-                hero.getRole() == null || hero.getTroop() == null) {
+        if (hero == null || hero.getRace() == null
+                || hero.getAge() == 0 || hero.getRank() == 0
+                || hero.getRole() == null || hero.getTroop() == null) {
             throw new IllegalArgumentException("Update hero called with wrong param.");
         }
-          
+
         em.merge(hero);
     }
 
     @Override
     public void deleteHero(Hero hero) throws IllegalArgumentException {
-        if(hero == null || hero.getId() == null) {
+        if (hero == null || hero.getId() == null) {
             throw new IllegalArgumentException("Remove hero called with wrong param");
-        }  
-        if(em.contains(hero)) {
+        }
+        if (em.contains(hero)) {
             em.remove(hero);
         } else {
             em.remove(em.merge(hero));
@@ -93,5 +91,5 @@ public class HeroDAOImpl implements HeroDAO{
         hero = em.createQuery("SELECT h FROM Hero h WHERE h.name = :name").setParameter("name", name).getResultList();
         return hero;
     }
-    
+
 }

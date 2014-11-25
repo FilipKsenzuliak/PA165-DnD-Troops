@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cz.fi.muni.pa165.daoImpl;
 
 import cz.fi.muni.pa165.dao.RoleDAO;
@@ -16,28 +15,31 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author David Hubac
  * @uco 396042
  */
-public class RoleDAOImpl implements RoleDAO{
+@Repository("heroDAO")
+@Transactional
+public class RoleDAOImpl implements RoleDAO {
 
+    @PersistenceContext
     private EntityManagerFactory emf;
-    
+
     public RoleDAOImpl(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
+
     @Override
     public void createRole(Role role) throws IllegalArgumentException {
-        if(role == null)
-        {
+        if (role == null) {
             throw new IllegalArgumentException("Role cannot be null.");
         }
-        if(role.getId() != null)
-        {
+        if (role.getId() != null) {
             throw new IllegalArgumentException("Role identifier is already set.");
         }
         EntityManager em = emf.createEntityManager();
@@ -49,8 +51,7 @@ public class RoleDAOImpl implements RoleDAO{
 
     @Override
     public Role getRoleById(Long id) throws IllegalArgumentException {
-        if(id == null)
-        {
+        if (id == null) {
             throw new IllegalArgumentException("Identifier should now be null.");
         }
         EntityManager em = emf.createEntityManager();
@@ -63,14 +64,14 @@ public class RoleDAOImpl implements RoleDAO{
 
     @Override
     public void updateRole(Role role) throws IllegalArgumentException {
-        if(role == null) {
+        if (role == null) {
             throw new IllegalArgumentException("Role can't be null.");
         }
-        if(role.getId() == null) {
+        if (role.getId() == null) {
             throw new IllegalArgumentException("Role is not present in DB.");
-        }    
+        }
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();   
+        em.getTransaction().begin();
         em.merge(role);
         em.getTransaction().commit();
         em.close();
@@ -78,21 +79,21 @@ public class RoleDAOImpl implements RoleDAO{
 
     @Override
     public void deleteRole(Role role) throws IllegalArgumentException {
-        if(role == null) {
+        if (role == null) {
             throw new IllegalArgumentException("Role can't be null.");
         }
-        if(role.getId() == null) {
+        if (role.getId() == null) {
             throw new IllegalArgumentException("Role is not present in DB.");
-        } 
+        }
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();  
+        em.getTransaction().begin();
         Role present = em.find(Role.class, role.getId());
         em.getTransaction().commit();
-        
-        if(present == null) {
+
+        if (present == null) {
             throw new IllegalArgumentException("Role is not present in DB.");
         } else {
-            em.getTransaction().begin();   
+            em.getTransaction().begin();
             em.remove(em.contains(role) ? role : em.merge(role));
             em.getTransaction().commit();
         }

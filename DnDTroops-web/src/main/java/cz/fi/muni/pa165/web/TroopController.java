@@ -5,8 +5,12 @@
  */
 package cz.fi.muni.pa165.web;
 
-import cz.fi.muni.pa165.service.MissionService;
-import cz.fi.muni.pa165.dto.MissionDTO;
+/**
+ *
+ * @author Andrej
+ */
+import cz.fi.muni.pa165.service.TroopService;
+import cz.fi.muni.pa165.dto.TroopDTO;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,42 +30,38 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
-/**
- *
- * @author Tomus
- */
 @Controller
-@RequestMapping("/mission")
-public class MissionController {
+@RequestMapping("/troop")
+public class TroopController {
 
     @Autowired
-    private MissionService missionService;
+    private TroopService troopService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String show(HttpServletResponse response) {
 
-        return "TOMUS este viac SEXY";
+        return "Ne moc SEXI";
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public MissionDTO get(@PathVariable Long id, HttpServletResponse response) {
-        MissionDTO mission = missionService.getMissionById(id);
-        if (mission == null) {
+    public TroopDTO get(@PathVariable Long id, HttpServletResponse response) {
+        TroopDTO troop = troopService.getTroopById(id);
+        if (troop == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
-        return mission;
+        return troop;
     }
 
     @RequestMapping(value = "/delete/{id}", method = {RequestMethod.POST, RequestMethod.DELETE}, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Object delete(@PathVariable Long id, HttpServletResponse response) {
-        MissionDTO mission = missionService.getMissionById(id);
-        if (mission == null) {
+        TroopDTO troop = troopService.getTroopById(id);
+        if (troop == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         } else {
-            missionService.deleteMission(mission);
+            troopService.deleteTroop(troop);
         }
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
@@ -72,7 +72,7 @@ public class MissionController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Object update(@RequestBody @Valid MissionDTO mission, BindingResult bindingResult,
+    public Object update(@RequestBody @Valid TroopDTO troop, BindingResult bindingResult,
             UriComponentsBuilder uriBuilder, HttpServletResponse response) throws IOException {
         if (bindingResult.hasErrors()) {
             Map<String, Object> map = new HashMap<>();
@@ -93,31 +93,31 @@ public class MissionController {
             response.setStatus(422);
             return map;
         }
-        if (mission == null) {
+        if (troop == null) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return null;
         }
-        if (mission.getId() == 0) {
-            missionService.createMission(mission);
+        if (troop.getId() == 0) {
+            troopService.createTroop(troop);
         } else {
-            MissionDTO missionById = missionService.getMissionById(mission.getId());
+            TroopDTO missionById = troopService.getTroopById(troop.getId());
             if (missionById == null) {
                 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 return null;
             }
-            missionService.updateMission(mission);
+            troopService.updateTroop(troop);
         }
-        return mission;
+        return troop;
     }
 
     @RequestMapping(value = "/add", method = {RequestMethod.POST, RequestMethod.PUT},
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Object add(@RequestBody @Valid MissionDTO mission, BindingResult bindingResult,
+    public Object add(@RequestBody @Valid TroopDTO troop, BindingResult bindingResult,
             UriComponentsBuilder uriBuilder, HttpServletResponse response) throws IOException {
-        mission.setId(0L);
-        return update(mission, bindingResult, uriBuilder, response);
+        troop.setId(0L);
+        return update(troop, bindingResult, uriBuilder, response);
     }
 
 }

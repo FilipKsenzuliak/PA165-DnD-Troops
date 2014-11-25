@@ -10,27 +10,33 @@ import cz.fi.muni.pa165.entity.Troop;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Andrej Nemec
  * @UCO 396474
  */
-public class TroopDAOImpl implements TroopDAO{
+@Repository("heroDAO")
+@Transactional
+public class TroopDAOImpl implements TroopDAO {
 
+    @PersistenceContext
     private EntityManagerFactory emf;
-    
+
     public TroopDAOImpl(EntityManagerFactory emf) {
         this.emf = emf;
     }
-        
+
     @Override
     public void createTroop(Troop troop) throws IllegalArgumentException {
-        
-        if(troop == null || troop.getId() != null || troop.getName() == null || 
-                troop.getMission()== null || troop.getAmountOfMoney() == null) {
+
+        if (troop == null || troop.getId() != null || troop.getName() == null
+                || troop.getMission() == null || troop.getAmountOfMoney() == null) {
             throw new IllegalArgumentException("Create troop called with wrong param");
-        } 
+        }
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(troop);
@@ -40,8 +46,7 @@ public class TroopDAOImpl implements TroopDAO{
 
     @Override
     public Troop getTroop(Long id) throws IllegalArgumentException {
-        if(id == null)
-        {
+        if (id == null) {
             throw new IllegalArgumentException("getTroop called with null");
         }
         EntityManager em = emf.createEntityManager();
@@ -55,16 +60,17 @@ public class TroopDAOImpl implements TroopDAO{
     @Override
     public void updateTroop(Troop troop) throws IllegalArgumentException {
         /**
-        if(troop == null){System.out.println("1");}
-        if(troop.getId() != null){System.out.println("2");}
-        if(troop.getName() == null){System.out.println("3");}
-        if(troop.getMission() == null){System.out.println("4");}
-        if(troop.getAmountOfMoney() == null){System.out.println("5");}
-        * */
-        if(troop == null || troop.getName() == null || 
-                troop.getMission()== null || troop.getAmountOfMoney()== null) {
+         * if(troop == null){System.out.println("1");} if(troop.getId() !=
+         * null){System.out.println("2");} if(troop.getName() ==
+         * null){System.out.println("3");} if(troop.getMission() ==
+         * null){System.out.println("4");} if(troop.getAmountOfMoney() ==
+         * null){System.out.println("5");}
+        *
+         */
+        if (troop == null || troop.getName() == null
+                || troop.getMission() == null || troop.getAmountOfMoney() == null) {
             throw new IllegalArgumentException("Update troop called with wrong param");
-        }   
+        }
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.merge(troop);
@@ -74,21 +80,21 @@ public class TroopDAOImpl implements TroopDAO{
 
     @Override
     public void removeTroop(Troop troop) throws IllegalArgumentException {
-        if(troop == null) {
+        if (troop == null) {
             throw new IllegalArgumentException("Troop can't be null.");
         }
-        if(troop.getId() == null) {
+        if (troop.getId() == null) {
             throw new IllegalArgumentException("Troop is not present in DB.");
-        } 
+        }
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Troop present = em.find(Troop.class, troop.getId());
         em.getTransaction().commit();
-        
-        if(present == null) {
+
+        if (present == null) {
             throw new IllegalArgumentException("Troop is not present in DB.");
         } else {
-            em.getTransaction().begin();   
+            em.getTransaction().begin();
             em.remove(em.contains(troop) ? troop : em.merge(troop));
             em.getTransaction().commit();
         }
@@ -102,7 +108,7 @@ public class TroopDAOImpl implements TroopDAO{
         List<Troop> troops = em.createQuery("SELECT t FROM Troop t", Troop.class).getResultList();
         em.getTransaction().commit();
         em.close();
-        return  troops;
+        return troops;
     }
 
     @Override

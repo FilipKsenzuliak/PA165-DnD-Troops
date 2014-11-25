@@ -16,13 +16,14 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 /**
  *
  * @author David
  */
-@Service
+@Component("roleService")
 public class RoleServiceImpl implements RoleService {
     
     
