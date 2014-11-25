@@ -4,10 +4,9 @@ import cz.fi.muni.pa165.dao.MissionDAO;
 import cz.fi.muni.pa165.entity.Mission;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+import javax.persistence.PersistenceContext;
 
 
 /**
@@ -15,11 +14,12 @@ import org.springframework.stereotype.Repository;
  * @author Tomas Javorsky a.k.a. Tomus
  * @uco 324662
  */
-@Repository
+@Repository("missionDAO")
+@Transactional
 public class MissionDAOImpl implements MissionDAO{
 
-    @Autowired
-    EntityManager entityManager;
+    @PersistenceContext
+    private EntityManager entityManager;
     
     public MissionDAOImpl(){
     }
