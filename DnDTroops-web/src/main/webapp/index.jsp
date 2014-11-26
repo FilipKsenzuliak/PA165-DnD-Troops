@@ -2,7 +2,6 @@
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Hero</title>
         <style>
             table.mytable { border-collapse: collapse; margin: 10px; }
@@ -93,10 +92,14 @@
         <table class="mytable" id="heroes">
 
         </table>
+        
+        <input hidden="true" id="contextPath" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}">
 
         <br><button onclick="load_heroes()">Load table</button>
         <br><button onclick="create_hero()">Create hero</button>
         <br><button onclick="update_hero()">Update hero</button>
+        <br><a href="${pageContext.request.contextPath}/mvc/hero/list">JSON list</a>
+<br>
 
         <form id="f1" name="f1" onsubmit="submit_hero()">
             <table>

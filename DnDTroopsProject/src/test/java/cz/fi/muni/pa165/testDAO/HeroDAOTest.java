@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,9 +35,9 @@ public class HeroDAOTest {
     
     private Hero h1;
     private Hero h2;
-    private HeroDAO heroDAO;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
-    private EntityManager em = emf.createEntityManager();
+    private HeroDAOImpl heroDAO;
+    private EntityManager em;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestUnit");
 
     @Before
     public void setup() {
@@ -91,7 +92,7 @@ public class HeroDAOTest {
         troop2.setMission(mission2);
         h2.setTroop(troop2);
         
-        EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(role);
         em.persist(mission);
@@ -100,24 +101,38 @@ public class HeroDAOTest {
         em.persist(mission2);
         em.persist(troop2);
         em.getTransaction().commit();
-        em.close();
         
-        heroDAO = new HeroDAOImpl(emf);
+        heroDAO = new HeroDAOImpl();
+        
+        heroDAO.setEm(em);
+    }
+    
+    @After
+    public void tearDown() {
+        em.close();
     }
 
     @Test
     public void testCreateHero() {
+        em.getTransaction().begin();
         heroDAO.createHero(h1);
-
+        em.getTransaction().commit();
+        
         Hero heroDB = heroDAO.getHeroById(h1.getId());
-        assertNotNull(heroDB.getId());
+        
+        assertNotNull(heroDB);
         assertEquals("Andrej", heroDB.getName());
-        heroDAO.deleteHero(h1);
+        
+        
     }
     
     @Test
-    public void testUpdateHero() {
+    public void testUpdateHero() 
+    {
+        em.getTransaction().begin();
         heroDAO.createHero(h1);
+        em.getTransaction().commit();
+        
         String name = h1.getName();
         Long rank = h1.getRank();
         Hero heroDB = heroDAO.getHeroById(h1.getId());
@@ -131,9 +146,17 @@ public class HeroDAOTest {
     
     @Test
     public void testRemoveHero() {
+        em.getTransaction().begin();
         heroDAO.createHero(h1);
+        em.getTransaction().commit();
+        
+        em.getTransaction().begin();
         heroDAO.createHero(h2);
+        em.getTransaction().commit();
+        
+        em.getTransaction().begin();
         heroDAO.deleteHero(h1);
+        em.getTransaction().commit();
         
         List<Hero> heroes = heroDAO.getAllHeroes();
         assertNotNull(heroes);
@@ -142,22 +165,34 @@ public class HeroDAOTest {
     
     @Test
     public void testGetAllHeroes() {
+        em.getTransaction().begin();
         heroDAO.createHero(h1);
+        em.getTransaction().commit();
+        
+        em.getTransaction().begin();
         heroDAO.createHero(h2);
+        em.getTransaction().commit();
+        
         int count = heroDAO.getAllHeroes().size();
         assertEquals(count, 2);
     }
     
     @Test
     public void testGetHero() {
+        em.getTransaction().begin();
         heroDAO.createHero(h1);
+        em.getTransaction().commit();
+        
         Hero hero = heroDAO.getHeroById(h1.getId());
         assertNotNull(hero);
     }
     
     @Test
     public void testFindHeroByName() {
+        em.getTransaction().begin();
         heroDAO.createHero(h1);
+        em.getTransaction().commit();
+        
         List<Hero> hero = heroDAO.findHeroByName(h1.getName());
         assertNotNull(hero);
     }

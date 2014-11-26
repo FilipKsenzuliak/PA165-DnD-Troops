@@ -13,19 +13,19 @@ import javax.persistence.Id;
  * @author Tomas Javorsky a.k.a. Tomus
  * @uco: 324662
  */
-@Entity
-public class Mission implements Serializable{
-    
+@Entity(name = "Mission")
+public class Mission implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String name;
-    
+
     private String objective;
-    
+
     private int reward;
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -57,7 +57,7 @@ public class Mission implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -90,13 +90,10 @@ public class Mission implements Serializable{
         }
         return true;
     }
-    
-    
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Mission[" + name + "]: " + reward + "gold. Objective: " + objective;
     }
-    
-    
+
 }

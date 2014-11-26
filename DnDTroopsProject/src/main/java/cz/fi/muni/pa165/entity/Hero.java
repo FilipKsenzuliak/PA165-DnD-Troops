@@ -24,7 +24,7 @@ import javax.persistence.ManyToOne;
  * @author Filip Ksenzuliak
  * @uco 396072
  */
-@Entity
+@Entity(name = "Hero")
 public class Hero implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

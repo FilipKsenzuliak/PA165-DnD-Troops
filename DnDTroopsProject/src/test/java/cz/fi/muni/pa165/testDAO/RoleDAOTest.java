@@ -31,7 +31,7 @@ public class RoleDAOTest {
     private Role r1;
     private Role r2;
     private RoleDAO roleDAO;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestUnit");
     private EntityManager em = emf.createEntityManager();
     
     @Before

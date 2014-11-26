@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
  * @author David Hubac
  * @uco 396042
  */
-@Entity
+@Entity(name = "Role")
 public class Role implements Serializable{
     @ManyToMany
     private List<Hero> heroes;

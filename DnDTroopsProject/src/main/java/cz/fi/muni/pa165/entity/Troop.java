@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
  * @author Andrej Nemec
  * @UCO 396474
  */
-@Entity
+@Entity(name = "Troop")
 public class Troop implements Serializable{
     
     @Id

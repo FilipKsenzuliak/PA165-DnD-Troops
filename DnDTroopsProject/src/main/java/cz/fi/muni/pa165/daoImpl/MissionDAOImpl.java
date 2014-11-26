@@ -4,26 +4,25 @@ import cz.fi.muni.pa165.dao.MissionDAO;
 import cz.fi.muni.pa165.entity.Mission;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
-
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author Tomas Javorsky a.k.a. Tomus
  * @uco 324662
  */
-@Repository
-public class MissionDAOImpl implements MissionDAO{
+@Repository("missionDAO")
+@Transactional
+public class MissionDAOImpl implements MissionDAO {
 
-    @Autowired
-    EntityManager entityManager;
-    
-    public MissionDAOImpl(){
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public MissionDAOImpl() {
     }
-    
+
     public EntityManager getEntityManager() {
         return entityManager;
     }
@@ -31,15 +30,13 @@ public class MissionDAOImpl implements MissionDAO{
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-    
+
     @Override
     public void createMission(Mission mission) throws IllegalArgumentException {
-        if(mission == null)
-        {
+        if (mission == null) {
             throw new IllegalArgumentException("Mission cannot be null.");
         }
-        if(mission.getId() != null)
-        {
+        if (mission.getId() != null) {
             throw new IllegalArgumentException("Mission identifier is already set.");
         }
         entityManager.persist(mission);
@@ -47,8 +44,7 @@ public class MissionDAOImpl implements MissionDAO{
 
     @Override
     public Mission getMissionById(Long id) throws IllegalArgumentException {
-        if(id == null)
-        {
+        if (id == null) {
             throw new IllegalArgumentException("Identifier should not be null.");
         }
         Mission mission = entityManager.find(Mission.class, id);
@@ -57,27 +53,27 @@ public class MissionDAOImpl implements MissionDAO{
 
     @Override
     public void updateMission(Mission mission) throws IllegalArgumentException {
-        if(mission == null) {
+        if (mission == null) {
             throw new IllegalArgumentException("Mission can't be null.");
         }
-        if(mission.getId() == null) {
+        if (mission.getId() == null) {
             throw new IllegalArgumentException("Mission is not present in DB.");
-        }     
+        }
         entityManager.merge(mission);
     }
 
     @Override
     public void deleteMission(Mission mission) throws IllegalArgumentException {
-        if(mission == null) {
+        if (mission == null) {
             throw new IllegalArgumentException("Mission can't be null.");
         }
-        if(mission.getId() == null) {
+        if (mission.getId() == null) {
             throw new IllegalArgumentException("Mission is not present in DB.");
-        }   
-        if (entityManager.contains(mission)){
+        }
+        if (entityManager.contains(mission)) {
             entityManager.remove(mission);
-            
-        }else{
+
+        } else {
             entityManager.remove(entityManager.merge(mission));
         }
     }
@@ -87,12 +83,12 @@ public class MissionDAOImpl implements MissionDAO{
         List<Mission> missions = entityManager.createQuery("SELECT m FROM Mission m", Mission.class).getResultList();
         return missions;
     }
-    
+
     @Override
     public List<Mission> findMissionByName(String name) throws IllegalArgumentException {
         List<Mission> mission;
         mission = entityManager.createQuery("SELECT h FROM Mission h WHERE h.name = :name").setParameter("name", name).getResultList();
-        
+
         return mission;
     }
 }

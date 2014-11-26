@@ -9,98 +9,87 @@ import cz.fi.muni.pa165.entity.Hero;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Filip Ksenzuliak
  * @uco 396072
  */
+@Repository("heroDAO")
+@Transactional
+public class HeroDAOImpl implements HeroDAO {
 
-public class HeroDAOImpl implements HeroDAO{
-    
-    private EntityManagerFactory emf;
-    
-    public HeroDAOImpl(EntityManagerFactory emf) {
-        this.emf = emf;
+    @PersistenceContext
+    private EntityManager em;
+
+    public HeroDAOImpl() {
+
     }
-    
+
+    public EntityManager getEm() {
+        return em;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
     @Override
     public void createHero(Hero hero) throws IllegalArgumentException {
-        if(hero == null || hero.getId() != null || hero.getRace() == null || 
-                hero.getAge() == null || hero.getRank() == null ||
-                hero.getRole() == null || hero.getTroop() == null) {
+        if (hero == null || hero.getId() != null || hero.getRace() == null
+                || hero.getAge() == null || hero.getRank() == null
+                || hero.getRole() == null || hero.getTroop() == null) {
             throw new IllegalArgumentException("Create hero called with wrong param.");
-        } 
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        }
         em.persist(hero);
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public Hero getHeroById(Long id) throws IllegalArgumentException {
-        if(id == null) {
+        if (id == null) {
             throw new IllegalArgumentException("getHero called with null.");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
         Hero hero = em.find(Hero.class, id);
-        em.getTransaction().commit();
-        em.close();
         return hero;
     }
 
     @Override
     public void updateHero(Hero hero) throws IllegalArgumentException {
-        if(hero == null || hero.getRace() == null || 
-                hero.getAge() == 0 || hero.getRank() == 0 ||
-                hero.getRole() == null || hero.getTroop() == null) {
+        if (hero == null || hero.getRace() == null
+                || hero.getAge() == 0 || hero.getRank() == 0
+                || hero.getRole() == null || hero.getTroop() == null) {
             throw new IllegalArgumentException("Update hero called with wrong param.");
         }
-        
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();   
+
         em.merge(hero);
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public void deleteHero(Hero hero) throws IllegalArgumentException {
-        if(hero == null || hero.getId() == null) {
+        if (hero == null || hero.getId() == null) {
             throw new IllegalArgumentException("Remove hero called with wrong param");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();    
-        if(em.contains(hero)) {
+        if (em.contains(hero)) {
             em.remove(hero);
         } else {
             em.remove(em.merge(hero));
         }
-        em.getTransaction().commit();         
-        em.close();
     }
 
     @Override
     public List<Hero> getAllHeroes() {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
         List<Hero> heroes = em.createQuery("SELECT h FROM Hero h", Hero.class).getResultList();
-        em.getTransaction().commit();
-        em.close();
         return heroes;
     }
 
     @Override
     public List<Hero> findHeroByName(String name) throws IllegalArgumentException {
         List<Hero> hero;
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
         hero = em.createQuery("SELECT h FROM Hero h WHERE h.name = :name").setParameter("name", name).getResultList();
-        em.getTransaction().commit();
-        em.close();
         return hero;
     }
-    
+
 }

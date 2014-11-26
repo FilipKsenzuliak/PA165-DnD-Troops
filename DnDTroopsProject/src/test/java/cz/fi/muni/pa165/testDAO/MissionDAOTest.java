@@ -26,19 +26,17 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Filip Ksenzuliak
  * @uco 396072
  */
-@Transactional
-@ContextConfiguration("file:src/main/resources/META-INF/testContext.xml")
+
 public class MissionDAOTest{
         
     public MissionDAOTest() {
     }
 
-    @Autowired
     private MissionDAOImpl missionDAO;
     
     private Mission m1;
     private Mission m2;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestUnit");
     private EntityManager em;
 
     @Before
