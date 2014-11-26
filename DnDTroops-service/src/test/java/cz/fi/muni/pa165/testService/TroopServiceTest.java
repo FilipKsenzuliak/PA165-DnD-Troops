@@ -62,11 +62,6 @@ public class TroopServiceTest {
     }
     
     @Test
-    public void smt(){
-        
-    }
-    
-    @Test
     public void testCreateTroop() {
         Mapper mapper = new DozerBeanMapper();
         MissionDTO mission = new MissionDTO(); //awaiting implementation

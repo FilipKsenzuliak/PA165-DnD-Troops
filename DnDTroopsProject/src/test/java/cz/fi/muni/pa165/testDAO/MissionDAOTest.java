@@ -108,6 +108,20 @@ public class MissionDAOTest{
     }
     
     @Test
+    public void testGetAllMissions() {
+        em.getTransaction().begin();
+        missionDAO.createMission(m1);
+        em.getTransaction().commit();
+        
+        em.getTransaction().begin();
+        missionDAO.createMission(m2);
+        em.getTransaction().commit();
+        
+        int count = missionDAO.getAllMissions().size();
+        assertEquals(count, 2);
+    }
+    
+    @Test
     public void testFindMissionByName() {
         missionDAO.createMission(m2);
         List<Mission> mission = missionDAO.findMissionByName(m2.getName());
