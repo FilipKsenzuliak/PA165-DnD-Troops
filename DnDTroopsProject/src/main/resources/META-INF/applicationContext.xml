@@ -40,6 +40,11 @@
         <property name="missionDAO" ref="missionService">
     </bean>
     <bean id="missionDAO" class="cz.fi.muni.pa165.daoImpl.MissionDAOImpl"/>
+    
+    <bean id="troopService" class="cz.fi.muni.pa165.serviceImpl.TroopServiceImpl">
+        <property name="troopDAO" ref="troopService">
+    </bean>
+    <bean id="troopDAO" class="cz.fi.muni.pa165.daoImpl.TroopDAOImpl"/>
      
 
 </beans>
