@@ -19,7 +19,7 @@ public class MissionDTO {
     }
     
     public MissionDTO(String name, String objective, int reward){
-        this(-1L, name, objective, reward);
+        this(null, name, objective, reward);
     }
     
     public MissionDTO(Long id, String name, String objective, int reward){

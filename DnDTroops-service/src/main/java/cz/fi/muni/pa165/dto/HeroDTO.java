@@ -30,7 +30,7 @@ public class HeroDTO {
     public HeroDTO(Race race, Long age, Long rank,
                    String name, TroopDTO troop, List<RoleDTO> role) {
         
-        this(-1L, race, age, rank, name, troop, role);
+        this(null, race, age, rank, name, troop, role);
     }
     
     public HeroDTO(Long id, Race race, Long age, Long rank,

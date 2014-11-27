@@ -31,7 +31,7 @@ public class TroopDTO {
     }
     
     public TroopDTO(String name, MissionDTO mission, Long amountOfMoney, List<HeroDTO> heroes) {
-        this(-1L, name, mission, amountOfMoney, heroes);
+        this(null, name, mission, amountOfMoney, heroes);
     }
     
     public TroopDTO(Long id, String name, MissionDTO mission, Long amountOfMoney, List<HeroDTO> heroes) {
