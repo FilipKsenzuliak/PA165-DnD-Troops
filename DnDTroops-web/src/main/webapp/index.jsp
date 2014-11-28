@@ -6,9 +6,36 @@
 <html>
 <head>
     <title>DnD Troops</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/dnd.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>Welcome to Forgotten realms</h1>
+    <div class="main"></div>
+    <div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand active" href="index.jsp">DnD Troops</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="hero.jsp">Heroes</a></li>
+                    <li><a href="role.jsp">Roles</a></li>
+                    <li><a href="mission.jsp">Troops</a></li>
+                    <li><a href="troop.jsp">Missions</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<h1>Welcome to Forgotten realm</h1>
+<h3>Mission for heroes in realm PA165</h3>
 <p>
 Through Forgotten realms are wandering various troops of several heros trying to complete assigned mission 
 (mission is not an entity, it is just text attribute). Hero has a name, role, experience level.
@@ -17,34 +44,7 @@ Example of a role is "elf magician". Every hero could belong to up to one group 
 Administrator should be able to manage (CRUD) all entities.
 Hero could assign himself to some group and also can assign himself some role.
 </p>
-<div>
-    <ul>
-        <li><a href="hero.jsp">Hero</a></li>
-        <li><a href="role.jsp">Role</a></li>
-        <li><a href="mission.jsp">Mission</a></li>
-        <li><a href="troop.jsp">Troop</a></li>
-    </ul>
 </div>
-<stripes:form beanclass="cz.fi.muni.pa165.CalculatorActionBean" focus="">
-    <table>
-        <tr>
-            <td>Number 1:</td>
-            <td><stripes:text name="numberOne"/></td>
-        </tr>
-        <tr>
-            <td>Number 2:</td>
-            <td><stripes:text name="numberTwo"/></td>
-        </tr>
-        <tr>
-        </tr>
-            <td colspan="2">
-                <stripes:submit name="addition" value="Add"/>
-            </td>
-        <tr>
-            <td>Result:</td>
-            <td>${actionBean.result}</td>
-        </tr>
-    </table>
-</stripes:form>
+
 </body>
 </html>
