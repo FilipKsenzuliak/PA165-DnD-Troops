@@ -6,6 +6,7 @@ import cz.fi.muni.pa165.entity.Mission;
 import cz.fi.muni.pa165.service.MissionService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -21,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class MissionServiceImpl implements MissionService{
     
-    @Autowired
+    @Inject
     private MissionDAO missionDAO;
     
     private Mapper mapper = new DozerBeanMapper();

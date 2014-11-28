@@ -15,15 +15,18 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import javax.inject.Inject;
 /**
  *
  * @author Andrej
  */
+@Service
+@Transactional
 public class TroopServiceImpl implements TroopService {
 
-    @Autowired
+    @Inject
     private TroopDAO troopDAO;
     
     private Mapper mapper = new DozerBeanMapper();

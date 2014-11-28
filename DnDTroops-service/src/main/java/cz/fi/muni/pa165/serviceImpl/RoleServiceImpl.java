@@ -12,6 +12,7 @@ import cz.fi.muni.pa165.entity.Role;
 import cz.fi.muni.pa165.service.RoleService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.apache.commons.lang3.Validate;
@@ -23,9 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
  * @author David
  */
 @Service
+@Transactional
 public class RoleServiceImpl implements RoleService {
     
-    @Autowired
+    @Inject
     private RoleDAO roleDAO;
     
     private Mapper mapper = new DozerBeanMapper();

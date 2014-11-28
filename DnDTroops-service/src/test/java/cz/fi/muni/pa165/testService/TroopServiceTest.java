@@ -13,6 +13,7 @@ import cz.fi.muni.pa165.entity.Troop;
 import cz.fi.muni.pa165.serviceImpl.TroopServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -41,7 +42,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RunWith(MockitoJUnitRunner.class)
 public class TroopServiceTest {
     
-    @Autowired
+    @Inject
     @InjectMocks
     private TroopServiceImpl troopService;
     

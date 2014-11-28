@@ -12,6 +12,7 @@ import cz.fi.muni.pa165.entity.Role;
 import cz.fi.muni.pa165.serviceImpl.RoleServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(MockitoJUnitRunner.class)
 public class RoleServiceTest {
     
-    @Autowired
+    @Inject
     @InjectMocks
     private RoleServiceImpl roleService;
     

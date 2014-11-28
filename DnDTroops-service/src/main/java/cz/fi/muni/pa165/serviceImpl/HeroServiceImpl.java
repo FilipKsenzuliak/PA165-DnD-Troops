@@ -10,6 +10,7 @@ import cz.fi.muni.pa165.entity.Hero;
 import cz.fi.muni.pa165.service.HeroService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -23,9 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Filip Ksenzuliak
  */
 @Service
+@Transactional
 public class HeroServiceImpl implements HeroService{
 
-    @Autowired
+    @Inject
     private HeroDAO heroDAO;
     private Mapper mapper = new DozerBeanMapper();
     

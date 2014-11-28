@@ -18,6 +18,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.junit.After;
@@ -36,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(MockitoJUnitRunner.class)
 public class MissionServiceTest {
     
-    @Autowired
+    @Inject
     @InjectMocks
     private MissionServiceImpl missionService;
     
