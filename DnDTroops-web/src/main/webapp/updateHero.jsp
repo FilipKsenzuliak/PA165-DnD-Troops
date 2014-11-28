@@ -74,7 +74,7 @@
                     </tr>
                     <tr>
                         <td class="col-md-1">
-                            <stripes:submit class="btn btn-lg" name="create" value="Create"/>
+                            <stripes:submit class="btn btn-lg" name="update" value="Update"/>
                         </td>
                         <td class="col-md-1">
                             <button class="btn btn-lg">Cancel</button>

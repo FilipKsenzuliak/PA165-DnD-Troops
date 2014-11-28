@@ -109,7 +109,7 @@ public class HeroActionBean implements ActionBean{
         
         HeroDTO hero = new HeroDTO(1L,Race.ELF, 210L, 7L, "Jozef Kopac",  troop, roles);
         HeroDTO hero2 = new HeroDTO(2L,Race.DWARF, 150L, 5L, "Peter Kopac",  troop, roles2);
-        HeroDTO hero3 = new HeroDTO(3L,Race.HUMAN, 32L, 9L, "Peter Kovac",  troop, roles2);
+        HeroDTO hero3 = new HeroDTO(3L,Race.HUMAN, 32L, 9L, "Peter Kovac",  troop, roles3);
         List<HeroDTO> h = new ArrayList();
         
         h.add(hero);
