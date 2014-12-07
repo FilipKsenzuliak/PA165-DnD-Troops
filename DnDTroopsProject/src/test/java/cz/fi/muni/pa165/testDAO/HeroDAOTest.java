@@ -27,17 +27,24 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 /**
  *
  * @author David Hubac
  */
+@Transactional
+@ContextConfiguration("file:src/main/resources/applicationContext-dao-test.xml")
+@TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class HeroDAOTest {
     
     private Hero h1;
     private Hero h2;
     private HeroDAOImpl heroDAO;
     private EntityManager em;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestUnit");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
 
     @Before
     public void setup() {

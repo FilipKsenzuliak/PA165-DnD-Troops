@@ -10,12 +10,19 @@ import javax.persistence.Persistence;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Tomas Javorsky a.k.a. Tomus
  * @uco 324662
  */
+@Transactional
+@ContextConfiguration("file:src/main/resources/applicationContext-dao-test.xml")
+@TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class TroopDAOTest {
     
     private Troop troop1;
@@ -23,7 +30,7 @@ public class TroopDAOTest {
     private Troop troop3;
     private Mission mission1,mission2,mission3;
     private TroopDAO troopDAO;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestUnit");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
     private EntityManager em = emf.createEntityManager();
     
     @Before

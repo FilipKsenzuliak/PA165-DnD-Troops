@@ -21,17 +21,24 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Andrej Nemec
  * @UCO 396474
  */
+@Transactional
+@ContextConfiguration("file:src/main/resources/applicationContext-dao-test.xml")
+@TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class RoleDAOTest {
     private Role r1;
     private Role r2;
     private RoleDAO roleDAO;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestUnit");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
     private EntityManager em = emf.createEntityManager();
     
     @Before

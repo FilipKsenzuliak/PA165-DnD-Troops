@@ -18,6 +18,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -26,7 +28,9 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Filip Ksenzuliak
  * @uco 396072
  */
-
+@Transactional
+@ContextConfiguration("file:src/main/resources/applicationContext-dao-test.xml")
+@TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class MissionDAOTest{
         
     public MissionDAOTest() {
@@ -36,7 +40,7 @@ public class MissionDAOTest{
     
     private Mission m1;
     private Mission m2;
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("TestUnit");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
     private EntityManager em;
 
     @Before
