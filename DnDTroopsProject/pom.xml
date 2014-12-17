@@ -9,10 +9,10 @@
   </parent>
     
     <groupId>cz.fi.muni.pa165</groupId>
-    <artifactId>DnDTroopsProject</artifactId>
+    <artifactId>DnDTroops-dao</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>        
-    <name>DnDTroopsProject</name>
+    <name>DnDTroops-dao</name>
     <url>http://maven.apache.org</url>
      
         

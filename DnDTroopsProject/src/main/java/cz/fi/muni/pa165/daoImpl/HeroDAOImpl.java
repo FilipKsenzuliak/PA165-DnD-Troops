@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
  * @uco 396072
  */
 @Repository("heroDAO")
-@Transactional
+@Transactional(propagation = Propagation.MANDATORY)
 public class HeroDAOImpl implements HeroDAO {
 
     @PersistenceContext
