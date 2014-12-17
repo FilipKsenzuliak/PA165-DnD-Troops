@@ -7,8 +7,6 @@
 package cz.fi.muni.pa165.dto;
 
 import cz.fi.muni.pa165.entity.Race;
-import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,72 +14,100 @@ import java.util.Objects;
  *
  * @author Filip Ksenzuliak
  */
-public class HeroDTO implements Serializable {
-
-    private long id;
+public class HeroDTO {
+    
+    private Long id;
+    private Race race;
+    private Long age;
+    private Long rank;
+    private List<RoleDTO> role;
+    private TroopDTO troop;
     private String name;
-    private List<RoleDTO> role = new LinkedList<RoleDTO>();
-    private int rank;
-
-    private TroopDTO troop = null;
-
-    private String race;
-
-    public HeroDTO() {
+    
+    public HeroDTO(){
+    }
+    
+    public HeroDTO(Race race, Long age, Long rank,
+                   String name, TroopDTO troop, List<RoleDTO> role) {
+        
+        this(null, race, age, rank, name, troop, role);
+    }
+    
+    public HeroDTO(Long id, Race race, Long age, Long rank,
+                   String name, TroopDTO troop, List<RoleDTO> role) {
+        
+        this.id = id;
+        this.race = race;
+        this.age = age;
+        this.rank = rank;
+        this.name = name;
+        this.troop = troop;
+        this.role = role;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long val) {
-        this.id = val;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Race getRace() {
+        return race;
     }
 
-    public void setName(String val) {
-        this.name = val;
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public Long getRank() {
+        return rank;
+    }
+
+    public void setRank(Long rank) {
+        this.rank = rank;
     }
 
     public List<RoleDTO> getRole() {
         return role;
     }
 
-    public void setRole(List<RoleDTO> val) {
-        this.role = val;
+    public void setRole(List<RoleDTO> role) {
+        this.role = role;
     }
 
     public TroopDTO getTroop() {
         return troop;
     }
 
-    public void setTroop(TroopDTO val) {
-        this.troop = val;
+    public void setTroop(TroopDTO troop) {
+        this.troop = troop;
     }
 
-    public int getRank() {
-        return rank;
+    public String getName() {
+        return name;
     }
 
-    public void setRank(int val) {
-        this.rank = val;
-    }
-
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 5;
+        hash = 67 * hash + (this.race != null ? this.race.hashCode() : 0);
+        hash = 67 * hash + Objects.hashCode(this.age);
+        hash = 67 * hash + Objects.hashCode(this.rank);
+        hash = 67 * hash + Objects.hashCode(this.name);
         return hash;
     }
 
@@ -94,10 +120,19 @@ public class HeroDTO implements Serializable {
             return false;
         }
         final HeroDTO other = (HeroDTO) obj;
-        if (this.id != other.id) {
+        if (this.race != other.race) {
+            return false;
+        }
+        if (!Objects.equals(this.age, other.age)) {
+            return false;
+        }
+        if (!Objects.equals(this.rank, other.rank)) {
+            return false;
+        }
+        if (!Objects.equals(this.troop, other.troop)) {
             return false;
         }
         return true;
     }
-
+    
 }

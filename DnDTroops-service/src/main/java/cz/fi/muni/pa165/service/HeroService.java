@@ -12,54 +12,46 @@ import java.util.List;
  * @author Filip Ksenzuliak
  */
 public interface HeroService {
-    
     /**
-     * Creates new hero in database and return him.
-     * 
-     * @param hero  Hero, what we want save to database without id
-     * @return  hero with id from database
+     * Adds hero to DB.
+     * @param hero 
      */
-    public HeroDTO createHero (HeroDTO hero);
-    
+    void createHero(HeroDTO hero);
     /**
-     * Update hero in database and return updated hero.
-     * @param hero  hero need to update
-     * @return  updated hero
+     * Updates hero's values in DB
+     * @param hero 
      */
-    public HeroDTO updateHero (HeroDTO hero);
+    void updateHero(HeroDTO hero);  
+    /**
+     * Deletes hero from DB
+     * @param hero 
+     */
+    void deleteHero(HeroDTO hero);   
+    /**
+     * Deletes all heroes in DB.
+     */
+    void deleteAllHeroes();    
+    /**
+     * Updates heroes from list.
+     * @param heroes
+     */
+    void updateHeroes(List<HeroDTO> heroes);
+    /**
+     * Gets all heroes loaded in DB
+     * @return List of heroes
+     */
+    List<HeroDTO> getAllHeroes();  
+    /**
+     * Finds hero by its Id
+     * @param id
+     * @return hero with specific id
+     */
+    HeroDTO getHeroById(Long id);
+    /**
+     * Finds hero by its Id
+     * @param name
+     * @return heroes with specific name
+     */
+    List<HeroDTO> findHeroByName(String name);
 
-    /**
-     * Delete hero from database.
-     * @param hero hero, what we want delete from database
-     * @return  true if hero is deleted, false otherwise
-     */
-    public Boolean deleteHero (HeroDTO hero);
-
-    /**
-     * Retrieve list of all heroes from database.
-     * @return  list of heroes
-     */
-    public List<HeroDTO> retrieveAllHeroes ();
-
-    /**
-     * Retrieve one hero with unique id.
-     * @param id    hero id
-     * @return  hero with choosen id
-     */
-    public HeroDTO retrieveHeroById (long id);
-
-    /**
-     * Retrieve one hero with unique name.
-     * @param name  hero name
-     * @return  hero with choosen name
-     */
-    public HeroDTO retrieveHeroByName (String name);
-    
-    /**
-     * Delete all heroes from database.
-     * 
-     * @return true if all heroes were deleted, false otherwise 
-     */
-    public Boolean deleteAllHeroes();
-    
 }

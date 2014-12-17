@@ -10,8 +10,12 @@ import cz.fi.muni.pa165.entity.Hero;
 import cz.fi.muni.pa165.service.HeroService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import org.apache.commons.lang3.Validate;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,68 +27,98 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class HeroServiceImpl implements HeroService{
 
-    @Autowired
-    private Mapper mapper;
+    @Inject
+    private HeroDAO heroDAO;
+    private Mapper mapper = new DozerBeanMapper();
     
-    @Autowired
-    private HeroDAO heroDao;
-    
-    public HeroServiceImpl() { }
-    
-    public HeroServiceImpl(HeroDAO heroDao, Mapper mapper) {
-        this.heroDao = heroDao;
-        this.mapper = mapper;
+    public HeroDAO getHeroDAO() {
+        return heroDAO;
     }
     
-    private HeroDTO mapDTO(Hero hero) {
-        return mapper == null || hero == null ? null : mapper.map(hero, HeroDTO.class);
+    public void setHeroDAO(HeroDAO heroDAO) {
+        this.heroDAO = heroDAO;
     }
-    
-    private Hero mapEntity(HeroDTO heroDTO) {
-        return mapper == null || heroDTO == null ? null : mapper.map(heroDTO, Hero.class);
-    }
-    
+       
     @Override
-    public HeroDTO createHero(HeroDTO hero) {
-        return mapDTO(heroDao.createHero(mapEntity(hero)));
+    @Transactional
+    public void createHero(HeroDTO hero) {
+        Validate.notNull(hero, "Argument is null.");
+        
+        Hero createdHero = mapper.map(hero, Hero.class);
+        heroDAO.createHero(createdHero);
+        hero.setId(createdHero.getId());
     }
 
     @Override
-    public HeroDTO updateHero(HeroDTO hero) {
-        return mapDTO(heroDao.updateHero(mapEntity(hero)));
+    @Transactional
+    public void updateHero(HeroDTO hero) {
+        Validate.notNull(hero, "Argument is null.");
+        
+        heroDAO.updateHero(mapper.map(hero, Hero.class));
     }
-
+    
     @Override
-    public Boolean deleteHero(HeroDTO hero) {
-        return heroDao.deleteHero(mapEntity(hero));
-    }
-
-    @Override
-    public List<HeroDTO> retrieveAllHeroes() {
-        List<HeroDTO> allHeroes = new ArrayList();
-        for(Hero h : heroDao.retrieveAllHeroes()) {
-            allHeroes.add(mapDTO(h));
+    @Transactional
+    public void updateHeroes(List<HeroDTO> heroes) {
+        Validate.notNull(heroes, "Argument is null.");
+        
+        for(HeroDTO hero : heroes) {
+            heroDAO.updateHero(mapper.map(hero, Hero.class));
         }
-        return allHeroes;
     }
 
     @Override
-    public HeroDTO retrieveHeroById(long id) {
-        return mapDTO(heroDao.retrieveHeroById(id));
+    @Transactional
+    public void deleteHero(HeroDTO hero) {
+        Validate.notNull(hero, "Argument is null.");
+        
+        heroDAO.deleteHero(mapper.map(hero, Hero.class));
     }
 
     @Override
-    public HeroDTO retrieveHeroByName(String name) {
-        return mapDTO(heroDao.retrieveHeroByName(name));
-    }
-
-    @Override
-    public Boolean deleteAllHeroes() {
-        Boolean res = true;
-        for(HeroDTO h : retrieveAllHeroes()) {
-            res &= deleteHero(h);
+    @Transactional
+    public void deleteAllHeroes() {
+        List<Hero> heroes = heroDAO.getAllHeroes();
+        for(Hero h : heroes) {
+            heroDAO.deleteHero(h);
         }
-        return res;
+    }
+
+    @Override
+    @Transactional
+    public List<HeroDTO> getAllHeroes() {
+        List<HeroDTO> heroesDTO = new ArrayList<HeroDTO>();
+        for(Hero hero : heroDAO.getAllHeroes()) {
+            heroesDTO.add(mapper.map(hero, HeroDTO.class));
+        }
+        return heroesDTO;
+    }
+
+    @Override
+    @Transactional
+    public HeroDTO getHeroById(Long id) {
+        Validate.isTrue(id > 0, "Invalid id!");
+        Validate.isTrue(id != null, "Id is null.");
+        
+        HeroDTO hero = mapper.map(heroDAO.getHeroById(id), HeroDTO.class);
+                System.out.println(hero);
+        return hero;
+    }
+
+    @Override
+    @Transactional
+    public List<HeroDTO> findHeroByName(String name) {
+        Validate.isTrue(!name.isEmpty(), "Empty name!");
+        
+        List<HeroDTO> heroes = new ArrayList<HeroDTO>();   
+        try{
+            for(Hero hero : heroDAO.findHeroByName(name)) {
+                heroes.add(mapper.map(hero, HeroDTO.class));
+            }
+        }catch(Exception e){
+            throw new DataAccessException("persistance error") {};
+        }
+        return heroes;
     }
     
 }
