@@ -18,17 +18,6 @@ public class MissionDTO {
         
     }
     
-    public MissionDTO(String name, String objective, int reward){
-        this(null, name, objective, reward);
-    }
-    
-    public MissionDTO(Long id, String name, String objective, int reward){
-        this.id = id;
-        this.name = name;
-        this.objective = objective;
-        this.reward = reward;
-    }
-    
     public void setName(String name) {
         this.name = name;
     }

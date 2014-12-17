@@ -43,9 +43,9 @@ public class HeroActionBean implements ActionBean{
     private Long rank;
     private List<Role> role;
     private Troop troop;
-    private List<HeroDTO> heroes = new ArrayList(startHero());
-    private List<RoleDTO> roles = new ArrayList(startRole());
-    private List<TroopDTO> troops = new ArrayList(startTroop());
+    private List<HeroDTO> heroes = new ArrayList();
+    private List<RoleDTO> roles = new ArrayList();
+    private List<TroopDTO> troops = new ArrayList();
 
     public List<HeroDTO> getHeroes() { return heroes; }
     public void setHeroes(List<HeroDTO> heroes) { this.heroes = heroes; }
@@ -94,60 +94,61 @@ public class HeroActionBean implements ActionBean{
     
 // *** Testing datas ***
     
-    public List<HeroDTO> startHero(){
-        TroopDTO troop = new TroopDTO("Mathemagicians", null, 5000L, null);
-        RoleDTO role = new RoleDTO(null,"Magician","making some spells");
-        RoleDTO role2 = new RoleDTO(null,"Warrior","making some spells");
-        RoleDTO role3 = new RoleDTO(null,"Paladin","making some spells");
-        List<RoleDTO> roles = new ArrayList();
-        List<RoleDTO> roles2 = new ArrayList();
-        List<RoleDTO> roles3 = new ArrayList();
-        roles.add(role);
-        roles.add(role2);
-        roles2.add(role2);
-        roles3.add(role3);
-        
-        HeroDTO hero = new HeroDTO(1L,Race.ELF, 210L, 7L, "Jozef Kopac",  troop, roles);
-        HeroDTO hero2 = new HeroDTO(2L,Race.DWARF, 150L, 5L, "Peter Kopac",  troop, roles2);
-        HeroDTO hero3 = new HeroDTO(3L,Race.HUMAN, 32L, 9L, "Peter Kovac",  troop, roles3);
-        List<HeroDTO> h = new ArrayList();
-        
-        h.add(hero);
-        h.add(hero2);
-        h.add(hero3);
-        
-        return h;
-    }
-    
-    public List<RoleDTO> startRole(){
-        RoleDTO role = new RoleDTO(null,"Magician","making some spells");
-        RoleDTO role2 = new RoleDTO(null,"Warrior","making some damages");
-        RoleDTO role3 = new RoleDTO(null,"Paladin","beeing holy");        
-        List<RoleDTO> r = new ArrayList();
-        
-        r.add(role);
-        r.add(role2);
-        r.add(role3);
-                
-        return r;
-    }
-    
-    public List<TroopDTO> startTroop(){
-        TroopDTO troop = new TroopDTO("Mathemagicians", null, 5000L, null);
-        TroopDTO troop2 = new TroopDTO("Horses", null, 5000L, null);
-        TroopDTO troop3 = new TroopDTO("All in one", null, 5000L, null);
-        List<TroopDTO> t = new ArrayList();
-        
-        t.add(troop);
-        t.add(troop2);
-        t.add(troop3);
-        
-        return t;
-    }
+//    public List<HeroDTO> startHero(){
+//        TroopDTO troop = new TroopDTO("Mathemagicians", null, 5000L, null);
+//        RoleDTO role = new RoleDTO(null,"Magician","making some spells");
+//        RoleDTO role2 = new RoleDTO(null,"Warrior","making some spells");
+//        RoleDTO role3 = new RoleDTO(null,"Paladin","making some spells");
+//        List<RoleDTO> roles = new ArrayList();
+//        List<RoleDTO> roles2 = new ArrayList();
+//        List<RoleDTO> roles3 = new ArrayList();
+//        roles.add(role);
+//        roles.add(role2);
+//        roles2.add(role2);
+//        roles3.add(role3);
+//        
+//        HeroDTO hero = new HeroDTO(1L,Race.ELF, 210L, 7L, "Jozef Kopac",  troop, roles);
+//        HeroDTO hero2 = new HeroDTO(2L,Race.DWARF, 150L, 5L, "Peter Kopac",  troop, roles2);
+//        HeroDTO hero3 = new HeroDTO(3L,Race.HUMAN, 32L, 9L, "Peter Kovac",  troop, roles3);
+//        List<HeroDTO> h = new ArrayList();
+//        
+//        h.add(hero);
+//        h.add(hero2);
+//        h.add(hero3);
+//        
+//        return h;
+//    }
+//    
+//    public List<RoleDTO> startRole(){
+//        RoleDTO role = new RoleDTO(null,"Magician","making some spells");
+//        RoleDTO role2 = new RoleDTO(null,"Warrior","making some damages");
+//        RoleDTO role3 = new RoleDTO(null,"Paladin","beeing holy");        
+//        List<RoleDTO> r = new ArrayList();
+//        
+//        r.add(role);
+//        r.add(role2);
+//        r.add(role3);
+//                
+//        return r;
+//    }
+//    
+//    public List<TroopDTO> startTroop(){
+//        TroopDTO troop = new TroopDTO("Mathemagicians", null, 5000L, null);
+//        TroopDTO troop2 = new TroopDTO("Horses", null, 5000L, null);
+//        TroopDTO troop3 = new TroopDTO("All in one", null, 5000L, null);
+//        List<TroopDTO> t = new ArrayList();
+//        
+//        t.add(troop);
+//        t.add(troop2);
+//        t.add(troop3);
+//        
+//        return t;
+//    }
     
     public Resolution create() {
-        //HeroDTO hero = new HeroDTO(race,);
-        //heroService.createHero(hero);
+        HeroDTO hdto = new HeroDTO();
+        hdto.setName("Jozef");
+        heroService.createHero(hdto);
         return new ForwardResolution("/hero.jsp");
     }
 }

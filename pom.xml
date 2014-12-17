@@ -9,7 +9,7 @@
   
     <modules>
         <module>DnDTroops-service</module>
-        <module>DnDTroopsProject</module>
         <module>DnDTroops-web</module>
+        <module>DnDTroops-dao</module>
     </modules>
 </project>

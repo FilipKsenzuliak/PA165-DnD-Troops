@@ -29,18 +29,6 @@ public class TroopDTO {
     public TroopDTO() {
         
     }
-    
-    public TroopDTO(String name, MissionDTO mission, Long amountOfMoney, List<HeroDTO> heroes) {
-        this(null, name, mission, amountOfMoney, heroes);
-    }
-    
-    public TroopDTO(Long id, String name, MissionDTO mission, Long amountOfMoney, List<HeroDTO> heroes) {
-        this.id = id;
-        this.amountOfMoney = amountOfMoney;
-        this.heroes = heroes;
-        this.mission = mission;
-        this.name = name;
-    }
 
     public Long getId() {
         return id;
