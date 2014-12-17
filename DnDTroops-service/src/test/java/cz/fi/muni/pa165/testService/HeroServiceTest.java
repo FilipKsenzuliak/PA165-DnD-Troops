@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Filip Ksenzuliak
  */
 @Transactional
-@ContextConfiguration(locations = {"classpath:META-INF/testContext.xml"})
+@ContextConfiguration(locations = {"classpath:META-INF/applicationContext-dao-test.xml"})
 @RunWith(MockitoJUnitRunner.class)
 public class HeroServiceTest {
     
