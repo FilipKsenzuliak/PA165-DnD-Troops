@@ -6,18 +6,16 @@
 package cz.fi.muni.pa165.serviceImpl;
 
 import cz.fi.muni.pa165.dao.TroopDAO;
-import cz.fi.muni.pa165.dto.TroopDTO;
+import cz.fi.muni.pa165.api.dto.TroopDTO;
 import cz.fi.muni.pa165.entity.Troop;
-import cz.fi.muni.pa165.service.TroopService;
+import cz.fi.muni.pa165.api.service.TroopService;
 import java.util.ArrayList;
 import java.util.List;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.apache.commons.lang3.Validate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import javax.inject.Inject;
 /**
  *
  * @author Andrej
@@ -26,7 +24,6 @@ import javax.inject.Inject;
 @Transactional
 public class TroopServiceImpl implements TroopService {
 
-    @Inject
     private TroopDAO troopDAO;
     
     private Mapper mapper = new DozerBeanMapper();

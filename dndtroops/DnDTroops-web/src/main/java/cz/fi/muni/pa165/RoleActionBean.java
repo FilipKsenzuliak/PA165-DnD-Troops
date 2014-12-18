@@ -6,8 +6,8 @@
 
 package cz.fi.muni.pa165;
 
-import cz.fi.muni.pa165.dto.RoleDTO;
-import cz.fi.muni.pa165.service.RoleService;
+import cz.fi.muni.pa165.api.dto.RoleDTO;
+import cz.fi.muni.pa165.api.service.RoleService;
 import java.util.List;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;

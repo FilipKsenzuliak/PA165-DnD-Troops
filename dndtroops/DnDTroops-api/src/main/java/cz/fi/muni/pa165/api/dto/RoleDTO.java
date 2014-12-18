@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 
-package cz.fi.muni.pa165.dto;
+package cz.fi.muni.pa165.api.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author David Hubac
  */
-public class RoleDTO {
+public class RoleDTO implements Serializable{
     private Long id;
     
     private List<HeroDTO> heroes;

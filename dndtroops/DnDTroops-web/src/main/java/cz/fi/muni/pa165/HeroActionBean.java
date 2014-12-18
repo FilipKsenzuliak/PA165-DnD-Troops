@@ -4,13 +4,13 @@
  */
 package cz.fi.muni.pa165;
 
-import cz.fi.muni.pa165.dto.HeroDTO;
-import cz.fi.muni.pa165.dto.RoleDTO;
-import cz.fi.muni.pa165.dto.TroopDTO;
+import cz.fi.muni.pa165.api.dto.HeroDTO;
+import cz.fi.muni.pa165.api.dto.RoleDTO;
+import cz.fi.muni.pa165.api.dto.TroopDTO;
 import cz.fi.muni.pa165.entity.Race;
 import cz.fi.muni.pa165.entity.Role;
 import cz.fi.muni.pa165.entity.Troop;
-import cz.fi.muni.pa165.service.HeroService;
+import cz.fi.muni.pa165.api.service.HeroService;
 import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.ActionBean;

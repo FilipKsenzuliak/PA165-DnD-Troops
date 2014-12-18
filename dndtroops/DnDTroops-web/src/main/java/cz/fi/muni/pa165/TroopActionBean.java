@@ -5,9 +5,9 @@
  */
 package cz.fi.muni.pa165;
 
-import cz.fi.muni.pa165.dto.RoleDTO;
-import cz.fi.muni.pa165.dto.TroopDTO;
-import cz.fi.muni.pa165.service.TroopService;
+import cz.fi.muni.pa165.api.dto.RoleDTO;
+import cz.fi.muni.pa165.api.dto.TroopDTO;
+import cz.fi.muni.pa165.api.service.TroopService;
 import java.util.List;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;

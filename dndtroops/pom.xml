@@ -11,5 +11,7 @@
         <module>DnDTroops-service</module>
         <module>DnDTroops-web</module>
         <module>DnDTroops-dao</module>
+        <module>DnDTroops-api</module>
+        <module>DnDTroops-soap</module>
     </modules>
 </project>

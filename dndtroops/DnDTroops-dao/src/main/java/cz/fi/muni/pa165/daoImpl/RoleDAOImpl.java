@@ -6,15 +6,11 @@
 package cz.fi.muni.pa165.daoImpl;
 
 import cz.fi.muni.pa165.dao.RoleDAO;
-import cz.fi.muni.pa165.entity.Mission;
 import cz.fi.muni.pa165.entity.Role;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,30 +20,20 @@ import org.springframework.transaction.annotation.Transactional;
  * @author David Hubac
  * @uco 396042
  */
-@Repository("heroDAO")
+@Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public class RoleDAOImpl implements RoleDAO {
 
     @PersistenceContext
-    private EntityManagerFactory emf;
+    private EntityManager em;
 
-    public RoleDAOImpl(EntityManagerFactory emf) {
-        this.emf = emf;
+    public RoleDAOImpl () {
     }
-
+    
     @Override
-    public void createRole(Role role) throws IllegalArgumentException {
-        if (role == null) {
-            throw new IllegalArgumentException("Role cannot be null.");
-        }
-        if (role.getId() != null) {
-            throw new IllegalArgumentException("Role identifier is already set.");
-        }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+    public Role createRole(Role role) throws IllegalArgumentException {
         em.persist(role);
-        em.getTransaction().commit();
-        em.close();
+        return role;
     }
 
     @Override
@@ -55,7 +41,6 @@ public class RoleDAOImpl implements RoleDAO {
         if (id == null) {
             throw new IllegalArgumentException("Identifier should now be null.");
         }
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Role role = em.find(Role.class, id);
         em.getTransaction().commit();
@@ -64,29 +49,28 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public void updateRole(Role role) throws IllegalArgumentException {
+    public Role updateRole(Role role) throws IllegalArgumentException {
         if (role == null) {
             throw new IllegalArgumentException("Role can't be null.");
         }
         if (role.getId() == null) {
             throw new IllegalArgumentException("Role is not present in DB.");
         }
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.merge(role);
         em.getTransaction().commit();
         em.close();
+        return role;
     }
 
     @Override
-    public void deleteRole(Role role) throws IllegalArgumentException {
+    public Boolean deleteRole(Role role) throws IllegalArgumentException {
         if (role == null) {
             throw new IllegalArgumentException("Role can't be null.");
         }
         if (role.getId() == null) {
             throw new IllegalArgumentException("Role is not present in DB.");
         }
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         Role present = em.find(Role.class, role.getId());
         em.getTransaction().commit();
@@ -99,15 +83,25 @@ public class RoleDAOImpl implements RoleDAO {
             em.getTransaction().commit();
         }
         em.close();
+        return true;
     }
 
     @Override
     public List<Role> getAllRoles() {
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         List<Role> roles = em.createQuery("SELECT r FROM Role r", Role.class).getResultList();
         em.getTransaction().commit();
         em.close();
         return roles;
+    }
+    
+    @Override
+    public Role retrieveRoleByName (String name) {
+        try {
+            Role roleByName = em.createQuery("SELECT r FROM Role r WHERE name=:name", Role.class).setParameter("name", name).getSingleResult();
+            return roleByName;
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 }

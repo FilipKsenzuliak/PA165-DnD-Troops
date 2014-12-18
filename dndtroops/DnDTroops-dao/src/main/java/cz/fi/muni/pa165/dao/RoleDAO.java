@@ -19,9 +19,10 @@ public interface RoleDAO {
      * Role can't have ID set
      * 
      * @param role Role to be inserted
+     * @return role
      * @throws IllegalArgumentException if argument is null or if ID is not null
      */
-    public void createRole(Role role) throws IllegalArgumentException;
+    public Role createRole(Role role) throws IllegalArgumentException;
     
     /**
      * Find and return entity by its Id.
@@ -36,14 +37,14 @@ public interface RoleDAO {
      * @param role
      * @throws IllegalArgumentException 
      */
-    public void updateRole(Role role) throws IllegalArgumentException;
+    public Role updateRole(Role role) throws IllegalArgumentException;
     
     /**
      * Delete existing entity
      * @param role
      * @throws IllegalArgumentException 
      */
-    public void deleteRole(Role role) throws IllegalArgumentException;
+    public Boolean deleteRole(Role role) throws IllegalArgumentException;
     
     /**
      * Finds and returns a collection of all roles stored in DB
@@ -51,4 +52,7 @@ public interface RoleDAO {
      * @return List of all roles in DB.
      */
     public List<Role> getAllRoles();
+    
+    
+    Role retrieveRoleByName(String name);
 }

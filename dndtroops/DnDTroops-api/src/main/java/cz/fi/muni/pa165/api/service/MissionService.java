@@ -1,7 +1,7 @@
-package cz.fi.muni.pa165.service;
+package cz.fi.muni.pa165.api.service;
 
 import java.util.List;
-import cz.fi.muni.pa165.dto.MissionDTO;
+import cz.fi.muni.pa165.api.dto.MissionDTO;
 
 /**
  *

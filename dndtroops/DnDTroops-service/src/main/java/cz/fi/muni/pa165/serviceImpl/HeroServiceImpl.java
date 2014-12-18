@@ -5,16 +5,14 @@
 package cz.fi.muni.pa165.serviceImpl;
 
 import cz.fi.muni.pa165.dao.HeroDAO;
-import cz.fi.muni.pa165.dto.HeroDTO;
+import cz.fi.muni.pa165.api.dto.HeroDTO;
 import cz.fi.muni.pa165.entity.Hero;
-import cz.fi.muni.pa165.service.HeroService;
+import cz.fi.muni.pa165.api.service.HeroService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class HeroServiceImpl implements HeroService{
 
-    @Inject
     private HeroDAO heroDAO;
     private Mapper mapper = new DozerBeanMapper();
     

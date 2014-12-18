@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.fi.muni.pa165.service;
+package cz.fi.muni.pa165.api.service;
 
-import cz.fi.muni.pa165.dto.HeroDTO;
+import cz.fi.muni.pa165.api.dto.HeroDTO;
 import java.util.List;
 
 /**

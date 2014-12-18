@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.fi.muni.pa165.service;
+package cz.fi.muni.pa165.api.service;
 
-import cz.fi.muni.pa165.dto.TroopDTO;
+import cz.fi.muni.pa165.api.dto.TroopDTO;
 import java.util.List;
 
 /**

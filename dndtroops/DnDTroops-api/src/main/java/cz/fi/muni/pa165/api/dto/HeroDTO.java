@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package cz.fi.muni.pa165.dto;
+package cz.fi.muni.pa165.api.dto;
 
 import cz.fi.muni.pa165.entity.Race;
 import java.util.List;

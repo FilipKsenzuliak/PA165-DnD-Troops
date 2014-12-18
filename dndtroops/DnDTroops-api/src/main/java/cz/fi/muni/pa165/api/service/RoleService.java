@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-package cz.fi.muni.pa165.service;
-import cz.fi.muni.pa165.dto.RoleDTO;
+package cz.fi.muni.pa165.api.service;
+import cz.fi.muni.pa165.api.dto.RoleDTO;
 import java.util.List;
 /**
  *
@@ -30,29 +30,33 @@ public interface RoleService {
      * Method updates the value for Role 'role' in DB
      * @param role 
      */
-    void updateRole(RoleDTO role);
+    RoleDTO updateRole(RoleDTO role);
     
     /**
      * 
      * Method deletes Role 'role' from DB
      * @param role 
      */
-    void deleteRole(RoleDTO role);
+    Boolean deleteRole(RoleDTO role);
     
     /**
      * Method adds RoleDTO role to DB.
      * @param role 
+     * @return role
      */
-    void createRole(RoleDTO role);
+    RoleDTO createRole(RoleDTO role);
     
     /**
      * Method deletes all roles present in DB.
      */
-    void deleteAllRoles();
+    Boolean deleteAllRoles();
     
-    /**
-     * Method updates roles from list.
-     * @param roles 
-     */
-    void updateRoles(List<RoleDTO> roles);
+//    /**
+//     * Method updates roles from list.
+//     * @param roles 
+//     */
+//    RoleDTO updateRoles(List<RoleDTO> roles);
+    
+    RoleDTO retrieveRoleByName(String name);
+    
 }

@@ -1,16 +1,14 @@
 package cz.fi.muni.pa165.serviceImpl;
 
 import cz.fi.muni.pa165.dao.MissionDAO;
-import cz.fi.muni.pa165.dto.MissionDTO;
+import cz.fi.muni.pa165.api.dto.MissionDTO;
 import cz.fi.muni.pa165.entity.Mission;
-import cz.fi.muni.pa165.service.MissionService;
+import cz.fi.muni.pa165.api.service.MissionService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 import org.apache.commons.lang3.Validate;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class MissionServiceImpl implements MissionService{
     
-    @Inject
     private MissionDAO missionDAO;
     
     private Mapper mapper = new DozerBeanMapper();
@@ -38,14 +35,9 @@ public class MissionServiceImpl implements MissionService{
     @Override
     public void createMission(MissionDTO mission) {
         Validate.notNull(mission, "Argument is null (on Create)");
-        try{
             Mission createdMission = mapper.map(mission, Mission.class);
             missionDAO.createMission(createdMission);
             mission.setId(mission.getId());
-        }
-        catch(Exception e){
-            throw new DataAccessException("persistance error"){};
-        }
     }
 
     @Override
